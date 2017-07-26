@@ -26,6 +26,6 @@ class IndexController extends Controller
     
         return $this->formatPaged($races);
     }
-    
+
 
 }
