@@ -11,7 +11,7 @@ $app->get('/', function () use ($app) {
 // 第三方服务接口
 $app->group(['namespace' => 'App\Http\Controllers\v1', 'middleware' => ['xss']], function($app)
 {
-    $app->post('/git/push', 'GitPushController@push');
+    $app->post('git/push', 'GitPushController@push');
 });
 
 
