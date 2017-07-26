@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\v2\Race;
 
-class RaceController extends Controller
+class IndexController extends Controller
 {
     /**
      * GET /urun.race.list
@@ -27,23 +27,5 @@ class RaceController extends Controller
         return $this->formatPaged($races);
     }
     
-    /**
-     * GET /urun.race.get
-     */
-    public function get(Request $request)
-    {
-        $rules = [
-            'id' => 'required|integer',
-        ];
-        if ($error = $this->validateInput($rules)) {
-            return $error;
-        }
-    
-        $race = Race::get($request->input('id'));
-    
-        return $this->body(['race' => $race]);
-    }
-
-
 
 }

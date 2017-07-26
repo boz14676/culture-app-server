@@ -39,10 +39,10 @@ class Controller extends BaseController
     {
         $requests = $this->request->all();
 
-        if (config('security.request_encrypt') && is_dev() == false) {
+        /*if (config('security.request_encrypt') && is_dev() == false) {
             if (in_array(strtolower($this->request->method()), ['put', 'post'])) {
                 if (isset($requests['x'])) {
-                    
+
                     if (!$x = XXTEA::decrypt(base64_decode($requests['x']))) {
                         return $this->error(self::BAD_REQUEST, trans('message.error.request_encrypt'));
                     }
@@ -71,7 +71,7 @@ class Controller extends BaseController
                     return $this->error(self::BAD_REQUEST, trans('message.error.request_encrypt'));
                 }
             }
-        }
+        }*/
 
         $validator = Validator::make($requests, $rules);
         if ($validator->fails()) {
@@ -151,6 +151,21 @@ class Controller extends BaseController
                 'more' => 0
             ];
         }
+        return $this->body([
+            'data' => $data,
+            'paged' => $paged
+        ]);
+    }
+
+    public function test_formatPaged($data)
+    {
+
+        $paged = [
+            'size' => 10,
+            'page' => 1,
+            'more' => 0
+        ];
+
         return $this->body([
             'data' => $data,
             'paged' => $paged
