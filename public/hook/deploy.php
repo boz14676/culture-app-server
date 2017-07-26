@@ -1,4 +1,4 @@
-<?php
+<?php 
 $fp = fopen('/pro/pzjhw/appapi.pzjhw.com/storage/logs/hook.log', 'a+');
 $log = function ($msg) use ($fp) {
     $now = new DateTime();
