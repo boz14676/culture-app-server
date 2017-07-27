@@ -9,7 +9,7 @@ chdir('../../');
 define('__CACHE_DIR__',		getcwd().'/storage/logs/sync-cache');
 define('__SYNC_CONFIGS_DIR__',	getcwd().'/storage/logs/sync-configs');
 # Log file
-define('LOG_FILENAME',		'git-sync.log');
+define('LOG_FILENAME',		getcwd().'/storage/logs/git-sync.log');
 # Clone and Sync git commands
 define('__CMD_CLONE__',		'git clone $repo_url $cache_dir');
 define('__CMD_SYNC__',		'cd $cache_dir && git pull');
