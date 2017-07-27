@@ -1,6 +1,6 @@
 <?php
 
-echo exec("sudo su && cd /pro/pzjhw/appapi.pzjhw.com && /usr/bin/git reset --hard origin/develop && /usr/bin/git clean -f && /usr/bin/git pull", $file);
+echo exec("sudo su && cd /pro/pzjhw/appapi.pzjhw.com && /usr/bin/git reset --hard origin/develop && /usr/bin/git pull", $file);
 echo "</br>";
 print_r($file);
 
