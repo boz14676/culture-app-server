@@ -28,14 +28,14 @@ $log = '------------------------------------------------------------------------
 $log .= 'REQUEST:'.PHP_EOL.print_r($_REQUEST, 1).PHP_EOL.PHP_EOL.PHP_EOL;
 # Check requests by ip address
 $log .= '------------------------------ IP check'.PHP_EOL;
-if (!empty($_SERVER['REMOTE_ADDR'])) {
+/*if (!empty($_SERVER['REMOTE_ADDR'])) {
     if (strlen(__ALLOWED_IPS__) > 0) {
         if (stripos(__ALLOWED_IPS__, $_SERVER['REMOTE_ADDR']) !== false) $log .= 'IP "'.$_SERVER['REMOTE_ADDR'].'": passed'.PHP_EOL;
         else $error = 'This ip "'.$_SERVER['REMOTE_ADDR'].'" is not allowed';
     }
     else $log .= '**WARNING** List of allowed ips is empty. All requests are allowed.'.PHP_EOL;
 }
-else $error = '$_SERVER[\'REMOTE_ADDR\'] is not set. Operations from console are not allowed.';
+else $error = '$_SERVER[\'REMOTE_ADDR\'] is not set. Operations from console are not allowed.';*/
 /**
  * STEP 1: Get params from POST request and check if this repos
  * is allowed for this instance of github-webhook
