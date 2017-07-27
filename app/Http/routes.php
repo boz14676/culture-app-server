@@ -18,7 +18,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1', 'middleware' => ['xss']],
 // Api - Guest
 $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middleware' => ['xss']], function($app)
 {
-    $app->get('article_categories', 'ArticleController@qqqqqsss'); // 获取文章类别(s)
+    $app->get('article_categories', 'ArticleController@q12222'); // 获取文章类别(s)
     $app->get('articles', 'ArticleController@_lists'); // 获取文章(s)
 });
 
