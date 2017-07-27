@@ -1,8 +1,8 @@
 <?php
-
+$log = '';
 $log .= '---------- SYNC'.PHP_EOL;
 // $command = str_replace(array_keys($git), array_values($git), __CMD_SYNC__);
-$command = 'cd /pro/pzjhw/appapi.pzjhw.com && mkdir test123 && git pull';
+$command = 'cd /pro/pzjhw/appapi.pzjhw.com && mkdir test123';
 echo '<hr/>EXECUTE COMMAND: '.$command.'<br/>';
 $log .= 'Executing: '.$command.PHP_EOL;
 
