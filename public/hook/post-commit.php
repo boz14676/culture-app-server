@@ -1,6 +1,6 @@
 <?php
 
-echo exec("cd /pro/pzjhw/appapi.pzjhw.com && /usr/bin/git reset --hard origin/master && /usr/bin/git clean -f && /usr/bin/git pull", $file);
+echo exec("cd /pro/pzjhw/appapi.pzjhw.com && sudo bash .git/hooks/post-receive", $file);
 echo "</br>";
 print_r($file);
 
