@@ -8,7 +8,7 @@ $log .= 'Executing: '.$command.PHP_EOL;
 
 
 
-exec($command, $result).'<hr/>';
+shell_exec($command, $result).'<hr/>';
 echo '* '.implode('<br/>* ', $result);
 $log .= 'Result: '.PHP_EOL.'* '.implode(PHP_EOL.'* ', $result).PHP_EOL.PHP_EOL;
 
