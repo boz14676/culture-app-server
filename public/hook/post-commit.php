@@ -121,9 +121,13 @@ if (empty($error) && !empty($sync_task)) {
     # if dir is already created, try to sync it
     if (is_dir($git['$cache_dir'])) {
         $log .= '---------- SYNC'.PHP_EOL;
-        $command = str_replace(array_keys($git), array_values($git), __CMD_SYNC__);
+        // $command = str_replace(array_keys($git), array_values($git), __CMD_SYNC__);
+        $command = __CMD_SYNC__;
         echo '<hr/>EXECUTE COMMAND: '.$command.'<br/>';
         $log .= 'Executing: '.$command.PHP_EOL;
+
+
+
         exec($command, $result).'<hr/>';
         echo '* '.implode('<br/>* ', $result);
         $log .= 'Result: '.PHP_EOL.'* '.implode(PHP_EOL.'* ', $result).PHP_EOL.PHP_EOL;

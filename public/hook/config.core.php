@@ -13,6 +13,7 @@ define('LOG_FILENAME',		getcwd().'/storage/logs/git-sync.log');
 # Clone and Sync git commands
 define('__CMD_CLONE__',		'git clone $repo_url $cache_dir');
 define('__CMD_SYNC__',		'cd $cache_dir && git pull');
+define('__CMD_SYNC2__',		'cd '.getcwd().' && git pull');
 # Protocol-specific configurations
 $proto_conf = array(
     'rsync+ssh' => array(

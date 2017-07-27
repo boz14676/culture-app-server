@@ -43,9 +43,9 @@ $hosts_conf = array(
 $repo_conf = array(
     'https://github.com/boz14676/culture-app-server' => array(
         'branch'	=> 'develop',
-        'hosts'		=> 'dev',
+        'hosts'		=> 'http://appapi.pzjhw.com/',
         'repo_path'	=> 'culture-app-server',
         'server_path'	=> 'culture-app-server',
-        'config_folder'	=> 'webhook'
+        'config_folder'	=> ''
     )
 );
