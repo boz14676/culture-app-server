@@ -44,7 +44,7 @@ $repo_conf = array(
     'https://github.com/boz14676/culture-app-server' => array(
         'branch'	=> 'develop',
         'hosts'		=> 'dev',
-        'repo_path'	=> '',
+        'repo_path'	=> 'culture-app-server',
         'server_path'	=> 'culture-app-server',
         'config_folder'	=> 'webhook'
     )
