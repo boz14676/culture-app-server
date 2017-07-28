@@ -14,14 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
         
-        $this->call('RaceCategoriesTableSeeder');
-        $this->call('RacesTableSeeder');
-        $this->call('RaceItemsTableSeeder');
-        $this->call('RaceGroupsTableSeeder');
-        $this->call('UsersTableSeeder');
-        $this->call('UserRaceMappingTableSeeder');
-        $this->call('VideosTableSeeder');
-        $this->call('RunnerTemporaryTableSeeder');
+        $this->call('ArticleCategoriesTableSeeder');
         
         Model::reguard();
     }

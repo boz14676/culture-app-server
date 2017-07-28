@@ -65,58 +65,10 @@ class BaseModel extends Model
             return '';
         }
     }
-    
-    /**
-     * 获取当前时间
-     *
-     * @return int
-     */
-    /*public function freshTimestamp() {
-        return time();
-    }*/
-
-    /**
-     * 避免转换时间戳为时间字符串
-     *
-     * @param DateTime|int $value
-     * @return DateTime|int
-     */
-    public function fromDateTime($value) {
-        return $value;
-    }
-
-    public static function formatPaged($page)
-    {
-        return [
-            'total' => $page->total(),
-            'page' => $page->currentPage(),
-            'size' => $page->perPage(),
-            'more' => intval($page->hasMorePages())
-        ];
-    }
 
     public static function formatBody(array $data = [])
     {
         $data['error_code'] = 0;
         return $data;
-    }
-
-    public static function formatError($code, $message = null)
-    {
-        switch ($code) {
-            case self::UNKNOWN_ERROR:
-                $message = trans('message.error.unknown');
-                break;
-
-            case self::NOT_FOUND:
-                $message = $message ? : trans('message.error.404');
-                break;
-        }
-
-        $body['error'] = true;
-        $body['error_code'] = $code;
-        $body['error_desc'] = $message;
-
-        return $body;
     }
 }

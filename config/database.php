@@ -48,11 +48,11 @@ return [
 
         'db' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'port'      => env('DB_PORT', 3306),
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => env('DB_USERNAME', 'forge'),
-            'password'  => env('DB_PASSWORD', ''),
+            'host'      => env('DB_HOST'),
+            'port'      => env('DB_PORT'),
+            'database'  => env('DB_DATABASE'),
+            'username'  => env('DB_USERNAME'),
+            'password'  => env('DB_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix'    => env('DB_PREFIX', ''),
@@ -60,13 +60,13 @@ return [
             'strict'    => false,
         ],
 
-        'oss' => [
+        'native' => [
             'driver'    => 'mysql',
-            'host'      => env('OSS_DB_HOST', 'localhost'),
-            'port'      => env('OSS_DB_PORT', 3306),
-            'database'  => env('OSS_DB_DATABASE', 'forge'),
-            'username'  => env('OSS_DB_USERNAME', 'forge'),
-            'password'  => env('OSS_DB_PASSWORD', ''),
+            'host'      => env('NATIVE_DB_HOST'),
+            'port'      => env('NATIVE_DB_PORT'),
+            'database'  => env('NATIVE_DB_DATABASE'),
+            'username'  => env('NATIVE_DB_USERNAME'),
+            'password'  => env('NATIVE_DB_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix'    => env('OSS_DB_PREFIX', ''),

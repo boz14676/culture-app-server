@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ArticleCategoriesTableSeeder' => $baseDir . '/database/seeds/ArticleCategoriesTableSeeder.php',
     'CreatePhotosTable' => $baseDir . '/database/migrations/2017_05_09_150706_create_photos_table.php',
     'CreateRaceCategoriesTable' => $baseDir . '/database/migrations/2017_05_09_150706_create_race_categories_table.php',
     'CreateRaceGroupsTable' => $baseDir . '/database/migrations/2017_05_09_150706_create_race_groups_table.php',
@@ -26,9 +27,12 @@ return array(
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
     'IlluminateQueueClosure' => $vendorDir . '/illuminate/queue/IlluminateQueueClosure.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
+    'PHPUnit\\Framework\\AssertionFailedError' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',
     'PHPUnit\\Framework\\BaseTestListener' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/BaseTestListener.php',
+    'PHPUnit\\Framework\\Test' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/Test.php',
     'PHPUnit\\Framework\\TestCase' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
     'PHPUnit\\Framework\\TestListener' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/TestListener.php',
+    'PHPUnit\\Framework\\TestSuite' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/TestSuite.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
     'PHPUnit_Extensions_PhptTestCase' => $vendorDir . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -427,11 +431,6 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
-    'RaceCategoriesTableSeeder' => $baseDir . '/database/seeds/RaceCategoriesTableSeeder.php',
-    'RaceGroupsTableSeeder' => $baseDir . '/database/seeds/RaceGroupsTableSeeder.php',
-    'RaceItemsTableSeeder' => $baseDir . '/database/seeds/RaceItemsTableSeeder.php',
-    'RacesTableSeeder' => $baseDir . '/database/seeds/RacesTableSeeder.php',
-    'RunnerTemporaryTableSeeder' => $baseDir . '/database/seeds/RunnerTemporaryTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -470,7 +469,4 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
-    'UserRaceMappingTableSeeder' => $baseDir . '/database/seeds/UserRaceMappingTableSeeder.php',
-    'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
-    'VideosTableSeeder' => $baseDir . '/database/seeds/VideosTableSeeder.php',
 );

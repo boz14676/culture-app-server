@@ -34,8 +34,8 @@ class DemoFilter implements FilterInterface
      */
     public function applyFilter(\Intervention\Image\Image $image)
     {
-        // $image->pixelate($this->size);
-        // $image->greyscale();
+        $image->pixelate($this->size);
+        $image->greyscale();
 
         return $image;
     }

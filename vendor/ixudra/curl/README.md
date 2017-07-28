@@ -260,6 +260,52 @@ Delete requests work similar to `GET` requests, but use the `delete()` method in
 ```
 
 
+### Sending custom headers
+
+Sending custom headers is easy with the `withHeader()` method. Multiple calls can be chained together to add multiple headers to the request:
+
+```php
+
+    use Ixudra\Curl\Facades\Curl;
+
+    // Send a GET request to: http://www.foo.com/bar with 2 custom headers
+    $response = Curl::to('http://foo.com/bar')
+        ->withHeader('MyFirstHeader: 123')
+        ->withHeader('MySecondHeader: 456')
+        ->get();
+
+```
+
+Alternatively, you can use the `withHeaders()` to combine multiple headers into one method call:
+
+```php
+
+    use Ixudra\Curl\Facades\Curl;
+
+    // Send a GET request to: http://www.foo.com/bar with 2 custom headers
+    $response = Curl::to('http://foo.com/bar')
+        ->withHeaders( array( 'MyFirstHeader: 123', 'MySecondHeader: 456' ) )
+        ->get();
+
+```
+
+
+### Specifying the content type
+
+Sending custom headers is easy with the `withcontentType()` method. Multiple calls can be chained together to add multiple headers to the request:
+
+```php
+
+    use Ixudra\Curl\Facades\Curl;
+
+    // Send a GET request to: http://www.foo.com/bar with a json content type
+    $response = Curl::to('http://foo.com/bar')
+        ->withContentType('application/json')
+        ->get();
+
+```
+
+
 ### Sending files via Curl
 
 For sending files via a POST request, you can use the `containsFile` method to correctly format a request before sending:
@@ -289,23 +335,6 @@ For downloading a file, you can use the `download()` method:
     $response = Curl::to('http://foo.com/bar.png')
         ->withContentType('image/png')
         ->download('/path/to/dir/image.png');
-
-```
-
-
-### Debugging requests
-
-In case a request fails, it might be useful to get debug the request. In this case, you can use the `enableDebug()` method.
-This method uses one parameter, which is the name of the file in which the debug information is to be stored:
-
-```php
-
-    use Ixudra\Curl\Facades\Curl;
-
-    // Send a GET request to http://www.foo.com/bar and log debug information in /path/to/dir/logFile.txt
-    $response = Curl::to('http://www.foo.com/bar')
-        ->enableDebug('/path/to/dir/logFile.txt')
-        ->get();
 
 ```
 
@@ -341,6 +370,23 @@ The response object will look like this:
 ```
 
 
+### Debugging requests
+
+In case a request fails, it might be useful to get debug the request. In this case, you can use the `enableDebug()` method.
+This method uses one parameter, which is the name of the file in which the debug information is to be stored:
+
+```php
+
+    use Ixudra\Curl\Facades\Curl;
+
+    // Send a GET request to http://www.foo.com/bar and log debug information in /path/to/dir/logFile.txt
+    $response = Curl::to('http://www.foo.com/bar')
+        ->enableDebug('/path/to/dir/logFile.txt')
+        ->get();
+
+```
+
+
 ### Using cURL options
 
 You can add various cURL options to the request using of several utility methods such as `withHeader()` for adding a
@@ -351,7 +397,7 @@ any validation on the cURL options. Additional information about available cURL 
 
 | Method                |  Default value    | Description                                                       |
 |-----------------------|-------------------|-------------------------------------------------------------------|
-| withTimeout()         |  30 seconds       | Set the timeout of the request                                    |
+| withTimeout()         |  30 seconds       | Set the timeout of the request (integer or float)                 |
 | allowRedirect()       |  false            | Allow the request to be redirected internally                     |
 | asJsonRequest()       |  false            | Submit the request data as JSON                                   |
 | asJsonResponse()      |  false            | Decode the response data from JSON                                |

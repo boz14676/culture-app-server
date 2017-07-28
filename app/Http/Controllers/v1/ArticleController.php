@@ -3,27 +3,30 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\v1\ArticleCategory;
 
 class ArticleController extends Controller
 {
     /**
      * GET /article_categories
      */
-    /*public function categories()
+    public function categories()
     {
         $rules = [
-            'top_id'      => 'required|integer|min:1',
+            'topid'      => 'required|integer|min:1',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
-    
-        $article_categories = [
-            ''
-        ];
-    
-        return $this->body(['article_categories' => $article_categories]);
-    }*/
+
+        $topid = $this->request->input('topid');
+
+        if ($article_categories = ArticleCategory::repositories($topid)) {
+            return $this->body(['data' => $article_categories]);
+        }
+
+        return $this->error(self::UNKNOWN_ERROR);
+    }
 
 
     /**

@@ -1,6 +1,4 @@
-<?php
-
-namespace Ixudra\Curl\Facades;
+<?php namespace Ixudra\Curl\Facades;
 
 
 use Illuminate\Support\Facades\Facade;

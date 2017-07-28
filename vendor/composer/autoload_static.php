@@ -14,9 +14,9 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'bee9632da3ca00a99623b9c35d0c4f8b' => __DIR__ . '/..' . '/laravel/lumen-framework/src/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'f29c112279a25ec191524a5e3902c925' => __DIR__ . '/../..' . '/app/Helper/common.php',
@@ -129,6 +129,7 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
         array (
             'Dotenv\\' => 7,
             'Doctrine\\Instantiator\\' => 22,
+            'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
@@ -395,6 +396,10 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
         ),
+        'Doctrine\\Common\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
@@ -471,10 +476,6 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
             array (
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
             ),
-            'Doctrine\\Common\\Inflector\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
-            ),
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
@@ -483,6 +484,7 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
     );
 
     public static $classMap = array (
+        'ArticleCategoriesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ArticleCategoriesTableSeeder.php',
         'CreatePhotosTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_09_150706_create_photos_table.php',
         'CreateRaceCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_09_150706_create_race_categories_table.php',
         'CreateRaceGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_09_150706_create_race_groups_table.php',
@@ -503,9 +505,12 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
         'IlluminateQueueClosure' => __DIR__ . '/..' . '/illuminate/queue/IlluminateQueueClosure.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
+        'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',
         'PHPUnit\\Framework\\BaseTestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/BaseTestListener.php',
+        'PHPUnit\\Framework\\Test' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Test.php',
         'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
         'PHPUnit\\Framework\\TestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestListener.php',
+        'PHPUnit\\Framework\\TestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestSuite.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
         'PHPUnit_Extensions_PhptTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -904,11 +909,6 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
-        'RaceCategoriesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RaceCategoriesTableSeeder.php',
-        'RaceGroupsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RaceGroupsTableSeeder.php',
-        'RaceItemsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RaceItemsTableSeeder.php',
-        'RacesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RacesTableSeeder.php',
-        'RunnerTemporaryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RunnerTemporaryTableSeeder.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -947,9 +947,6 @@ class ComposerStaticInit736660e558b0d28123be919de6b55f2b
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
-        'UserRaceMappingTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UserRaceMappingTableSeeder.php',
-        'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',
-        'VideosTableSeeder' => __DIR__ . '/../..' . '/database/seeds/VideosTableSeeder.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
