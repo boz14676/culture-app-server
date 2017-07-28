@@ -13,7 +13,7 @@ class ArticleController extends Controller
     public function categories()
     {
         $rules = [
-            'topid'      => 'required|integer|min:1',
+            'topid'      => 'required|integer|min:0',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
