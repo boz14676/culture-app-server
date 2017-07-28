@@ -9,6 +9,7 @@ use App\Models\v1\ArticleCategory;
 class ArticleController extends Controller
 {
     /**
+     * 获取文章类别(s)
      * GET /article_categories
      */
     public function categories()
@@ -31,8 +32,8 @@ class ArticleController extends Controller
 
 
     /**
-     * GET /articles
      * 获取文章(s)
+     * GET /articles
      */
     public function _lists()
     {
@@ -61,5 +62,16 @@ class ArticleController extends Controller
         return $this->error(self::UNKNOWN_ERROR);
     }
     
+    /**
+     * 获取文章
+     * GET /article
+     */
+    public function get($id=0)
+    {
+        if ($article = Article::repository($id)) {
+            return $this->body(['data' => $article]);
+        }
 
+        return $this->error(self::UNKNOWN_ERROR);
+    }
 }

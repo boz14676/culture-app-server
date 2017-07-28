@@ -13,6 +13,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 {
     $app->get('article_categories', 'ArticleController@categories'); // 获取文章类别(s)
     $app->get('articles', 'ArticleController@_lists'); // 获取文章(s)
+    $app->get('article/{id}', 'ArticleController@get'); // 获取文章
 });
 
 // Api - Authorization

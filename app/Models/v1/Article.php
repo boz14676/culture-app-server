@@ -32,7 +32,6 @@ class Article extends BaseModel
         'comment_numbers',      // 评论数量 *可用作做排序使用的属性
         'like_numbers',         // 点赞数量 *可用作排序使用的属性
         'reading_numbers',      // 阅读量 *仅做排序使用的属性
-        'details'               // 内容
     ];
 
     protected $with = [];
@@ -83,6 +82,17 @@ class Article extends BaseModel
             })
 
             ->simplePaginate($per_page);
+    }
+
+    /**
+     * repository
+     *
+     * @param $id
+     * @return mixed    # 文章对象或null
+     */
+    public static function repository($id)
+    {
+        return self::find($id)->makeVisible(['details']);
     }
 
     // 获取[缩略图] 属性
