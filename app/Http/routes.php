@@ -11,9 +11,14 @@ $app->get('/', function () use ($app) {
 // Api - Guest
 $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middleware' => ['xss']], function($app)
 {
-    $app->get('article_categories', 'ArticleController@categories'); // 获取文章类别(s)
-    $app->get('articles', 'ArticleController@_lists'); // 获取文章(s)
-    $app->get('article/{id}', 'ArticleController@get'); // 获取文章
+    /**************************************************** 文章模块 **********************************************/
+    $app->get('article_categories', 'ArticleController@categories');  // 获取文章类别(s)
+    $app->get('articles', 'ArticleController@_lists');                // 获取文章(s)
+    $app->get('article/{id}', 'ArticleController@get');               // 获取文章
+
+    /**************************************************** Others **********************************************/
+    $app->get('hotsearches', 'OthersController@getHotsearches');                 // 获取热搜(s)
+    $app->get('home_sections', 'OthersController@getHomeSections');   // 获取首页推荐栏目
 });
 
 // Api - Authorization

@@ -40,7 +40,7 @@ class ArticleController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'article_category_id' => 'required|integer|min:1',
+            'article_category_id' => 'integer|min:1',
             's' => 'array',
             'q' => 'array',
             's.*' => 'string',
@@ -51,7 +51,7 @@ class ArticleController extends Controller
         }
 
         $per_page = $this->request->input('per_page');                          // 每页显示记录数
-        $article_category_id = $this->request->input('article_category_id');    // 文章分类ID
+        $article_category_id = $this->request->input('article_category_id', 0);    // 文章分类ID
         $s = $this->request->input('s');                                        // 排序
         $q = $this->request->input('q');                                        // 筛选
 

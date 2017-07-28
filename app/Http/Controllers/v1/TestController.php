@@ -40,5 +40,16 @@ class TestController extends Controller
         });
 
         db::table('articles')->insert($articles->all());*/
+
+        // 热搜
+        /*$hotsearches = [
+            ['article_category_id' => 1, 'name' => '舌尖上的村寨'],
+            ['article_category_id' => 1, 'name' => '非物质文化遗产'],
+            ['article_category_id' => 1, 'name' => '村寨文化起源'],
+            ['article_category_id' => 1, 'name' => '文化名城'],
+            ['article_category_id' => 1, 'name' => '革命故居'],
+            ['article_category_id' => 1, 'name' => '村寨文化起源'],
+        ];
+        db::table('hotsearches')->insert($hotsearches);*/
     }
 }
