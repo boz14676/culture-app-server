@@ -1,8 +1,12 @@
 <?php
+/*
+ * 文章 - Eloquent ORM
+ */
 
 namespace App\Models\v1;
 
 use App\Models\BaseModel;
+use DB;
 
 class Article extends BaseModel
 {
@@ -41,4 +45,56 @@ class Article extends BaseModel
         'comment_numbers' => 'integer',
         'like_numbers' => 'integer',
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        DB::enableQueryLog();
+    }
+
+    /**
+     * repositories
+     *
+     * @param int $article_category_id  # 文章分类ID
+     * @param int $per_page             # 每页显示记录数
+     * @param array $s                  # 排序
+     * @param array $q                  # 筛选
+     * @return mixed                    # 文章对象(s)或null
+     */
+    public static function repositories($article_category_id=0, $per_page=10, $s=[], $q=[])
+    {
+         return self::where('article_category_id', $article_category_id)
+            ->orderBy('id', 'desc')
+            // 排序
+            ->when($s, function ($query) use ($s) {
+                collect($s)->map(function ($item, $key) use (&$query) {
+                    $query->orderBy($key, $item);
+                });
+
+                return $query;
+            })
+            // 筛选
+            ->when($q, function ($query) use ($q) {
+                collect($q)->map(function ($item, $key) use (&$query) {
+                    $query->where($key, $item);
+                });
+
+                return $query;
+            })
+
+            ->simplePaginate($per_page);
+    }
+
+    // 获取[缩略图] 属性
+    public function getThumbnailAttribute($value)
+    {
+        return 'http://spdb.wth689.com/' . $value;
+    }
+
+    // 获取[内容] 属性
+    public function getDetailsAttribute($value)
+    {
+        return html_entity_decode($value);
+    }
+
 }

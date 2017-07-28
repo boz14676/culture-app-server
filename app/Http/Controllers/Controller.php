@@ -136,38 +136,25 @@ class Controller extends BaseController
     
     public function formatPaged($page)
     {
-        if ($page) {
-            $data = $page->toArray()['data'];
+        $page_val_data = [];
+        list($page_key, $page_val) = each($page);
+        if ($page_val) {
+            $page_val_data = $page_val->toArray()['data'];
             $paged = [
-                'size' => $page->perPage(),
-                'page' => $page->currentPage(),
-                'more' => intval($page->hasMorePages())
+                'size' => $page_val->perPage(),
+                'page' => $page_val->currentPage(),
+                'more' => intval($page_val->hasMorePages())
             ];
         } else {
-            $data = [];
             $paged = [
                 'size' => 10,
                 'page' => 1,
                 'more' => 0
             ];
         }
-        return $this->body([
-            'data' => $data,
-            'paged' => $paged
-        ]);
-    }
-
-    public function test_formatPaged($data)
-    {
-
-        $paged = [
-            'size' => 10,
-            'page' => 1,
-            'more' => 0
-        ];
 
         return $this->body([
-            'data' => $data,
+            $page_key => $page_val_data,
             'paged' => $paged
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\v1\Article;
 use App\Models\v1\ArticleCategory;
 
 class ArticleController extends Controller
@@ -38,29 +39,26 @@ class ArticleController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
+            'article_category_id' => 'required|integer|min:1',
+            's' => 'array',
+            'q' => 'array',
+            's.*' => 'string',
+            'q.*' => 'string',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
 
-        $attribute = [
-            'id' => 1,
-            'name' => '文章测试',
-            'thumbnail' => 'http://v1.qzone.cc/avatar/201508/17/09/21/55d1372b820a3621.jpg%21200x200.jpg',
-            'banner' => 'http://v1.qzone.cc/avatar/201508/17/09/21/55d1372b820a3621.jpg%21200x200.jpg',
-            'item' => ['测试标签1', '测试标签2'],
-            'distance' => '1223',
-            'location' => '1223',
-            'desc' => '描述测试',
-            'timed_at' => '2017-07-27 00:00:00',
-            'activity_nums' => '12',
-        ];
-        for ($i=1; $i<=10; $i++) {
-            $attribute['id'] = $i;
-            $articles[] = $attribute;
+        $per_page = $this->request->input('per_page');                          // 每页显示记录数
+        $article_category_id = $this->request->input('article_category_id');    // 文章分类ID
+        $s = $this->request->input('s');                                        // 排序
+        $q = $this->request->input('q');                                        // 筛选
+
+        if ($articles = Article::repositories($article_category_id, $per_page, $s, $q)) {
+            return $this->formatPaged(['data' => $articles]);
         }
 
-        return $this->test_formatPaged(collect($articles));
+        return $this->error(self::UNKNOWN_ERROR);
     }
     
 

@@ -25,6 +25,12 @@ class ArticleCategory extends BaseModel
 
     protected $casts = [];
 
+    /**
+     * repositories
+     *
+     * @param int $topid
+     * @return mixed
+     */
     public static function repositories($topid=0)
     {
         return self::where('topid', $topid)->get();
