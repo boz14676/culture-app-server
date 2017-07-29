@@ -15,15 +15,18 @@ class ArticleController extends Controller
     public function categories()
     {
         $rules = [
-            'topid'      => 'required|integer|min:0',
+            'topid'      => 'integer|min:0',
+            'number'      => 'integer|min:1',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
 
-        $topid = $this->request->input('topid');
+        $topid = $this->request->input('topid');              // 上一级ID
+        $q = $this->request->input('q');                      // 筛选
+        $numbers = $this->request->input('numbers');          // 显示数量
 
-        if ($article_categories = ArticleCategory::repositories($topid)) {
+        if ($article_categories = ArticleCategory::repositories($topid, $q, $numbers)) {
             return $this->body(['data' => $article_categories]);
         }
 
@@ -51,7 +54,7 @@ class ArticleController extends Controller
         }
 
         $per_page = $this->request->input('per_page');                          // 每页显示记录数
-        $article_category_id = $this->request->input('article_category_id', 0);    // 文章分类ID
+        $article_category_id = $this->request->input('article_category_id', 0); // 文章分类ID
         $s = $this->request->input('s');                                        // 排序
         $q = $this->request->input('q');                                        // 筛选
 

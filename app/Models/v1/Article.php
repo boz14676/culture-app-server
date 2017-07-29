@@ -59,25 +59,11 @@ class Article extends BaseModel
          return self::orderBy('id', 'desc')
             // 排序
             ->when($s, function ($query) use ($s) {
-                collect($s)->map(function ($item, $key) use (&$query) {
-                    $query->orderBy($key, $item);
-                });
-
-                return $query;
+               return self::sorting($query, $s);
             })
             // 筛选
             ->when($q, function ($query) use ($q) {
-
-                collect($q)->map(function ($item, $key) use (&$query) {
-                    // 关键字筛选
-                    if ($key === 'keywords') {
-                        $query->where('name', 'like', '%' . $item . '%');
-                    } else {
-                        $query->where($key, $item);
-                    }
-                });
-
-                return $query;
+                return self::filtering($query, $q);
             })
 
             ->simplePaginate($per_page);

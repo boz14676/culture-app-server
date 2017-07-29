@@ -66,6 +66,41 @@ class BaseModel extends Model
         }
     }
 
+    /**
+     * 过滤
+     * @param object $query
+     * @param array $q
+     * @return mixed
+     */
+    public static function filtering($query, array $q=[])
+    {
+        collect($q)->map(function ($item, $key) use (&$query) {
+            // 关键字筛选
+            if ($key === 'keywords') {
+                $query->where('name', 'like', '%' . $item . '%');
+            } else {
+                $query->where($key, $item);
+            }
+        });
+
+        return $query;
+    }
+
+    /**
+     * 排序
+     * @param object $query
+     * @param array $q
+     * @return mixed
+     */
+    public static function sorting($query, array $s=[])
+    {
+        collect($s)->map(function ($item, $key) use (&$query) {
+            $query->orderBy($key, $item);
+        });
+
+        return $query;
+    }
+
     public static function formatBody(array $data = [])
     {
         $data['error_code'] = 0;

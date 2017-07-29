@@ -33,9 +33,19 @@ class ArticleCategory extends BaseModel
      * @param int $topid
      * @return mixed
      */
-    public static function repositories($topid=0)
+    public static function repositories($topid=0, $q=[], $numbers=0)
     {
-        return self::where('topid', $topid)
+        return self::when($topid, function ($query) use ($topid) {
+                return $query->where('topid', $topid);
+            })
+            // 筛选
+            ->when($q, function ($query) use ($q) {
+                return self::filtering($query, $q);
+            })
+            // 限制显示数量
+            ->when($numbers, function ($query) use ($numbers) {
+                return $query->take($numbers);
+            })
             ->orderBy('sort', 'asc')
             ->get();
     }

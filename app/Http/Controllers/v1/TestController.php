@@ -16,23 +16,21 @@ class TestController extends Controller
         /*$article_categoires = collect();
         $native_article_categories = collect(db::connection('native')->table('cloud_culture_title')->get());
         $native_article_categories->map(function ($native_article_category) use (&$article_categoires) {
-            $article_category = [
-                'name' => $native_article_category->name,
-                'topid' => $native_article_category->pid,
+            $data = [
+                'level' => $native_article_category->level,
             ];
-            $article_categoires->push($article_category);
-        });
-        db::table('article_categories')->insert($article_categoires->all());*/
+            db::table('article_categories')->where('id', $native_article_category->id)->update($data);
+        });*/
 
         // 文章
         /*$articles = collect();
         $native_articles = collect(db::connection('native')->table('cloud_cultural_content')->get());
         $native_articles->map(function ($native_article) use ($articles) {
-            $article = [
+            $data = [
                 'address' => $native_article->address
             ];
 
-            db::table('articles')->insert($articles->all());
+            db::table('articles')->where('id', $native_article_category->id)->update($data);
 
         });*/
 
