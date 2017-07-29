@@ -15,6 +15,8 @@ class ArticleCategory extends BaseModel
     protected $visible = [
         'id',
         'topid',  // 上级ID
+        'icon',   // icon
+        'type',   // 类型
         'name',   // 名称
         'desc',   // 简介
     ];
@@ -33,6 +35,28 @@ class ArticleCategory extends BaseModel
      */
     public static function repositories($topid=0)
     {
-        return self::where('topid', $topid)->get();
+        return self::where('topid', $topid)
+            ->orderBy('sort', 'asc')
+            ->get();
+    }
+
+    // 获取当前文章分类对象的 上一级文章分类对象
+    public function topCategory()
+    {
+        return self::find($this->attributes['topid']);
+    }
+
+    // 获取类型属性
+    public function getTypeAttribute($value)
+    {
+        if ($value) {
+            return $value;
+        } else {
+            if ($this->topCategory()) {
+                return $this->topCategory()->type;
+            }
+        }
+
+        return ;
     }
 }
