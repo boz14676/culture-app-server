@@ -29,17 +29,13 @@ class TestController extends Controller
         $native_articles = collect(db::connection('native')->table('cloud_cultural_content')->get());
         $native_articles->map(function ($native_article) use ($articles) {
             $article = [
-                'article_category_id' => $native_article->pid,
-                'name' => $native_article->title,
-                'thumbnail' => $native_article->cover,
-                'item' => implode(',', explode('，', $native_article->label)),
-                'details' => $native_article->content
+                'address' => $native_article->address
             ];
 
-            $articles->push($article);
-        });
+            db::table('articles')->insert($articles->all());
 
-        db::table('articles')->insert($articles->all());*/
+        });*/
+
 
         // 热搜
         /*$hotsearches = [

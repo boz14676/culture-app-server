@@ -13,7 +13,7 @@ class Article extends BaseModel
 
     protected $guarded = [];
 
-    protected $appends = [];
+    protected $appends = ['client_timed_at'];
 
     protected $visible = [
         'id',
@@ -21,7 +21,7 @@ class Article extends BaseModel
         'name',                 // 名称（包含：姓名）
         'thumbnail',            // 缩略图（包含：大师头像）
         'banner',               // banner（包含：背景图）
-        'tags',                 // 标签
+        'label',                // 标签
         'distance',             // 距离（m）*可做排序使用属性
         'location',             // 内容所在地
         'desc',                 // 用于：内容描述、专题简介、内容年代、主题、个人简介
@@ -30,7 +30,8 @@ class Article extends BaseModel
         'comment_numbers',      // 评论数量 *可用作做排序使用的属性
         'like_numbers',         // 点赞数量 *可用作排序使用的属性
         'reading_numbers',      // 阅读量 *仅做排序使用的属性
-        'timed_at',             // 时间
+        'client_timed_at',      // 时间
+        'photos',               // 图片
     ];
 
     protected $with = [];
@@ -93,14 +94,23 @@ class Article extends BaseModel
         return self::find($id)->makeVisible(['details']);
     }
 
+    /**
+     * 获取图片
+     */
+    public function photos()
+    {
+        return $this->morphMany('App\Models\v1\Photo', 'imageable');
+    }
+
+
     // 获取[缩略图] 属性
     public function getThumbnailAttribute($value)
     {
-        return 'http://spdb.wth689.com/' . $value;
+        return 'http://spdb.wth689.com' . $value;
     }
 
     // 获取[标签] 属性
-    public function getTagsAttribute($value)
+    public function getLabelAttribute($value)
     {
         return explode(',', $value);
     }
@@ -111,4 +121,16 @@ class Article extends BaseModel
         return html_entity_decode($value);
     }
 
+    // 获取[时间] 属性
+    public function getClientTimedAtAttribute()
+    {
+        if ($this->timed_at)
+            return $this->timed_at->toDateString();
+    }
+
+    // 获取[图片(s)] 属性
+    public function getPhotosAttribute()
+    {
+        dd($this->photos);
+    }
 }

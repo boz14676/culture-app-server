@@ -101,9 +101,6 @@ if (! function_exists('formatPhoto')) {
         $cdn = ($cdn == null) ?  config('app.cdn') : $cdn ;
 
         return [
-            'width'  => null,
-            'height' => null,
-
             //定义图片服务器
             'thumb'  => (strpos($thumb, 'http://') === false) ? $cdn.'/'.$thumb : $thumb,
             'large'  => (strpos($img, 'http://') === false) ? $cdn.'/'.$img : $img
