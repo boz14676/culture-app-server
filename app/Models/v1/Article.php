@@ -16,9 +16,9 @@ class Article extends BaseModel
     protected $guarded = [];
 
     protected $appends = [
-        'activity_numbers',     // 活动数量
-        'client_timed_at',      // 时间
-        ''
+        'activity_numbers',                 // 活动数量
+        'client_timed_at',                  // 时间
+        'original_article_category'         // 文章分类对象
     ];
 
     protected $visible = [
@@ -99,6 +99,12 @@ class Article extends BaseModel
     public function articleCategory()
     {
         return $this->belongsTo('App\Models\v1\ArticleCategory', 'article_category_id');
+    }
+
+    // 获取[文章分类对象] 属性
+    public function getOriginalArticleCategoryAttribute()
+    {
+        return $this->articleCategory;
     }
 
     // 获取[活动数量] 属性

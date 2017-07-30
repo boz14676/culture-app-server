@@ -60,14 +60,28 @@ class ArticleCategory extends BaseModel
         return self::find($this->attributes['topid']);
     }
 
-    // 获取类型属性
-    public function getTypeAttribute($value)
+    // 获取[文章列表展示类型] 属性
+    public function getShowingTypeListAttribute($value)
     {
         if ($value) {
             return $value;
         } else {
             if ($this->topCategory()) {
-                return $this->topCategory()->type;
+                return $this->topCategory()->showing_type_list;
+            }
+        }
+
+        return ;
+    }
+
+    // 获取[文章详情展示类型] 属性
+    public function getShowingTypeInforAttribute($value)
+    {
+        if ($value) {
+            return $value;
+        } else {
+            if ($this->topCategory()) {
+                return $this->topCategory()->showing_type_infor;
             }
         }
 
