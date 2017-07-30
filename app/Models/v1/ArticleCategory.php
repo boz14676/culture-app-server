@@ -16,6 +16,7 @@ class ArticleCategory extends BaseModel
 
     protected $visible = [
         'id',
+        'is_activity',          // 是否可预约
         'topid',                // 上级ID
         'icon',                 // 图标
         'showing_type_list',    // 文章列表展示类型

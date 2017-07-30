@@ -23,6 +23,7 @@ class Article extends BaseModel
 
     protected $visible = [
         'id',
+        'is_activity',                      // 是否可预约
         'original_article_category',        // 文章分类
         'name',                             // 名称（包含：姓名）
         'thumbnail',                        // 缩略图（包含：大师头像）
