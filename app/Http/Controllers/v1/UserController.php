@@ -192,7 +192,7 @@ class UserController extends Controller
     /**
      * GET /user/comments 获取用户的评论(s)
      */
-    public function comments()
+    public function commentLists()
     {
         $rules = [
             'page'      => 'required|integer|min:1',
@@ -219,4 +219,30 @@ class UserController extends Controller
 
         return $this->error(self::UNKNOWN_ERROR);
     }
+
+    /**
+     * POST /user/comment
+     */
+    public function writeComment()
+    {
+        $rules = [
+            'commentable_type'  => 'required|string',
+            'commentable_id' => 'required|integer',
+            'details' => 'required|string',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $commentable_type = $this->request->input('commentable_type');  // 主题类型
+        $commentable_id = $this->request->input('commentable_type');    // 主题ID
+        $details = $this->request->input('details');                    // 内容
+
+        if ($comment = Comment::write($commentable_type, $commentable_id, $details)) {
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST, Comment::errorMsg());
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Models\v1;
 
 use App\Models\BaseModel;
+use Auth;
 
 class Comment extends BaseModel
 {
@@ -55,5 +56,30 @@ class Comment extends BaseModel
         if ($this->user) {
             return $this->user->setVisible(['nickname','avatar']);
         }
+    }
+
+    /**
+     * 写入一条评论
+     * @param $commentable_type
+     * @param $commentable_id
+     * @param $details
+     * @return bool
+     */
+    public static function write($commentable_type, $commentable_id, $details)
+    {
+        // 当前登录用户
+        if (!$user = Auth::user()) {
+            self::errorMsg(trans('message.user.user_not_found'));
+
+            return false;
+        }
+
+        $comment = new self;
+        $comment->user_id = $user->id;                      // 用户ID
+        $comment->commentable_type = $commentable_type;     // 主题类型
+        $comment->commentable_id = $commentable_id;         // 主题ID
+        $comment->details = $details;                       // 内容
+        $comment->save();
+        return $comment;
     }
 }

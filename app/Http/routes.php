@@ -54,7 +54,8 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->put('user/password/update', 'UserController@updatePassword');                  // 修改密码
 
     $app->get('user', 'UserController@get');                                             // 获取用户
-    $app->get('user/comments', 'UserController@comments');                               // 用户的评论列表
+    $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
+    $app->post('user/comment', 'UserController@writeComment');                           // 新增一个用户
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单
