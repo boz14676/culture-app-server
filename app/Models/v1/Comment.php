@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 
 class Comment extends BaseModel
 {
-    protected $table = 'comment';
+    protected $table = 'comments';
 
     protected $guarded = [];
 
@@ -30,6 +30,14 @@ class Comment extends BaseModel
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+
+    public static function repositories($per_page = 10, $q = [], $s = [])
+    {
+        $s['id'] = 'desc';
+
+        return parent::repositories($per_page, $q, $s);
     }
 
     /**

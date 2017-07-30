@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\v1\Comment;
 use App\Models\v1\User;
 
 class UserController extends Controller
@@ -186,5 +187,36 @@ class UserController extends Controller
         }
 
         return $this->error(self::NOT_FOUND);
+    }
+
+    /**
+     * GET /user/comments 获取用户的评论(s)
+     */
+    public function comments()
+    {
+        $rules = [
+            'page'      => 'required|integer|min:1',
+            'per_page'  => 'required|integer|min:1',
+            'q' => 'array',
+            's' => 'array',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $per_page = $this->request->input('per_page');                          // 每页显示记录数
+        $q = $this->request->input('q');                                        // 搜索
+        $s = $this->request->input('s');                                        // 排序
+
+        // 获取用户
+        if (!$user = $this->request->user()) {
+            return $this->error(self::UNKNOWN_ERROR);
+        }
+
+        if ($comment = $user->commentRepositories($per_page, $q, $s)) {
+            return $this->formatPaged(['data' => $comment]);
+        }
+
+        return $this->error(self::UNKNOWN_ERROR);
     }
 }

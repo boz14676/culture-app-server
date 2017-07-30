@@ -181,6 +181,23 @@ class User extends BaseModel
     }
 
     /**
+     * 评论对象
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comment()
+    {
+        return $this->hasMany('App\Models\v1\Comment');
+    }
+
+    //
+    public function commentRepositories($per_page = 10, $q = [], $s = [])
+    {
+        // TODO: 优化代码
+        return $this->comment()
+            ->simplePaginate($per_page);
+    }
+
+    /**
      * 订单对象
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
