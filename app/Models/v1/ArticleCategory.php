@@ -17,7 +17,7 @@ class ArticleCategory extends BaseModel
     protected $visible = [
         'id',
         'topid',                // 上级ID
-        'icon',                 // icon
+        'icon',                 // 图标
         'showing_type_list',    // 文章列表展示类型
         'showing_type_infor',   // 文章详情展示类型
         'name',                 // 名称
@@ -109,5 +109,11 @@ class ArticleCategory extends BaseModel
         }
 
         return ;
+    }
+
+    // 获取[图标] 属性
+    public function getIconAttribute($value)
+    {
+        return format_photo($value);
     }
 }

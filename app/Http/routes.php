@@ -33,6 +33,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 
     /**************************************************** 活动 **********************************************/
     $app->get('activities', 'ActivityController@_lists');
+    $app->get('activity/{id}', 'ActivityController@get');
 });
 
 // Api - Authorization

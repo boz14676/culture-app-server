@@ -26,7 +26,8 @@ class Activity extends BaseModel
         'address',              // 地址
         'registered_at',        // 活动的开始和结束时间
         'contact',              // 咨询电话
-        'details',              // 内容
+
+        /*'details',              // 内容*/
     ];
 
     protected $with = [];

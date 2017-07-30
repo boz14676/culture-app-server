@@ -34,4 +34,16 @@ class ActivityController extends Controller
 
         return $this->error(self::UNKNOWN_ERROR);
     }
+
+    /**
+     * GET /activity 获取活动
+     */
+    public function get($id=0)
+    {
+        if ($activity = Activity::find($id)) {
+            return $this->body(['data' => $activity->makeVisible(['details'])]);
+        }
+
+        return $this->error(self::UNKNOWN_ERROR);
+    }
 }
