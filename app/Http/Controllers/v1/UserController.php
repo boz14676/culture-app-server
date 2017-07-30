@@ -133,15 +133,15 @@ class UserController extends Controller
     }
 
     /**
-     * GET /api.user.get
+     * GET /user
      */
     public function get()
     {
-        if (!$this->request->user()) {
-            return $this->error(self::NOT_FOUND);
+        if ($this->request->user()) {
+            return $this->body(['user' => $this->request->user()]);
         }
 
-        return $this->body(['user' => $this->request->user()]);
+        return $this->error(self::NOT_FOUND);
     }
 
     /**

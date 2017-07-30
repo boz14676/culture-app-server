@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use db;
+use DB;
 
 class TestController extends Controller
 {
@@ -23,16 +23,23 @@ class TestController extends Controller
         });*/
 
         // 文章 数据填充
-        /*$articles = collect();
+        $articles = collect();
         $native_articles = collect(db::connection('native')->table('cloud_cultural_content')->get());
         $native_articles->map(function ($native_article) use ($articles) {
-            $data = [
-                'address' => $native_article->address
+            $article = [
+                'name' => $native_article->title,
+                'label' => implode(',', explode('，', $native_article->label)),
+                'details' => $native_article->content,
+                'address' => $native_article->address,
+                'thumbnail' => $native_article->cover,
+                'banner' => $native_article->url,
+                'article_category_id' => $native_article->pid,
             ];
 
-            db::table('articles')->where('id', $native_article_category->id)->update($data);
+            $articles->push($article);
+        });
 
-        });*/
+        DB::table('articles')->insert($articles->all());
 
 
         // 热搜 数据填充

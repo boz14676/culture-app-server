@@ -17,13 +17,25 @@ class User extends BaseModel
 
     protected $guarded = ['password'];
 
-    protected $appends = ['token'];
+    protected $appends = [
+        'token',                    // TOKEN
+
+        /***************************** 数量统计 *****************************/
+        'numbers_count',            // 数量总统计
+        'order_numbers',            // 订单总数量
+        'order_wait_pay_numbers',   // 订单待支付数量
+        'order_paid_numbers',       // 订单已预订数量
+        'order_refunded_numbers',   // 订单已退款数量
+        'enshrine_numbers',         // 收藏数量
+        'comment_numbers'           // 评论数量
+    ];
 
     protected $visible = [
         'nickname',             // 昵称
         'avatar',               // 头像
         'is_bind',              // 是否绑定
         'is_identification',    // 是否认证
+        'numbers_count',        // 数据统计
     ];
 
     protected $with = [];
@@ -198,5 +210,58 @@ class User extends BaseModel
     public function getTokenAttribute()
     {
         return Token::encode(['uid' => $this->attributes['id']]);
+    }
+
+    // 获取[数量总统计] 属性
+    public function getNumbersCountAttribute()
+    {
+        return [
+            'order_numbers' => $this->order_numbers,
+            'order_wait_pay_numbers' => $this->order_wait_pay_numbers,
+            'order_paid_numbers' => $this->order_paid_numbers,
+            'order_refunded_numbers' => $this->order_refunded_numbers,
+            'enshrine_numbers' => $this->enshrine_numbers,
+            'comment_numbers' => $this->comment_numbers,
+        ];
+    }
+
+    // 获取[订单总数量] 属性
+    public function getOrderNumbersAttribute()
+    {
+        return $this->orders()->count();
+    }
+
+    // 获取[订单待支付数量] 属性
+    public function getOrderWaitPayNumbersAttribute()
+    {
+        return $this->orders()
+            ->where('status', Order::STATUS_WAIT_PAY)
+            ->count();
+    }
+
+    // 获取[订单已预订数量] 属性
+    public function getOrderPaidNumbersAttribute()
+    {
+        return $this->orders()
+            ->where('status', Order::STATUS_PAID)
+            ->count();
+    }
+
+    // 获取[订单已退款数量] 属性
+    public function getOrderRefundedNumbersAttribute()
+    {
+        return 0;
+    }
+
+    // 获取[收藏数量] 属性
+    public function getEnshrineNumbersAttribute()
+    {
+        return 0;
+    }
+
+    // 获取[评论数量] 属性
+    public function getCommentNumbersAttribute()
+    {
+        return 0;
     }
 }

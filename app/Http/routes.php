@@ -43,6 +43,8 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->get('user/check_original_password', 'UserController@chekcOriginalPassword'); // 验证原始密码
     $app->put('user/password/update', 'UserController@updatePassword');                // 修改密码
 
+    $app->get('user', 'UserController@get');                                      // 获取用户
+
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单
     $app->get('orders', 'OrderController@_lists');      // 获取订单(s)

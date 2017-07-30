@@ -10,7 +10,9 @@ class ArticleCategory extends BaseModel
 
     protected $guarded = [];
 
-    protected $appends = [];
+    protected $appends = [
+        'subclasses_id', // 所有子类的ID
+    ];
 
     protected $visible = [
         'id',
@@ -52,6 +54,27 @@ class ArticleCategory extends BaseModel
             })
             ->orderBy('sort', 'asc')
             ->get();
+    }
+
+    // 获取子类的id
+    public function getSubclassesIdAttribute()
+    {
+        $ids = [];
+
+        if (!$this->upCategory()->isEmpty()) {
+            $this->upCategory()->map(function ($up_category) use (&$ids) {
+                $ids[] = $up_category->id;
+                $ids = array_merge($ids, $up_category->subclasses_id);
+            });
+        }
+
+        return $ids;
+    }
+
+    // 获取当前文章分类对象的 下一级文章分类对象
+    public function upCategory()
+    {
+        return self::where('topid', $this->attributes['id'])->get();
     }
 
     // 获取当前文章分类对象的 上一级文章分类对象

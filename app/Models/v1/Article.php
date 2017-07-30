@@ -60,6 +60,24 @@ class Article extends BaseModel
      */
     public static function repositories($per_page = 10, $q = [], $s = [])
     {
+        /**
+         * 显示在一级文章分类下的 [ 附近推荐 ] 或 [ 近期热门 ]
+         * 逻辑实现：获取当前一级文章分类下的所有子分类，根据这些分类去查找符合条件的记录
+         */
+        if (
+            isset($q['article_category_id'])
+            &&
+            (
+                isset($q['is_hot'])
+                || isset($q['is_guess'])
+            )
+        )
+        {
+            $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
+            $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
+            $q['article_category_id'] = $subclasses_id->push($article_category->attributes['id']);  // 文章分类ids
+        }
+
         $s['id'] = 'desc'; // ID倒序排序
         return parent::repositories($per_page = 10, $q, $s);
     }

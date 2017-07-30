@@ -75,7 +75,7 @@ class BaseModel extends Model
      */
     public static function repositories($per_page=10, $q=[], $s=[])
     {
-         return self
+        return self
             // 排序
             ::when($s, function ($query) use ($s) {
                 return self::sorting($query, $s);
@@ -101,7 +101,10 @@ class BaseModel extends Model
             if ($key === 'keywords') {
                 $query->where('name', 'like', '%' . $item . '%');
             } else {
-                $query->where($key, $item);
+                if (is_array($item) || is_object($item))
+                    $query->whereIn($key, $item);
+                else
+                    $query->where($key, $item);
             }
         });
 
