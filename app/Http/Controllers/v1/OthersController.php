@@ -47,7 +47,7 @@ class OthersController extends Controller
 
         $confs = $this->request->input('confs'); // 配置信息
 
-        if ($home_sections = HomeSection::repositories($confs)) {
+        if ($home_sections = HomeSection::_repositories($confs)) {
             return $this->body(['data' => $home_sections]);
         }
 

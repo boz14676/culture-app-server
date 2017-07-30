@@ -33,7 +33,7 @@ class HomeSection extends BaseModel
      * @param array $confs             # 配置信息
      * @return mixed                   # 首页推荐栏目对象(s)或null
      */
-    public static function repositories(array $confs)
+    public static function _repositories(array $confs)
     {
         $home_sections = collect();
         collect($confs)->map(function ($numbers, $adr) use (&$home_sections) {
