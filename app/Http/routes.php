@@ -32,8 +32,11 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('user/{attribute:agree|refuse}/update', 'UserController@update');
 
     /**************************************************** 活动 **********************************************/
-    $app->get('activities', 'ActivityController@_lists');
-    $app->get('activity/{id}', 'ActivityController@get');
+    $app->get('activities', 'ActivityController@_lists'); // 活动列表
+    $app->get('activity/{id}', 'ActivityController@get'); // 活动详情
+
+    /**************************************************** 视频 **********************************************/
+    $app->get('videos', 'VideoController@_lists'); // 活动列表
 });
 
 // Api - Authorization
