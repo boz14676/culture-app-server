@@ -38,6 +38,11 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     /**************************************************** 视频&&音乐 **********************************************/
     $app->get('videos', 'VideoController@_lists'); // 视频列表
     $app->get('videos', 'MusicController@_lists'); // 音乐列表
+
+
+    /**************************************************** 评论 **********************************************/
+    $app->get('comments', 'CommentController@_lists'); // 视频列表
+
 });
 
 // Api - Authorization
