@@ -75,8 +75,8 @@ class TestController extends Controller
                 'article_category_id' => 1,
                 'is_activity' => 0,
                 'name' => '银饰的起源',
-                'thumbnail' => $article_default_1,
-                'banner' => $article_default_1,
+                'thumbnail' => 'http://spdb.wth689.com/public/uploads/20170731/298bbb86b473516dc8062a0d9ee411b5.png',
+                'banner' => 'http://spdb.wth689.com/public/uploads/20170731/298bbb86b473516dc8062a0d9ee411b5.png',
                 'label' => '历史文化',
                 'location' => '',
                 'address' => '',
@@ -95,8 +95,8 @@ class TestController extends Controller
                 'article_category_id' => 1,
                 'is_activity' => 0,
                 'name' => '最后的匠人',
-                'thumbnail' => $article_default_1,
-                'banner' => $article_default_1,
+                'thumbnail' => 'http://spdb.wth689.com/public/uploads/20170731/dca2d4f47125620ed59e146e339de3e7.png',
+                'banner' => 'http://spdb.wth689.com/public/uploads/20170731/dca2d4f47125620ed59e146e339de3e7.png',
                 'label' => '非物质文化',
                 'location' => '',
                 'address' => '',
@@ -1131,12 +1131,12 @@ class TestController extends Controller
 
         // 文化服务 - 数字图书馆
 
-        // TODO:
+        // Tudo
 
 
         /*** 文化产业 文章 ***/
 
-        $thumbnail = '$article_default_1';
+        $thumbnail = 'http://appapi.pzjhw.com/file/photos/user/avator-default.png';
         // 文化产业 - 非遗大师
         $whcy_fyds_articles = [
             [
@@ -1266,11 +1266,8 @@ class TestController extends Controller
         ];
 
 
-        $total_articles = array_merge(
-            $wsts_articles,$wsts_hot_articles,$wsts_fywh_articles,$wsts_qlwh_articles,$wsts_yswh_articles,$wsts_cjwh_articles,$wsts_mzcz_articles,$wsts_whmz_articles,$wsts_msgj_articles,$wsts_hswh_articles,$wsts_lswh_articles,$wsts_ztlb_articles,$whfw_whjg_articles,$whfw_whcg_articles,$whfw_whtt_articles,$whfw_whtt_articles,$whfw_jzfp_articles,$whfw_whzw_articles,$whfw_qgwhgx_articles,$whcy_fyds_articles,$whcy_fyds_articles
-        );
-
-        DB::table('articles')->insert($total_articles);
+        /*$wsts_total_articles = array_merge($wsts_articles,$wsts_hot_articles,$wsts_fywh_articles,$wsts_qlwh_articles);
+        DB::table('articles')->insert($wsts_total_articles);*/
 
     }
 }
