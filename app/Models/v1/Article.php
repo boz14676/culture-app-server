@@ -96,7 +96,10 @@ class Article extends BaseModel
      */
     public static function repository($id)
     {
-        return self::find($id)->makeVisible(['details']);
+        if ($article = self::find($id)) {
+            return $article->makeVisible(['details']);
+        }
+        return false;
     }
 
     /**
