@@ -23,7 +23,7 @@ class TestController extends Controller
         });*/
 
         // 文章 数据填充
-        $articles = collect();
+        /*$articles = collect();
         $native_articles = collect(db::connection('native')->table('cloud_cultural_content')->get());
         $native_articles->map(function ($native_article) use ($articles) {
             $article = [
@@ -39,7 +39,7 @@ class TestController extends Controller
             $articles->push($article);
         });
 
-        DB::table('articles')->insert($articles->all());
+        DB::table('articles')->insert($articles->all());*/
 
 
         // 热搜 数据填充
@@ -54,11 +54,11 @@ class TestController extends Controller
         db::table('hotsearches')->insert($hotsearches);*/
 
         // 文化场馆 数据填充
-        /*$data = ['extra' => json_encode([
+        $data = ['extra' => json_encode([
             'opening_hours' => '10:00-18:00',
             'contact' => '0711-6666666',
             'transport' => '12路、123路、B765',
         ])];
-        db::table('articles')->where('article_category_id', 33)->update($data);*/
+        db::table('articles')->where('article_category_id', 33)->update($data);
     }
 }

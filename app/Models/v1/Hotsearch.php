@@ -25,6 +25,8 @@ class Hotsearch extends BaseModel
 
     public $timestamps = false;
 
+    const REPOSITORY_MODE = self::REPOSITORY_MODE_UNPAGE; // 数据仓库返回格式: 非分页
+
     /**
      * repositories
      * @param int $per_page             # 每页显示记录数
