@@ -1266,8 +1266,23 @@ class TestController extends Controller
         ];
 
 
+
         /*$wsts_total_articles = array_merge($wsts_articles,$wsts_hot_articles,$wsts_fywh_articles,$wsts_qlwh_articles);
         DB::table('articles')->insert($wsts_total_articles);*/
+
+        // 非遗文化
+        $fywh_category = [
+            'id' => 4,
+            'desc' => '非物质文化遗产既是历史发展的见证，又是珍贵的、具有重要价值的文化资源。',
+            'banner' => '',
+        ];
+
+        /*$total_articles = array_merge(
+            $wsts_articles,$wsts_hot_articles,$wsts_fywh_articles,$wsts_qlwh_articles,$wsts_yswh_articles,$wsts_cjwh_articles,$wsts_mzcz_articles,$wsts_whmz_articles,$wsts_msgj_articles,$wsts_hswh_articles,$wsts_lswh_articles,$wsts_ztlb_articles,$whfw_whjg_articles,$whfw_whcg_articles,$whfw_whtt_articles,$whfw_whtt_articles,$whfw_jzfp_articles,$whfw_whzw_articles,$whfw_qgwhgx_articles,$whcy_fyds_articles,$whcy_fyds_articles
+        );
+
+        DB::table('articles')->insert($total_articles);*/
+
 
     }
 }

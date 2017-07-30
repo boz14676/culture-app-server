@@ -80,23 +80,23 @@ class BaseModel extends Model
      */
     public static function repositories($per_page=10, $q=[], $s=[])
     {
-         return self
-             // 排序
-             ::when($s, function ($query) use ($s) {
-                 return self::sorting($query, $s);
-             })
-             // 筛选
-             ->when($q, function ($query) use ($q) {
-                 return self::filtering($query, $q);
-             })
+        return self
+            // 排序
+            ::when($s, function ($query) use ($s) {
+                return self::sorting($query, $s);
+            })
+            // 筛选
+            ->when($q, function ($query) use ($q) {
+                return self::filtering($query, $q);
+            })
 
-             // 返回数据格式
-             ->when(true, function ($query) use ($per_page) {
-                 if (self::REPOSITORY_MODE === self::REPOSITORY_MODE_PAGE)
+            // 返回数据格式
+            ->when(true, function ($query) use ($per_page) {
+                if (self::REPOSITORY_MODE === self::REPOSITORY_MODE_PAGE)
                     return $query->simplePaginate($per_page);
-                 else
+                else
                     return $query->take($per_page)->get();
-             });
+            });
     }
 
     /**

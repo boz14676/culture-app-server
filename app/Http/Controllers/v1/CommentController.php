@@ -8,7 +8,7 @@ use App\Models\v1\Comment;
 class CommentController extends Controller
 {
     /**
-     * GET /photos 获取图片(s)
+     * GET /comments 获取评论(s)
      */
     public function _lists()
     {
@@ -34,4 +34,5 @@ class CommentController extends Controller
 
         return $this->error(self::UNKNOWN_ERROR);
     }
+
 }
