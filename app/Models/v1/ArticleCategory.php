@@ -14,18 +14,22 @@ class ArticleCategory extends BaseModel
 
     protected $visible = [
         'id',
-        'topid',  // 上级ID
-        'icon',   // icon
-        'type',   // 类型
-        'name',   // 名称
-        'desc',   // 简介
+        'topid',                // 上级ID
+        'icon',                 // icon
+        'showing_type_list',    // 文章列表展示类型
+        'showing_type_infor',   // 文章详情展示类型
+        'name',                 // 名称
+        'desc',                 // 简介
     ];
 
     protected $with = [];
 
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $casts = [];
+    protected $casts = [
+        'showing_type_list' => 'integer',
+        'showing_type_infor' => 'integer'
+    ];
 
     /**
      * repositories

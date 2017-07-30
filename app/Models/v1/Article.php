@@ -3,9 +3,11 @@
  * 文章 - Eloquent ORM
  */
 
+
 namespace App\Models\v1;
 
 use App\Models\BaseModel;
+use DB;
 
 class Article extends BaseModel
 {
@@ -13,24 +15,28 @@ class Article extends BaseModel
 
     protected $guarded = [];
 
-    protected $appends = ['client_timed_at'];
+    protected $appends = [
+        'activity_numbers',     // 活动数量
+        'client_timed_at',      // 时间
+        ''
+    ];
 
     protected $visible = [
         'id',
-        'article_category_id',  // 文章分类对象 ID
-        'name',                 // 名称（包含：姓名）
-        'thumbnail',            // 缩略图（包含：大师头像）
-        'banner',               // banner（包含：背景图）
-        'label',                // 标签
-        'distance',             // 距离（m）*可做排序使用属性
-        'location',             // 内容所在地
-        'desc',                 // 用于：内容描述、专题简介、内容年代、主题、个人简介
-        'activity_numbers',     // 活动数量
-        'comment_numbers',      // 评论数量 *可用作做排序使用的属性
-        'like_numbers',         // 点赞数量 *可用作排序使用的属性
-        'reading_numbers',      // 阅读量 *仅做排序使用的属性
-        'client_timed_at',      // 时间
-        'extra',                // 扩展字段
+        'original_article_category',        // 文章分类
+        'name',                             // 名称（包含：姓名）
+        'thumbnail',                        // 缩略图（包含：大师头像）
+        'banner',                           // banner（包含：背景图）
+        'label',                            // 标签
+        'distance',                         // 距离（m）*可做排序使用属性
+        'location',                         // 内容所在地
+        'desc',                             // 用于：内容描述、专题简介、内容年代、主题、个人简介
+        'activity_numbers',                 // 活动数量
+        'comment_numbers',                  // 评论数量 *可用作做排序使用的属性
+        'like_numbers',                     // 点赞数量 *可用作排序使用的属性
+        'reading_numbers',                  // 阅读量 *仅做排序使用的属性
+        'client_timed_at',                  // 时间
+        'extra',                            // 扩展字段
     ];
 
     protected $with = [];
@@ -46,15 +52,16 @@ class Article extends BaseModel
 
     /**
      * repositories
-     * @param int $per_page             # 每页显示记录数
-     * @param array $q                  # 筛选
-     * @param array $s                  # 排序
+     *
+     * @param int $per_page # 每页显示记录数
+     * @param array $q # 筛选
+     * @param array $s # 排序
      * @return mixed                    # 文章对象(s)或null
      */
-    public static function repositories($per_page=10, $q=[], $s=[])
+    public static function repositories($per_page = 10, $q = [], $s = [])
     {
         $s['id'] = 'desc'; // ID倒序排序
-        return parent::repositories($per_page=10, $q, $s);
+        return parent::repositories($per_page = 10, $q, $s);
     }
 
     /**
@@ -73,9 +80,35 @@ class Article extends BaseModel
      */
     public function photos()
     {
-        return $this->morphMany('App\Models\v1\Photo', 'imageable');
+        return $this->morphMany('App\Models\v1\Photo', 'activitiable');
     }
 
+    /**
+     * 活动对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activity()
+    {
+        return $this->morphMany('App\Models\v1\Activity', 'activitiable');
+    }
+
+    /**
+     * 文章对象
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function articleCategory()
+    {
+        return $this->belongsTo('App\Models\v1\ArticleCategory', 'article_category_id');
+    }
+
+    // 获取[活动数量] 属性
+    public function getActivityNumbersAttribute()
+    {
+        if ($this->activity) {
+            return $this->activity()->count();
+        }
+        return 0;
+    }
 
     // 获取[缩略图] 属性
     public function getThumbnailAttribute($value)
