@@ -27,17 +27,15 @@ class Hotsearch extends BaseModel
 
     /**
      * repositories
-     *
-     * @param int $article_category_id # 文章分类对象 ID
-     * @param int $numbers             # 显示数量
-     * @return mixed                   # 热搜对象(s)或null
+     * @param int $per_page             # 每页显示记录数
+     * @param array $q                  # 筛选
+     * @param array $s                  # 排序
+     * @return mixed                    # 实体对象或null
      */
-    public static function repositories($article_category_id=0, $numbers=6)
+    public static function repositories($numbers=6, $q=[], $s=[])
     {
-         return self::where('article_category_id', $article_category_id)
-            ->orderBy('searching_numbers', 'desc')
-            ->take($numbers)
-            ->get();
+        $s['searching_numbers'] = 'desc';
+        parent::repositories($numbers, $q, $s);
     }
 
 }

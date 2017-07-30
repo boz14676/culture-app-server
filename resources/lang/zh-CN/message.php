@@ -21,11 +21,10 @@ return [
     ],
     'photo' => [
     ],
-    'race' => [
-        'not_found' => '没有找到该赛事',
-    ],
-    'video' => [
-        'push_error' => '视频接口请求失败'
+    'shopping' => [
+        'goods_not_found' => '商品没有找到',
+        'stockout' => '商品已售光',
+        'purchase_limitation' => '抱歉，您购买的数量已经超过限购的购买数量'
     ],
     'error' => [
         'user_id' => '用户ID',

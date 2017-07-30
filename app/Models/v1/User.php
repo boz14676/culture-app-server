@@ -159,18 +159,33 @@ class User extends BaseModel
         return Sms::requestSmsCode($mobile);
     }
 
-    // 获取当前登录用户
-    public function using($token)
+    // 订单对象
+    public function orders()
     {
-        if (!$user_id = Token::authorization($token)) {
-            return false;
-        }
+        return $this->hasMany('App\Models\v1\Order');
+    }
 
-        if (!$user = User::find($user_id)) {
-            return false;
-        }
+    // 订单商品对象
+    public function order($goods_id=0, $isvalid=0)
+    {
+        return $this->hasMany('App\Models\v1\Order')
+            ->when($goods_id, function($query) use($goods_id) {
+                return $query->where('goods_id', $goods_id);
+            })
+            ->when($isvalid, function ($query) {
+                return $query->where('status', '<>', Order::STATUS_CANCELED);
+            });
+    }
 
-        return $user;
+    /**
+     * 获取当前用户 对某个商品的下单总量
+     * @param int $goods_id 团购商品ID
+     * @param int $isvalid 是否为有效订单
+     * @return int 商品数量
+     */
+    public function getOrderGoodsNumbers($goods_id=0, $isvalid=0)
+    {
+        return $order_goods = $this->order($goods_id, $isvalid)->sum('goods_numbers') ? : 0;
     }
 
     // 获取头像属性

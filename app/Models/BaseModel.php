@@ -75,7 +75,7 @@ class BaseModel extends Model
      */
     public static function repositories($per_page=10, $q=[], $s=[])
     {
-        return self
+         return self
             // 排序
             ::when($s, function ($query) use ($s) {
                 return self::sorting($query, $s);

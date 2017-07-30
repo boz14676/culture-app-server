@@ -23,7 +23,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     /**************************************************** 图片资源库 **********************************************/
     $app->get('photos', 'PhotoController@_lists'); // 获取图片(s)
 
-    /**************************************************** 用户中心 **********************************************/
+    /**************************************************** 用户 **********************************************/
     $app->post('user/code', 'UserController@sendCode');      // 发送验证码
     $app->post('user/register', 'UserController@register');  // 注册
     $app->get('user/login', 'UserController@login');         // 登录
@@ -38,9 +38,16 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 // Api - Authorization
 $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middleware' => ['auth', 'xss']], function($app)
 {
-    /**************************************************** 用户中心 **********************************************/
-
+    /**************************************************** 用户 **********************************************/
     /** 修改密码 **/
     $app->get('user/check_original_password', 'UserController@chekcOriginalPassword'); // 验证原始密码
     $app->put('user/password/update', 'UserController@updatePassword');                // 修改密码
+
+    /**************************************************** 订单 **********************************************/
+    $app->get('order/{id}', 'OrderController@get');     // 获取订单
+    $app->get('orders', 'OrderController@_lists');      // 获取订单(s)
+
+    // **************************************** 购物 ***************************************
+    $app->post('shopping/orders', 'ShoppingController@orders');  // 下单
+    $app->post('shopping/pays', 'ShoppingController@pays');      // 付款
 });

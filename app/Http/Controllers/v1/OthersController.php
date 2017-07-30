@@ -15,17 +15,17 @@ class OthersController extends Controller
     public function getHotsearches()
     {
         $rules = [
-            'article_category_id' => 'required|integer|min:1',
+            'q' => 'array',
+            'q.article_category_id' => 'required|integer|min:1',
             'numbers' => 'integer|min:1'
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
 
-        $article_category_id = $this->request->input('article_category_id'); // 文章分类对象 ID
         $numbers = $this->request->input('numbers', 6);                        // 显示数量
 
-        if ($hotsearch = Hotsearch::repositories($article_category_id, $numbers)) {
+        if ($hotsearch = Hotsearch::repositories($numbers)) {
             return $this->body(['data' => $hotsearch]);
         }
 

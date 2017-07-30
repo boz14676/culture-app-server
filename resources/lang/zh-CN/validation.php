@@ -114,7 +114,8 @@ return [
         'password' => '密码',
         'repeat_password' => '密码',
         'mobile' => '手机号',
-        'code' => '验证码'
+        'code' => '验证码',
+        'goods_numbers' => '购买数量'
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Models\v1;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use Carbon\Carbon;
 
@@ -11,7 +12,7 @@ class Activity extends BaseModel
 
     protected $guarded = [];
 
-    protected $appends = ['registered_at', 'surplus_numbers'];
+    protected $appends = ['registered_at'];
 
     protected $visible = [
         'id',
@@ -43,6 +44,20 @@ class Activity extends BaseModel
     const STATUS_FINISHED = 4;      // 已结束
 
     /**
+     * 数据模型的启动方法
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('showing', function(Builder $builder) {
+            $builder->where('is_active', 1);
+        });
+    }
+
+    /**
      * 获取所有拥有的 activitiable 模型
      */
     public function activitiable()
@@ -58,15 +73,6 @@ class Activity extends BaseModel
                 $this->start_registered_at->toDateString(),
                 $this->end_registered_at->toDateString()
             ];
-        }
-    }
-
-    // 获取[剩余数量] 属性
-    public function getSurplusNumbersAttribute()
-    {
-        // 如果后台设置了限购数量
-        if ($this->attributes['limitation_numbers']) {
-            return intval($this->attributes['limitation_numbers']) - intval($this->attributes['sold_numbers']);
         }
     }
 
@@ -99,7 +105,7 @@ class Activity extends BaseModel
         }
 
         // 如果没有剩余数量
-        if ($this->surplus_numbers && $this->surplus_numbers < 1) {
+        if (!$this->attributes['stock_numbers']) {
             return self::STATUS_BOOKEDUP;
         }
 
