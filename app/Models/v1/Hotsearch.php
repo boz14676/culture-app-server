@@ -35,7 +35,7 @@ class Hotsearch extends BaseModel
     public static function repositories($numbers=6, $q=[], $s=[])
     {
         $s['searching_numbers'] = 'desc';
-        parent::repositories($numbers, $q, $s);
+        return parent::repositories($numbers, $q, $s);
     }
 
 }

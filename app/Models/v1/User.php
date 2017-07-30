@@ -148,7 +148,12 @@ class User extends BaseModel
         return $user->save();
     }
 
-    // 更新用户
+    /**
+     * 更新用户
+     * @param string $attribute
+     * @param null $ext
+     * @return $this|bool
+     */
     public function updates($attribute='', $ext=null)
     {
         // 更改头像
@@ -165,19 +170,31 @@ class User extends BaseModel
         }
     }
 
-    // 发送验证码
+    /**
+     * 发送验证码
+     * @param $mobile
+     * @return bool
+     */
     public static function sendVerifyCode($mobile)
     {
         return Sms::requestSmsCode($mobile);
     }
 
-    // 订单对象
+    /**
+     * 订单对象
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function orders()
     {
         return $this->hasMany('App\Models\v1\Order');
     }
 
-    // 订单商品对象
+    /**
+     * 订单商品对象
+     * @param int $goods_id
+     * @param int $isvalid
+     * @return mixed
+     */
     public function order($goods_id=0, $isvalid=0)
     {
         return $this->hasMany('App\Models\v1\Order')
@@ -200,13 +217,13 @@ class User extends BaseModel
         return $order_goods = $this->order($goods_id, $isvalid)->sum('goods_numbers') ? : 0;
     }
 
-    // 获取头像属性
+    // 获取[头像] 属性
     public function getAvatarAttribute()
     {
         return format_photo('file/photos/user/' . $this->attributes['avatar']);
     }
 
-    // 获取token属性
+    // 获取[token] 属性
     public function getTokenAttribute()
     {
         return Token::encode(['uid' => $this->attributes['id']]);
