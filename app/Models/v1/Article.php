@@ -30,6 +30,7 @@ class Article extends BaseModel
         'label',                            // 标签
         'distance',                         // 距离（m）*可做排序使用属性
         'location',                         // 内容所在地
+        'address',                          // 地址
         'desc',                             // 用于：内容描述、专题简介、内容年代、主题、个人简介
         'activity_numbers',                 // 活动数量
         'comment_numbers',                  // 评论数量 *可用作做排序使用的属性
