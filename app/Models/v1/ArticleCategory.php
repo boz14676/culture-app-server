@@ -19,6 +19,7 @@ class ArticleCategory extends BaseModel
         'is_activity',          // 是否可预约
         'topid',                // 上级ID
         'icon',                 // 图标
+        'banner',               // banner
         'showing_type_list',    // 文章列表展示类型
         'showing_type_infor',   // 文章详情展示类型
         'name',                 // 名称
