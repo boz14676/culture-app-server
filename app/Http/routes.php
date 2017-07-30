@@ -35,8 +35,9 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('activities', 'ActivityController@_lists'); // 活动列表
     $app->get('activity/{id}', 'ActivityController@get'); // 活动详情
 
-    /**************************************************** 视频 **********************************************/
-    $app->get('videos', 'VideoController@_lists'); // 活动列表
+    /**************************************************** 视频&&音乐 **********************************************/
+    $app->get('videos', 'VideoController@_lists'); // 视频列表
+    $app->get('videos', 'MusicController@_lists'); // 音乐列表
 });
 
 // Api - Authorization

@@ -39,6 +39,10 @@ class Article extends BaseModel
         'reading_numbers',                  // 阅读量 *仅做排序使用的属性
         'client_timed_at',                  // 时间
         'extra',                            // 扩展字段
+
+        'is_activity',                      // 是否有预约 [type: boolean(0, 1)]
+        'is_music',                         // 是否有音乐 [type: boolean(0, 1)]
+        'is_video',                         // 是否有视频 [type: boolean(0, 1)]
     ];
 
     protected $with = [];

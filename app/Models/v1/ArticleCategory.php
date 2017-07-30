@@ -23,6 +23,10 @@ class ArticleCategory extends BaseModel
         'showing_type_infor',   // 文章详情展示类型
         'name',                 // 名称
         'desc',                 // 简介
+
+        'is_activity',          // 是否有预约 [type: boolean(0, 1)]
+        'is_music',             // 是否有音乐 [type: boolean(0, 1)]
+        'is_video',             // 是否有视频 [type: boolean(0, 1)]
     ];
 
     protected $with = [];

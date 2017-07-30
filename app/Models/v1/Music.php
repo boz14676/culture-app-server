@@ -4,9 +4,9 @@ namespace App\Models\v1;
 
 use App\Models\BaseModel;
 
-class Video extends BaseModel
+class Music extends BaseModel
 {
-    protected $table = 'videos';
+    protected $table = 'musics';
 
     protected $guarded = [];
 
@@ -17,9 +17,8 @@ class Video extends BaseModel
         'name',                 // 名称
         'thumbnail',            // 缩略图
         'url',                  // 地址
-        'wathcing_numbers',     // 观看次数
-        'particular_year',      // 年份
-        'episode_numbers',      // 集数
+        'lenstening_numbers',   // 观看次数
+        'singer_name',          // 歌手名称
     ];
 
     protected $with = [];
