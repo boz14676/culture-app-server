@@ -43,11 +43,11 @@ class User extends BaseModel
     public static function register($mobile, $password=null, $code)
     {
         // 验证验证码
-        /*if (!Sms::verifySmsCode($mobile, $code)) {
+        if (!Sms::verifySmsCode($mobile, $code)) {
             self::errorMsg(trans('message.user.verify_code_error'));
 
             return false;
-        }*/
+        }
 
         // 创建用户对象
         $user = new User;
