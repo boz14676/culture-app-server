@@ -36,7 +36,8 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $token = Token::authorization();
+        $_token = $request->input('token', null);
+        $token = Token::authorization($_token);
 
         if ($token === false) {
             return show_error(10001, trans('message.token.invalid'));
