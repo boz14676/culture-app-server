@@ -91,6 +91,12 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'mobile' => [
+            'unique' => '您的手机已注册，请直接登录'
+        ],
+        'repeat_password' => [
+            'same' => '您2次输入的密码不一致'
+        ]
     ],
 
     /*
@@ -105,8 +111,10 @@ return [
     */
 
     'attributes' => [
-        'racer_no' => '参赛选手号',
-        'mobile' => '手机号'
+        'password' => '密码',
+        'repeat_password' => '密码',
+        'mobile' => '手机号',
+        'code' => '验证码'
     ],
 
 ];

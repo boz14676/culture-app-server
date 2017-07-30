@@ -17,12 +17,30 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('article/{id}', 'ArticleController@get');               // 获取文章
 
     /**************************************************** Others **********************************************/
-    $app->get('hotsearches', 'OthersController@getHotsearches');                 // 获取热搜(s)
+    $app->get('hotsearches', 'OthersController@getHotsearches');      // 获取热搜(s)
     $app->get('home_sections', 'OthersController@getHomeSections');   // 获取首页推荐栏目
+
+    /**************************************************** 图片资源库 **********************************************/
+    $app->get('photos', 'PhotoController@_lists'); // 获取图片(s)
+
+    /**************************************************** 用户中心 **********************************************/
+    $app->post('user/code', 'UserController@sendCode');      // 发送验证码
+    $app->post('user/register', 'UserController@register');  // 注册
+    $app->get('user/login', 'UserController@login');         // 登录
+
+    $app->get('user', 'UserController@get');
+    $app->get('user/{attribute:agree|refuse}/update', 'UserController@update');
+
+    /**************************************************** 活动 **********************************************/
+    $app->get('activities', 'ActivityController@_lists');
 });
 
 // Api - Authorization
-$app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middleware' => ['token', 'xss']], function($app)
+$app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middleware' => ['auth', 'xss']], function($app)
 {
+    /**************************************************** 用户中心 **********************************************/
 
+    /** 修改密码 **/
+    $app->get('user/check_original_password', 'UserController@chekcOriginalPassword'); // 验证原始密码
+    $app->put('user/password/update', 'UserController@updatePassword');                // 修改密码
 });

@@ -9,8 +9,7 @@ use App\Models\v1\ArticleCategory;
 class ArticleController extends Controller
 {
     /**
-     * 获取文章类别(s)
-     * GET /article_categories
+     * GET /article_categories 获取文章类别(s)
      */
     public function categories()
     {
@@ -35,15 +34,13 @@ class ArticleController extends Controller
 
 
     /**
-     * 获取文章(s)
-     * GET /articles
+     * GET /articles 获取文章(s)
      */
     public function _lists()
     {
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'article_category_id' => 'integer|min:1',
             's' => 'array',
             'q' => 'array',
             's.*' => 'string',
@@ -54,11 +51,10 @@ class ArticleController extends Controller
         }
 
         $per_page = $this->request->input('per_page');                          // 每页显示记录数
-        $article_category_id = $this->request->input('article_category_id', 0); // 文章分类ID
-        $s = $this->request->input('s');                                        // 排序
         $q = $this->request->input('q');                                        // 筛选
+        $s = $this->request->input('s');                                        // 排序
 
-        if ($articles = Article::repositories($article_category_id, $per_page, $s, $q)) {
+        if ($articles = Article::repositories($per_page, $q, $s)) {
             return $this->formatPaged(['data' => $articles]);
         }
 
@@ -66,8 +62,7 @@ class ArticleController extends Controller
     }
     
     /**
-     * 获取文章
-     * GET /article
+     * GET /article 获取文章
      */
     public function get($id=0)
     {

@@ -25,13 +25,12 @@ class Article extends BaseModel
         'distance',             // 距离（m）*可做排序使用属性
         'location',             // 内容所在地
         'desc',                 // 用于：内容描述、专题简介、内容年代、主题、个人简介
-        'is_hot',               // 是否热门 [type: boolean(0, 1)] *仅做搜索使用的属性
         'activity_numbers',     // 活动数量
         'comment_numbers',      // 评论数量 *可用作做排序使用的属性
         'like_numbers',         // 点赞数量 *可用作排序使用的属性
         'reading_numbers',      // 阅读量 *仅做排序使用的属性
         'client_timed_at',      // 时间
-        'photos',               // 图片
+        'extra',                // 扩展字段
     ];
 
     protected $with = [];
@@ -47,26 +46,15 @@ class Article extends BaseModel
 
     /**
      * repositories
-     *
-     * @param int $article_category_id  # 文章分类对象 ID
      * @param int $per_page             # 每页显示记录数
-     * @param array $s                  # 排序
      * @param array $q                  # 筛选
+     * @param array $s                  # 排序
      * @return mixed                    # 文章对象(s)或null
      */
-    public static function repositories($article_category_id=0, $per_page=10, $s=[], $q=[])
+    public static function repositories($per_page=10, $q=[], $s=[])
     {
-         return self::orderBy('id', 'desc')
-            // 排序
-            ->when($s, function ($query) use ($s) {
-               return self::sorting($query, $s);
-            })
-            // 筛选
-            ->when($q, function ($query) use ($q) {
-                return self::filtering($query, $q);
-            })
-
-            ->simplePaginate($per_page);
+        $s['id'] = 'desc'; // ID倒序排序
+        return parent::repositories($per_page=10, $q, $s);
     }
 
     /**
@@ -114,9 +102,9 @@ class Article extends BaseModel
             return $this->timed_at->toDateString();
     }
 
-    // 获取[图片(s)] 属性
-    public function getPhotosAttribute()
+    // 获取[扩展字段] 属性
+    public function getExtraAttribute($value)
     {
-        dd($this->photos);
+        return $value ? json_decode($value) : '';
     }
 }

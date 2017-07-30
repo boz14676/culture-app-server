@@ -118,9 +118,9 @@ class Token
         return $payload;
     }
 
-    public static function authorization()
+    public static function authorization($token='')
     {
-        $token = app('request')->header('Authorization');
+        $token = $token ?: app('request')->header('Authorization');
         $token = str_replace('Bearer ', '', $token);
 
         if (config('app.debug')) {

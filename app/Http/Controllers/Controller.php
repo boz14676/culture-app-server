@@ -35,7 +35,7 @@ class Controller extends BaseController
      * @param  array $rules
      * @return response
      */
-    public function validateInput($rules)
+    public function validateInput($rules, $messages=[])
     {
         $requests = $this->request->all();
 
@@ -73,7 +73,7 @@ class Controller extends BaseController
             }
         }*/
 
-        $validator = Validator::make($requests, $rules);
+        $validator = Validator::make($requests, $rules, $messages);
         if ($validator->fails()) {
             return $this->error(self::BAD_REQUEST, $validator->messages()->first());
         } else {

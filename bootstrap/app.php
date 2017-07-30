@@ -75,6 +75,7 @@ $app->routeMiddleware([
     'token' => App\Http\Middleware\TokenAuthenticate::class,
     'sign' => App\Http\Middleware\SignAuthenticate::class,
     'xss'  => App\Http\Middleware\XSSProtection::class,
+    'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
 /*
@@ -90,7 +91,7 @@ $app->routeMiddleware([
 
 
 $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(KamiOrz\Cors\CorsServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
@@ -102,6 +103,7 @@ $app->register(E421083458\Wxxcx\WxxcxServiceProvider::class);
 $app->register(Way\Generators\GeneratorsServiceProvider::class);
 $app->register(Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
 
+$app->register(Illuminate\Encryption\EncryptionServiceProvider::class);
 $app->register(Intervention\Image\ImageServiceProvider::class);
 
 /*

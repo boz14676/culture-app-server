@@ -64,14 +64,14 @@ if (! function_exists('bcrypt')) {
 }
 
 
-if (! function_exists('endWith')) {
+if (! function_exists('end_with')) {
     /**
      * 第一个是原串,第二个是 部份串
      * @param  [type] $haystack [description]
      * @param  [type] $needle   [description]
      * @return [type]           [description]
      */
-    function endWith($haystack, $needle)
+    function end_with($haystack, $needle)
     {
         $length = strlen($needle);
         if($length == 0)
@@ -82,29 +82,30 @@ if (! function_exists('endWith')) {
     }
 }
 
-if (! function_exists('formatPhoto')) {
+if (! function_exists('format_photo')) {
     /**
      * Format Photo
      *
      * @param  string $photo
      * @return array
      */
-    function formatPhoto($img, $thumb = null, $cdn = null)
+    function format_photo($img, $thumb = null, $cdn = null)
     {
-        if ($img == null) {
-            return null;
+        if (!$img) {
+            return ;
         }
-        if ($thumb == null) {
-            $thumb = $img;
-        }
-        
-        $cdn = ($cdn == null) ?  config('app.cdn') : $cdn ;
 
-        return [
-            //定义图片服务器
-            'thumb'  => (strpos($thumb, 'http://') === false) ? $cdn.'/'.$thumb : $thumb,
-            'large'  => (strpos($img, 'http://') === false) ? $cdn.'/'.$img : $img
-        ];
+        $cdn = ($cdn == null) ?  config('app.cdn') : $cdn;
+
+        if ($img && $thumb) {
+            return [
+                //定义图片服务器
+                'thumb'  => (strpos($thumb, 'http://') === false) ? $cdn.'/'.$thumb : $thumb,
+                'large'  => (strpos($img, 'http://') === false) ? $cdn.'/'.$img : $img
+            ];
+        } else {
+            return (strpos($img, 'http://') === false) ? $cdn.'/'.$img : $img;
+        }
     }
 }
 

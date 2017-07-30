@@ -67,6 +67,28 @@ class BaseModel extends Model
     }
 
     /**
+     * repositories
+     * @param int $per_page             # 每页显示记录数
+     * @param array $q                  # 筛选
+     * @param array $s                  # 排序
+     * @return mixed                    # 实体对象或null
+     */
+    public static function repositories($per_page=10, $q=[], $s=[])
+    {
+        return self
+            // 排序
+            ::when($s, function ($query) use ($s) {
+                return self::sorting($query, $s);
+            })
+            // 筛选
+            ->when($q, function ($query) use ($q) {
+                return self::filtering($query, $q);
+            })
+
+            ->simplePaginate($per_page);
+    }
+
+    /**
      * 过滤
      * @param object $query
      * @param array $q

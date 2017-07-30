@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use App\Helper\Token;
 
 class Authenticate
 {
@@ -35,8 +36,14 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        $token = Token::authorization();
+
+        if ($token === false) {
+            return show_error(10001, trans('message.token.invalid'));
+        }
+
+        if ($token ===  'token-expired') {
+            return show_error(10002, trans('message.token.expired'));
         }
 
         return $next($request);

@@ -13,11 +13,13 @@ return [
         'auth_error' => 'OAuth授权失败',
         'verify_code_error' => '验证码输入错误',
         'send_code_error' => '验证码发送失败，请稍后重试',
-        'cannot_found' => '用户未找到',
-        'video_already_existed' => '已请求过生成视频',
+        'mobile_not_found' => '您输入的手机号不存在',
+        'password_wrong' => '您输入的密码和手机号不匹配',
+        'user_not_found' => '用户未找到',
+        'original_password_wrong' => '您的输入的原始密码不正确',
+        'same_original_password' => '新密码不可与原始密码相同'
     ],
     'photo' => [
-        'cannot_found' => '图片没有找到'
     ],
     'race' => [
         'not_found' => '没有找到该赛事',
@@ -36,5 +38,5 @@ return [
         'cannot_found_result' => '没有找到当前比赛的用户成绩',
         'cannot_matching_result' => '没有该设备或符合该设备的站点成绩',
         'upload_failed' => '上传文件失败'
-    ],
+    ]
 ];
