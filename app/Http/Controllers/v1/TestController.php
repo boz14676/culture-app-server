@@ -73,7 +73,7 @@ class TestController extends Controller
         $wsts_articles = [
             [
                 'article_category_id' => 1,
-                'is_activity' => '',
+                'is_activity' => 0,
                 'name' => '银饰的起源',
                 'thumbnail' => $article_default_1,
                 'banner' => $article_default_1,
@@ -93,7 +93,7 @@ class TestController extends Controller
             ],
             [
                 'article_category_id' => 1,
-                'is_activity' => '',
+                'is_activity' => 0,
                 'name' => '最后的匠人',
                 'thumbnail' => $article_default_1,
                 'banner' => $article_default_1,
@@ -116,7 +116,7 @@ class TestController extends Controller
         $wsts_hot_articles = [
             [
                 'article_category_id' => 1,
-                'is_activity' => '',
+                'is_activity' => 0,
                 'name' => '贵州民族民俗博物馆',
                 'thumbnail' => $article_default_1,
                 'banner' => $article_default_1,
@@ -140,7 +140,7 @@ class TestController extends Controller
         $wsts_fywh_articles = [
             [
                 'article_category_id' => 4,
-                'is_activity' => '',
+                'is_activity' => 0,
                 'name' => '安顺地戏',
                 'thumbnail' => $article_default_1,
                 'banner' => $article_default_1,
@@ -164,7 +164,7 @@ class TestController extends Controller
         $wsts_qlwh_articles = [
             [
                 'article_category_id' => 5,
-                'is_activity' => '',
+                'is_activity' => 0,
                 'name' => '青西桥',
                 'thumbnail' => $article_default_1,
                 'banner' => $article_default_1,
@@ -186,7 +186,7 @@ class TestController extends Controller
 
 
 
-        /*$wsts_total_articles = array_merge($wsts_articles, $wsts_hot_articles, $wsts_up_articles->all());
+        /*$wsts_total_articles = array_merge($wsts_articles,$wsts_hot_articles,$wsts_fywh_articles,$wsts_qlwh_articles);
         DB::table('articles')->insert($wsts_total_articles);*/
 
     }
