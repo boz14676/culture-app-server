@@ -18,23 +18,18 @@ class BaseModel extends Model
     const MOBILE_USE      = 405;
     const INTERNAL_SERVER_ERROR = 500;
 
-    const REPOSITORY_MODE_PAGE = 1; // 分页
-    const REPOSITORY_MODE_UNPAGE = 2; // 非分页
-
-    const REPOSITORY_MODE = self::REPOSITORY_MODE_PAGE; // 数据仓库返回格式
-
     protected $casts = [
         'id' => 'string',
     ];
     
     protected static $error_msg = ''; // 错误信息
-    
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         DB::enableQueryLog();
     }
-    
+
     /**
      * 默认使用时间戳戳功能
      *
@@ -92,7 +87,7 @@ class BaseModel extends Model
 
             // 返回数据格式
             ->when(true, function ($query) use ($per_page) {
-                if (self::REPOSITORY_MODE === self::REPOSITORY_MODE_PAGE)
+                if (app('request')->input('page'))
                     return $query->simplePaginate($per_page);
                 else
                     return $query->take($per_page)->get();
