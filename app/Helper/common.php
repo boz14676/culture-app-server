@@ -87,25 +87,22 @@ if (! function_exists('format_photo')) {
      * Format Photo
      *
      * @param  string $photo
+     * @param  string $extra_path
      * @return array
      */
-    function format_photo($img, $thumb = null, $cdn = null)
+    function format_photo($img, $extra_path='')
     {
         if (!$img) {
             return ;
         }
 
-        $cdn = ($cdn == null) ?  config('app.cdn') : $cdn;
+        $cdn = config('app.cdn');
 
-        if ($img && $thumb) {
-            return [
-                //定义图片服务器
-                'thumb'  => (strpos($thumb, 'http://') === false) ? $cdn.'/'.$thumb : $thumb,
-                'large'  => (strpos($img, 'http://') === false) ? $cdn.'/'.$img : $img
-            ];
-        } else {
-            return (strpos($img, 'http://') === false) ? $cdn.'/'.$img : $img;
+        if ((strpos($img, 'http://') === false)) {
+            $img = $cdn . '/' . $extra_path . '/'. $img;
         }
+
+        return $img;
     }
 }
 
