@@ -118,7 +118,7 @@ class Token
         return $payload;
     }
 
-    public static function authorization($token)
+    public static function authorization()
     {
         $token = app('request')->header('Authorization');
         dd($token);
