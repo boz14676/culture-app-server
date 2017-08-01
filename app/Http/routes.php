@@ -51,7 +51,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middleware' => ['auth', 'xss']], function($app)
 {
     /**************************************************** 用户 **********************************************/
-    /** 修改密码 **/
+    /**** 修改密码 ****/
     $app->get('user/check_original_password', 'UserController@chekcOriginalPassword');   // 验证原始密码
     $app->put('user/password/update', 'UserController@updatePassword');                  // 修改密码
 
@@ -59,7 +59,10 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
     $app->post('user/comment', 'UserController@writeComment');                           // 写评论
     $app->post('user/like', 'UserController@likes');                                     // 点赞
-    $app->delete('user/like', 'UserController@unlikes');                                     // 取消点赞
+    $app->delete('user/like', 'UserController@unlikes');                                 // 取消点赞
+
+    /**** 积分 ****/
+    $app->get('integral_tasks', 'IntegralController@getIntegralTasks');                  // 获取积分任务(s)
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单

@@ -66,6 +66,20 @@ class Likes extends BaseModel
             return false;
         }
 
+        // 判断用户是否已经对该主题点赞
+        if (
+            $likes =
+                self::where('user_id', $user->id)
+                ->where('likesable_type', $likesable_type)
+                ->where('likesable_id', $likseable_id)
+                ->first()
+        )
+        {
+            self::errorMsg(trans('message.user.operation_error'));
+
+            return false;
+        }
+
         // 点赞的挂载操作
         switch ($likesable_type) {
             case 'comment':
@@ -102,10 +116,11 @@ class Likes extends BaseModel
         }
 
         if (
-            !$likes = self::where('user_id', $user->id)
-            ->where('likesable_type', $likesable_type)
-            ->where('likesable_id', $likseable_id)
-            ->first()
+            !$likes =
+                self::where('user_id', $user->id)
+                ->where('likesable_type', $likesable_type)
+                ->where('likesable_id', $likseable_id)
+                ->first()
         )
         {
             self::errorMsg(trans('message.user.operation_error'));
