@@ -63,6 +63,7 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
 
     /**** 积分 ****/
     $app->get('integral_tasks', 'IntegralController@getIntegralTasks');                  // 获取积分任务(s)
+    $app->get('user/integrals', 'IntegralController@getIntegrals');                      // 获取用户积分记录(s)
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单

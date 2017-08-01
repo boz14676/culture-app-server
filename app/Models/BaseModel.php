@@ -110,6 +110,9 @@ class BaseModel extends Model
     public static function filtering($query, array $q=[])
     {
         collect($q)->map(function ($item, $key) use (&$query) {
+            if (empty($item))
+                return;
+
             // 关键字筛选
             if ($key === 'keywords') {
                 $query->where('name', 'like', '%' . $item . '%');

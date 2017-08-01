@@ -24,6 +24,7 @@ class IntegralTask extends BaseModel
     public static function repositories($per_page=10, $q=[], $s=[])
     {
         $q['enable'] = 1;
+
         return parent::repositories(0, $q);
     }
 }
