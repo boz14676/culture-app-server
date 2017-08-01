@@ -28,8 +28,6 @@ class IntegralController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'q' => 'array',
-            's' => 'array',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;

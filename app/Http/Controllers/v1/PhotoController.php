@@ -15,8 +15,6 @@ class PhotoController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'q' => 'array',
-            's' => 'array',
             'q.imageable_type' => 'required|string',
             'q.imageable_id' => 'required|integer',
         ];

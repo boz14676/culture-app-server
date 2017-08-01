@@ -19,6 +19,8 @@ class IntegralTask extends BaseModel
         "quantity",           // 积分量
     ];
 
+    protected $timestamps = false;
+
     protected $with = [];
 
     public static function repositories($per_page=10, $q=[], $s=[])

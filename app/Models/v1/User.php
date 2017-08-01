@@ -8,6 +8,7 @@ use App\Services\QcloudSMS\Sms;
 use Laravel\Lumen\Auth\Authorizable;
 use Hash;
 use Auth;
+use DB;
 
 class User extends BaseModel
 {
@@ -31,11 +32,11 @@ class User extends BaseModel
     ];
 
     protected $visible = [
-        'nickname',             // 昵称
-        'avatar',               // 头像
-        'is_bind',              // 是否绑定
-        'is_identification',    // 是否认证
-        'numbers_count',        // 数据统计
+        'nickname',                 // 昵称
+        'avatar',                   // 头像
+        'is_bind',                  // 是否绑定
+        'identification_status',    // 是否认证
+        'numbers_count',            // 数据统计
     ];
 
     protected $with = [];
@@ -224,6 +225,15 @@ class User extends BaseModel
     }
 
     /**
+     * 实名认证 对象
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function identification()
+    {
+        return $this->hasOne('App\Models\v1\UserIdentification');
+    }
+
+    /**
      * 获取当前用户 对某个商品的下单总量
      * @param int $goods_id 团购商品ID
      * @param int $isvalid 是否为有效订单
@@ -297,5 +307,31 @@ class User extends BaseModel
     public function getCommentNumbersAttribute()
     {
         return 0;
+    }
+
+    /**
+     * 提交实名认证
+     * @param $name
+     * @param $id_number
+     * @return bool|\Illuminate\Database\Eloquent\Model
+     */
+    public function identifies($name, $id_number)
+    {
+        if ($this->identification) {
+            self::errorMsg(trans('message.user.opt_repetition'));
+            return false;
+        }
+
+        // 添加一条实名认证的审核记录
+        $this->identification()->create([
+            'name' => $name,
+            'id_number' => $id_number,
+        ]);
+
+        // 更新用户的实名认证审核的状态
+        $this->identification_status = UserIdentification::STATUS_WAIT;
+        $this->save();
+
+        return true;
     }
 }

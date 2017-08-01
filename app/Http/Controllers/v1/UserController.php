@@ -344,7 +344,7 @@ class UserController extends Controller
     }
 
     /**
-     * DEL /user/collect 取消收藏
+     * DELETE /user/collect 取消收藏
      */
     public function UserUncollects()
     {
@@ -365,4 +365,33 @@ class UserController extends Controller
 
         return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
     }
+
+    /**
+     * POST /user/collect 提交实名认证
+     */
+    public function identifies()
+    {
+        $rules = [
+            'name'  => 'required|string',
+            'id_number' => 'required',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        // 获取用户
+        if (!$user = $this->request->user()) {
+            return $this->error(self::NOT_FOUND);
+        }
+
+        $name = $this->request->input('name'); // 姓名
+        $id_number = $this->request->input('id_number'); // 身份证号
+
+        if ($user->identifies($name, $id_number)) {
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
+    }
+
 }

@@ -15,7 +15,6 @@ class OthersController extends Controller
     public function getHotsearches()
     {
         $rules = [
-            'q' => 'array',
             'q.article_category_id' => 'required|integer|min:1',
             'numbers' => 'integer|min:1'
         ];
@@ -59,8 +58,6 @@ class OthersController extends Controller
     public function getAreas()
     {
         $rules = [
-            's' => 'array',
-            'q' => 'array',
             'q.parent_id' => 'required|integer',
         ];
         if ($error = $this->validateInput($rules)) {

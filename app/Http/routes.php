@@ -67,7 +67,10 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
 
     $app->get('user/collects', 'UserController@getUserCollects');                        // 获取用户的收藏(s)
     $app->post('user/collect', 'UserController@UserCollects');                           // 收藏
-    $app->delete('user/collect', 'UserController@UserUncollects');                         // 取消收藏
+    $app->delete('user/collect', 'UserController@UserUncollects');                       // 取消收藏
+
+    $app->post('user/identification', 'UserController@identifies');                      // 提交实名认证
+
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单

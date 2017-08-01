@@ -15,8 +15,6 @@ class ActivityController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'q' => 'array',
-            's' => 'array',
             'q.activitiable_type' => 'required|string',
             'q.activitiable_id' => 'required|integer',
         ];

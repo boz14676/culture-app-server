@@ -15,8 +15,6 @@ class MusicController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'q' => 'array',
-            's' => 'array',
             'q.videoable_type' => 'required|string',
             'q.videoable_id' => 'required|integer',
         ];
