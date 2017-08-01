@@ -1274,7 +1274,7 @@ class TestController extends Controller
 
         /************************* 文章分类 *************************/
 
-        $banner = '	http://spdb.wth689.com/public/uploads/20170730/7f937e73e30693e5b1546476b167de60.png';
+        /*$banner = '	http://spdb.wth689.com/public/uploads/20170730/7f937e73e30693e5b1546476b167de60.png';
         // 非遗文化
         $categories['fywh_category'] = [
             'id' => 4,
@@ -1344,6 +1344,6 @@ class TestController extends Controller
             DB::table('article_categories')
                 ->where('id', $category_data->get('id'))
                 ->update($category_data->except('id')->all());
-        });
+        });*/
     }
 }
