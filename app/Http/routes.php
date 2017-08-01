@@ -18,7 +18,9 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 
     /**************************************************** Others **********************************************/
     $app->get('hotsearches', 'OthersController@getHotsearches');      // 获取热搜(s)
-    $app->get('home_sections', 'OthersController@getHomeSections');   // 获取首页推荐栏目
+    $app->get('home_sections', 'OthersController@getHomeSections');   // 获取首页推荐栏目(s)
+    $app->get('areas', 'OthersController@getAreas');                  // 获取区域(s)
+
 
     /**************************************************** 图片资源库 **********************************************/
     $app->get('photos', 'PhotoController@_lists'); // 获取图片(s)
@@ -37,12 +39,11 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 
     /**************************************************** 视频&&音乐 **********************************************/
     $app->get('videos', 'VideoController@_lists'); // 视频列表
-    $app->get('videos', 'MusicController@_lists'); // 音乐列表
+    $app->get('musics', 'MusicController@_lists'); // 音乐列表
 
 
     /**************************************************** 评论 **********************************************/
     $app->get('comments', 'CommentController@_lists'); // 评论列表
-
 });
 
 // Api - Authorization

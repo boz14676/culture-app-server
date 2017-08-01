@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\v1\Area;
 use App\Models\v1\HomeSection;
 use App\Models\v1\Hotsearch;
 
 class OthersController extends Controller
 {
     /**
-     * 获取热搜(s)
-     * GET /hotsearches
+     * GET /hotsearches 获取热搜(s)
      */
     public function getHotsearches()
     {
@@ -33,8 +33,7 @@ class OthersController extends Controller
     }
 
     /**
-     * 获取首页推荐栏目
-     * GET home_sections
+     * GET /home_sections 获取首页推荐栏目
      */
     public function getHomeSections()
     {
@@ -49,6 +48,30 @@ class OthersController extends Controller
 
         if ($home_sections = HomeSection::_repositories($confs)) {
             return $this->body(['data' => $home_sections]);
+        }
+
+        return $this->error(self::UNKNOWN_ERROR);
+    }
+
+    /**
+     * GET /areas 获取区域(s)
+     */
+    public function getAreas()
+    {
+        $rules = [
+            's' => 'array',
+            'q' => 'array',
+            'q.parent_id' => 'required|integer',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $q = $this->request->input('q');    // 筛选
+        $s = $this->request->input('s');    // 排序
+
+        if ($areas = Area::repositories(0, $q, $s)) {
+            return $this->body(['data' => $areas]);
         }
 
         return $this->error(self::UNKNOWN_ERROR);

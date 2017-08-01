@@ -87,10 +87,17 @@ class BaseModel extends Model
 
             // 返回数据格式
             ->when(true, function ($query) use ($per_page) {
-                if (app('request')->input('page'))
+                // 分页
+                if (app('request')->input('page')) {
                     return $query->simplePaginate($per_page);
+                }
+                // 非分页
                 else
-                    return $query->take($per_page)->get();
+                {
+                    if ($per_page) $query->take($per_page);
+
+                    return $query->get();
+                }
             });
     }
 

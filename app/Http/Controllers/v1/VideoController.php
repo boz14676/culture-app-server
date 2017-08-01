@@ -8,7 +8,7 @@ use App\Models\v1\Video;
 class VideoController extends Controller
 {
     /**
-     * GET /photos 获取图片(s)
+     * GET /photos 获取视频(s)
      */
     public function _lists()
     {
