@@ -373,7 +373,7 @@ class UserController extends Controller
     {
         $rules = [
             'name'  => 'required|string',
-            'id_number' => 'required',
+            'id_number' => 'required|string',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
@@ -384,14 +384,40 @@ class UserController extends Controller
             return $this->error(self::NOT_FOUND);
         }
 
-        $name = $this->request->input('name'); // 姓名
-        $id_number = $this->request->input('id_number'); // 身份证号
+        $name = $this->request->input('name');              // 姓名
+        $id_number = $this->request->input('id_number');    // 身份证号
 
         if ($user->identifies($name, $id_number)) {
             return $this->body();
         }
 
-        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
+        return $this->error(self::BAD_REQUEST, User::errorMsg());
+    }
+
+    /**
+     * POST /user/feedback 提交意见反馈
+     */
+    public function postFeedback()
+    {
+        $rules = [
+            'details'  => 'required|string',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        // 获取用户
+        if (!$user = $this->request->user()) {
+            return $this->error(self::NOT_FOUND);
+        }
+
+        $details = $this->request->input('details'); // 内容
+
+        if ($user->postFeedback($details)) {
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST);
     }
 
 }

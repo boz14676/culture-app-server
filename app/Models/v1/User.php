@@ -5,6 +5,7 @@ namespace App\Models\v1;
 use App\Models\BaseModel;
 use App\Helper\Token;
 use App\Services\QcloudSMS\Sms;
+use Carbon\Carbon;
 use Laravel\Lumen\Auth\Authorizable;
 use Hash;
 use Auth;
@@ -332,6 +333,17 @@ class User extends BaseModel
         $this->identification_status = UserIdentification::STATUS_WAIT;
         $this->save();
 
+        return true;
+    }
+
+    /**
+     * POST 意见反馈
+     * @param string $details
+     * @return bool
+     */
+    public function postFeedback($details='')
+    {
+        DB::table('feedback')->insert(['details' => $details, 'user_id' => $this->id, 'created_at' => Carbon::now()]);
         return true;
     }
 }

@@ -70,6 +70,7 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->delete('user/collect', 'UserController@UserUncollects');                       // 取消收藏
 
     $app->post('user/identification', 'UserController@identifies');                      // 提交实名认证
+    $app->post('user/feedback', 'UserController@postFeedback');                          // 意见反馈
 
 
     /**************************************************** 订单 **********************************************/
