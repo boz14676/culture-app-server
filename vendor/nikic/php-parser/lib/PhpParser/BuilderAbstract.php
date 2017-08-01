@@ -147,7 +147,7 @@ abstract class BuilderAbstract implements Builder {
     }
 
     /**
-     * Normalizes a doc comment: Converts plain strings to PhpParser\Comment\Doc.
+     * Normalizes a doc comment: Converts plain strings to PhpParser\UserComment\Doc.
      *
      * @param Comment\Doc|string $docComment The doc comment to normalize
      *

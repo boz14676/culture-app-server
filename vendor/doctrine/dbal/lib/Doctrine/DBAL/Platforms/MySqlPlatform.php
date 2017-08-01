@@ -159,7 +159,7 @@ class MySqlPlatform extends AbstractPlatform
             return "SELECT TABLE_NAME AS `Table`, NON_UNIQUE AS Non_Unique, INDEX_NAME AS Key_name, ".
                    "SEQ_IN_INDEX AS Seq_in_index, COLUMN_NAME AS Column_Name, COLLATION AS Collation, ".
                    "CARDINALITY AS Cardinality, SUB_PART AS Sub_Part, PACKED AS Packed, " .
-                   "NULLABLE AS `Null`, INDEX_TYPE AS Index_Type, COMMENT AS Comment " .
+                   "NULLABLE AS `Null`, INDEX_TYPE AS Index_Type, COMMENT AS UserComment " .
                    "FROM information_schema.STATISTICS WHERE TABLE_NAME = " . $table . " AND TABLE_SCHEMA = " . $currentDatabase;
         }
 
@@ -375,7 +375,7 @@ class MySqlPlatform extends AbstractPlatform
         }
 
         return "SELECT COLUMN_NAME AS Field, COLUMN_TYPE AS Type, IS_NULLABLE AS `Null`, ".
-               "COLUMN_KEY AS `Key`, COLUMN_DEFAULT AS `Default`, EXTRA AS Extra, COLUMN_COMMENT AS Comment, " .
+               "COLUMN_KEY AS `Key`, COLUMN_DEFAULT AS `Default`, EXTRA AS Extra, COLUMN_COMMENT AS UserComment, " .
                "CHARACTER_SET_NAME AS CharacterSet, COLLATION_NAME AS Collation ".
                "FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = " . $database . " AND TABLE_NAME = " . $table;
     }
@@ -503,7 +503,7 @@ class MySqlPlatform extends AbstractPlatform
             $tableOptions[] = sprintf('AUTO_INCREMENT = %s', $options['auto_increment']);
         }
 
-        // Comment
+        // UserComment
         if (isset($options['comment'])) {
             $comment = trim($options['comment'], " '");
 

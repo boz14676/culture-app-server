@@ -53,7 +53,7 @@ yaml: |
 php: |
     array('foo' => 'bar')
 ---
-test: Comment containing a colon on a hash line
+test: UserComment containing a colon on a hash line
 brief: >
     Comment containing a colon on a scalar line
 yaml: 'foo # comment: this is also part of the comment'

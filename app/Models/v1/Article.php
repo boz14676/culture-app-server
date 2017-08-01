@@ -103,7 +103,7 @@ class Article extends BaseModel
     }
 
     /**
-     * 获取图片
+     * 图片对象
      */
     public function photos()
     {
@@ -178,5 +178,30 @@ class Article extends BaseModel
     public function getExtraAttribute($value)
     {
         return $value ? json_decode($value) : '';
+    }
+
+
+    /**
+     * 被点赞后的挂载操作
+     */
+    public function liked()
+    {
+        return $this->increment('has_liked_numbers');
+    }
+
+    /**
+     * 被取消点赞后的挂载操作
+     */
+    public function unliked()
+    {
+        return $this->decrement('has_liked_numbers');
+    }
+
+    /**
+     * 被评论后的挂载操作
+     */
+    public function commented()
+    {
+        return $this->increment('has_commented_numbers');
     }
 }

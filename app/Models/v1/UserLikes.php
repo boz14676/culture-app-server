@@ -5,9 +5,9 @@ namespace App\Models\v1;
 use App\Models\BaseModel;
 use Auth;
 
-class Likes extends BaseModel
+class UserLikes extends BaseModel
 {
-    protected $table = 'likes';
+    protected $table = 'user_likes';
 
     protected $guarded = [];
 
@@ -25,7 +25,7 @@ class Likes extends BaseModel
     /**
      * 获取所有拥有的 imageable 模型
      */
-    public function likeable()
+    public function likesable()
     {
         return $this->morphTo();
     }
@@ -83,12 +83,16 @@ class Likes extends BaseModel
         // 点赞的挂载操作
         switch ($likesable_type) {
             case 'comment':
-                if ($comment = Comment::find($likseable_id))
+                if ($comment = UserComment::find($likseable_id))
                     $comment->liked();
+                break;
+            case 'article':
+                if ($article = Article::find($likseable_id))
+                    $article->liked();
                 break;
         }
 
-        $likes = new Likes;
+        $likes = new self;
         $likes->user_id = $user->id;
         $likes->likesable_type = $likesable_type;
         $likes->likesable_id = $likseable_id;
@@ -107,14 +111,7 @@ class Likes extends BaseModel
             return false;
         }
 
-        // 取消点赞的挂载操作
-        switch ($likesable_type) {
-            case 'comment':
-                if ($comment = Comment::find($likseable_id))
-                    $comment->unliked();
-                break;
-        }
-
+        // 获取点赞对象
         if (
             !$likes =
                 self::where('user_id', $user->id)
@@ -127,6 +124,19 @@ class Likes extends BaseModel
 
             return false;
         }
+
+        // 取消点赞的挂载操作
+        switch ($likesable_type) {
+            case 'comment':
+                if ($comment = UserComment::find($likseable_id))
+                    $comment->unliked();
+                break;
+            case 'article':
+                if ($article = Article::find($likseable_id))
+                    $article->unliked();
+                break;
+        }
+
 
         return $likes->delete();
     }

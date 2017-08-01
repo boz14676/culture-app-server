@@ -2,8 +2,9 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\v1\Comment;
-use App\Models\v1\Likes;
+use App\Models\v1\UserCollect;
+use App\Models\v1\UserComment;
+use App\Models\v1\UserLikes;
 use App\Models\v1\User;
 
 class UserController extends Controller
@@ -239,11 +240,11 @@ class UserController extends Controller
         $commentable_id = $this->request->input('commentable_id');      // 主题ID
         $details = $this->request->input('details');                    // 内容
 
-        if ($comment = Comment::write($commentable_type, $commentable_id, $details)) {
+        if ($comment = UserComment::write($commentable_type, $commentable_id, $details)) {
             return $this->body();
         }
 
-        return $this->error(self::BAD_REQUEST, Comment::errorMsg());
+        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
     }
 
     /**
@@ -262,15 +263,15 @@ class UserController extends Controller
         $likesable_type = $this->request->input('likesable_type');  // 主题类型
         $likesable_id = $this->request->input('likesable_id');      // 主题ID
 
-        if (Likes::add($likesable_type, $likesable_id)) {
+        if (UserLikes::add($likesable_type, $likesable_id)) {
             return $this->body();
         }
 
-        return $this->error(self::BAD_REQUEST, Comment::errorMsg());
+        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
     }
 
     /**
-     * DELETE /user/comment 点赞
+     * DELETE /user/comment 取消点赞
      */
     public function unlikes()
     {
@@ -285,10 +286,83 @@ class UserController extends Controller
         $likesable_type = $this->request->input('likesable_type');  // 主题类型
         $likesable_id = $this->request->input('likesable_id');      // 主题ID
 
-        if (Likes::remove($likesable_type, $likesable_id)) {
+        if (UserLikes::remove($likesable_type, $likesable_id)) {
             return $this->body();
         }
 
-        return $this->error(self::BAD_REQUEST, Likes::errorMsg());
+        return $this->error(self::BAD_REQUEST, UserLikes::errorMsg());
+    }
+
+    /**
+     * GET /user/collects 获取用户的收藏(s)
+     */
+    public function getUserCollects()
+    {
+        $rules = [
+            'page'      => 'required|integer|min:1',
+            'per_page'  => 'required|integer|min:1',
+
+            'q.collectable_type'  => 'required|string',
+            'q.collectable_id' => 'required|integer',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $per_page = $this->request->input('per_page');                          // 每页显示记录数
+        $q = $this->request->input('q');                                        // 筛选
+        $s = $this->request->input('s');                                        // 排序
+
+        if ($user_collects = UserCollect::repositories($per_page, $q, $s)) {
+            return $this->formatPaged(['data' => $user_collects]);
+        }
+
+        return $this->error(self::BAD_REQUEST, UserLikes::errorMsg());
+    }
+
+    /**
+     * POST /user/collect 收藏
+     */
+    public function UserCollects()
+    {
+        $rules = [
+            'collectable_type'  => 'required|string',
+            'collectable_id' => 'required|integer',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $collectable_type = $this->request->input('collectable_type');  // 主题类型
+        $collectable_id = $this->request->input('collectable_id');      // 主题ID
+
+        if (UserCollect::add($collectable_type, $collectable_id)) {
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
+    }
+
+    /**
+     * DEL /user/collect 取消收藏
+     */
+    public function UserUncollects()
+    {
+        $rules = [
+            'collectable_type'  => 'required|string',
+            'collectable_id' => 'required|integer',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $collectable_type = $this->request->input('collectable_type');  // 主题类型
+        $collectable_id = $this->request->input('collectable_id');      // 主题ID
+
+        if (UserCollect::remove($collectable_type, $collectable_id)) {
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
     }
 }

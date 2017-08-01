@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\v1\UserComment;
+use App\Models\v1\UserLikes;
 
-class CommentController extends Controller
+class UserCollectController extends Controller
 {
     /**
      * GET /comments 获取评论(s)
@@ -15,10 +15,8 @@ class CommentController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            's.created_at' => 'string',
-            's.has_liked_number' => 'string',
-            'q.commentable_type' => 'required|string',
-            'q.commentable_id' => 'required|integer',
+            'q.likesable_type' => 'required|string',
+            'q.likesable_id' => 'required|integer',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
@@ -28,7 +26,7 @@ class CommentController extends Controller
         $q = $this->request->input('q');                                        // 搜索
         $s = $this->request->input('s');                                        // 排序
 
-        if ($comment = UserComment::repositories($per_page, $q, $s)) {
+        if ($comment = UserLikes::repositories($per_page, $q, $s)) {
             return $this->formatPaged(['data' => $comment]);
         }
 

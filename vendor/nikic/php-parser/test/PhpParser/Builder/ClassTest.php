@@ -134,7 +134,7 @@ DOC;
 
     /**
      * @expectedException \LogicException
-     * @expectedExceptionMessage Doc comment must be a string or an instance of PhpParser\Comment\Doc
+     * @expectedExceptionMessage Doc comment must be a string or an instance of PhpParser\UserComment\Doc
      */
     public function testInvalidDocComment() {
         $this->createClassBuilder('Test')

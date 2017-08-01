@@ -2196,7 +2196,7 @@ continuité de la même passion silencieuse. Et puis le Vicomte, un
 matin, l'avait emporté avec lui. De quoi avait-on parlé, lorsqu'il
 restait sur les cheminées à large chambranle, entre les vases de
 fleurs et les pendules Pompadour? Elle était à Tostes. Lui, il
-était à Paris, maintenant; là-bas! Comment était ce Paris? Quel
+était à Paris, maintenant; là-bas! UserComment était ce Paris? Quel
 nom démesuré! Elle se le répétait à demi-voix, pour se faire
 plaisir; il sonnait à ses oreilles comme un bourdon de cathédrale,
 il flamboyait à ses yeux jusque sur l'étiquette de ses pots de
@@ -3166,7 +3166,7 @@ quelque site imposant.
 -- Non, mais je l'aime beaucoup, répondit-il.
 
 -- Ah! ne l'écoutez pas, madame Bovary, interrompit Homais en se
-penchant sur son assiette, c'est modestie pure. -- Comment, mon
+penchant sur son assiette, c'est modestie pure. -- UserComment, mon
 cher! Eh! l'autre jour, dans votre chambre, vous chantiez _l'Ange
 gardien_ à ravir. Je vous entendais du laboratoire; vous détachiez
 cela comme un acteur.
@@ -3330,7 +3330,7 @@ M. Binet, attablé.
 
 Ce dîner de la veille était pour lui un événement considérable;
 jamais, jusqu'alors, il n'avait causé pendant deux heures de suite
-avec une dame. Comment donc avoir pu lui exposer, et en un tel
+avec une dame. UserComment donc avoir pu lui exposer, et en un tel
 langage, quantité de choses qu'il n'aurait pas si bien dites
 auparavant? il était timide d'habitude et gardait cette réserve
 qui participe à la fois de la pudeur et de la dissimulation. On
@@ -4418,7 +4418,7 @@ reposaient les plis abondants de sa peau rouge; elle était semée
 de macules jaunes qui disparaissaient dans les poils rudes de sa
 barbe grisonnante. Il venait de dîner et respirait bruyamment.
 
--- Comment vous portez-vous? ajouta-t-il.
+-- UserComment vous portez-vous? ajouta-t-il.
 
 -- Mal, répondit Emma; je souffre.
 
@@ -4505,7 +4505,7 @@ et qui n'ont pas...
 
 -- Eh! qu'importe?
 
--- Comment! qu'importe? Il me semble, à moi, que lorsqu'on est
+-- UserComment! qu'importe? Il me semble, à moi, que lorsqu'on est
 bien chauffé, bien nourri..., car enfin...
 
 -- Mon Dieu! mon Dieu! soupirait-elle.
@@ -4974,7 +4974,7 @@ midi, seuls, à l'ombre, dans le fond du jardin! Il lisait tout
 haut, tête nue, posé sur un tabouret de bâtons secs; le vent frais
 de la prairie faisait trembler les pages du livre et les capucines
 de la tonnelle... Ah! il était parti, le seul charme de sa vie, le
-seul espoir possible d'une félicité! Comment n'avait-elle pas
+seul espoir possible d'une félicité! UserComment n'avait-elle pas
 saisi ce bonheur-là, quand il se présentait! Pourquoi ne l'avoir
 pas retenu à deux mains, à deux genoux, quand il voulait s'enfuir?
 Et elle se maudit de n'avoir pas aimé Léon; elle eut soif de ses
@@ -5469,7 +5469,7 @@ huit jours, tout est fini.
 Homais se recula de stupéfaction. Elle descendit ses trois
 marches, et, lui parlant à l'oreille:
 
--- Comment! vous ne savez pas cela? On va le saisir cette semaine.
+-- UserComment! vous ne savez pas cela? On va le saisir cette semaine.
 C'est Lheureux qui le fait vendre. Il l'a assassiné de billets.
 
 -- Quelle épouvantable catastrophe! s'écria l'apothicaire, qui
@@ -5595,7 +5595,7 @@ en marchant, quelques notes sur un album. C'était le président du
 jury: M. Derozerays de la Panville. Sitôt qu'il reconnut Rodolphe,
 il s'avança vivement, et lui dit en souriant d'un air aimable:
 
--- Comment, monsieur Boulanger, vous nous abandonnez?
+-- UserComment, monsieur Boulanger, vous nous abandonnez?
 
 Rodolphe protesta qu'il allait venir, mais quand le président eut
 disparu:
@@ -5829,7 +5829,7 @@ confiance renaît, et enfin la France respire!...»
 -- Du reste, ajouta Rodolphe, peut-être, au point de vue du monde,
 a-t-on raison?
 
--- Comment cela? fit-elle.
+-- UserComment cela? fit-elle.
 
 -- Eh quoi! dit-il, ne savez-vous pas qu'il y a des âmes sans
 cesse tourmentées? Il leur faut tour à tour le rêve et l'action,
@@ -6789,7 +6789,7 @@ vers un corridor. Emma tourna la clenche d'une porte, et tout à
 coup, au fond de la chambre, elle aperçut un homme qui dormait.
 C'était Rodolphe. Elle poussa un cri.
 
--- Te voilà! te voilà! répétait-il. Comment as-tu fait pour
+-- Te voilà! te voilà! répétait-il. UserComment as-tu fait pour
 venir?... Ah! ta robe est mouillée!
 
 -- Je t'aime! répondit-elle en lui passant les bras autour du cou.
@@ -6964,7 +6964,7 @@ taisait autour de lui; et l'on entendait seulement de temps à
 autre tinter les poids dans les balances, avec quelques paroles
 basses du pharmacien donnant des conseils à son élève.
 
--- Comment va votre jeune personne? demanda tout à coup madame
+-- UserComment va votre jeune personne? demanda tout à coup madame
 Homais.
 
 -- Silence! exclama son mari, qui écrivait des chiffres sur le
@@ -7478,7 +7478,7 @@ les paysans autour de lui poussaient les billes du billard,
 escrimaient avec les queues, fumaient, buvaient, chantaient,
 braillaient.
 
--- Comment vas-tu? disaient-ils en lui frappant sur l'épaule. Ah!
+-- UserComment vas-tu? disaient-ils en lui frappant sur l'épaule. Ah!
 tu n'es pas fier, à ce qu'il paraît! mais c'est ta faute. Il
 faudrait faire ceci, faire cela.
 
@@ -7683,7 +7683,7 @@ craquaient sur le parquet.
 
 Il se rassit.
 
-Comment donc avait-elle fait (elle qui était si intelligente!)
+UserComment donc avait-elle fait (elle qui était si intelligente!)
 pour se méprendre encore une fois? Du reste, par quelle déplorable
 manie avoir ainsi abîmé son existence en sacrifices continuels?
 Elle se rappela tous ses instincts de luxe, toutes les privations
@@ -8532,7 +8532,7 @@ Adieu!»
 Et il y avait un dernier adieu, séparé en deux mots: À Dieu! ce
 qu'il jugeait d'un excellent goût.
 
--- Comment vais-je signer, maintenant? se dit-il. Votre tout
+-- UserComment vais-je signer, maintenant? se dit-il. Votre tout
 dévoué?... Non. Votre ami?... Oui, c'est cela.
 
 «Votre ami.»
@@ -9532,7 +9532,7 @@ Mais, vite, se rappelant à la convenance de la situation, elle
 secoua dans un effort cette torpeur de ses souvenirs et se mit à
 balbutier des phrases rapides.
 
--- Ah! bonjour... Comment! vous voilà?
+-- Ah! bonjour... UserComment! vous voilà?
 
 -- Silence! cria une voix du parterre, car le troisième acte
 commençait.
@@ -9724,7 +9724,7 @@ descendus.
 
 -- Oh! je l'ai deviné, reprit Léon.
 
--- Comment?
+-- UserComment?
 
 Il prétendit avoir été guidé vers elle, au hasard, par un
 instinct. Elle se mit à sourire, et aussitôt, pour réparer sa
@@ -10650,7 +10650,7 @@ Quand la nappe fut ôtée, Bovary ne se leva pas, Emma non plus; et,
 à mesure qu'elle l'envisageait, la monotonie de ce spectacle
 bannissait peu à peu tout apitoiement de son coeur. Il lui
 semblait chétif, faible, nul, enfin être un pauvre homme, de
-toutes les façons. Comment se débarrasser de lui? Quelle
+toutes les façons. UserComment se débarrasser de lui? Quelle
 interminable soirée! Quelque chose de stupéfiant comme une vapeur
 d'opium l'engourdissait.
 
@@ -11495,7 +11495,7 @@ lut:
 somme de soixante-cinq francs. FELICIE LEMPEREUR, professeur de
 musique.»
 
--- Comment diable est-ce dans mes bottes?
+-- UserComment diable est-ce dans mes bottes?
 
 -- Ce sera, sans doute, répondit-elle, tombé du vieux carton aux
 factures, qui est sur le bord de la planche.
@@ -11600,7 +11600,7 @@ là.
 Alors, elle regarda les billets de banque; et, rêvant au nombre
 illimité de rendez-vous que ces deux mille francs représentaient:
 
--- Comment! comment! balbutia-t-elle.
+-- UserComment! comment! balbutia-t-elle.
 
 -- Oh! reprit-il en riant d'un air bonhomme, on met tout ce que
 l'on veut sur les factures. Est-ce que je ne connais pas les
@@ -11684,7 +11684,7 @@ assure.
 -- Tout le monde ne peut être riche! Aucune fortune ne tient
 contre le coulage! Je rougirais de me dorloter comme vous faites!
 et pourtant, moi, je suis vieille, j'ai besoin de soins... En
-voilà! en voilà, des ajustements! des flaflas! Comment! de la soie
+voilà! en voilà, des ajustements! des flaflas! UserComment! de la soie
 pour doublure, à deux francs!... tandis qu'on trouve du jaconas à
 dix sous, et même à huit sous qui fait parfaitement l'affaire.
 
@@ -11697,7 +11697,7 @@ L'autre continuait à la sermonner, prédisant qu'ils finiraient à
 l'hôpital. D'ailleurs, c'était la faute de Bovary. Heureusement
 qu'il avait promis d'anéantir cette procuration...
 
--- Comment?
+-- UserComment?
 
 -- Ah! il me l'a juré, reprit la bonne femme.
 
@@ -11799,7 +11799,7 @@ s'écriant:
 
 -- J'ai été malade.
 
--- Et de quoi?... Où?... Comment?...
+-- Et de quoi?... Où?... UserComment?...
 
 Elle se passa la main sur le front, et répondit:
 
@@ -12236,7 +12236,7 @@ pourrais...
 
 -- Du reste, dit-elle, dès que l'arriéré de Barneville...
 
--- Comment?...
+-- UserComment?...
 
 Et, en apprenant que Langlois n'avait pas encore payé, il parut
 fort surpris. Puis, d'une voix mielleuse:
@@ -12527,7 +12527,7 @@ Elle se présenta chez lui d'un air dégagé.
 
 -- Non.
 
--- Comment cela?
+-- UserComment cela?
 
 Il se détourna lentement, et lui dit en se croisant les bras:
 
@@ -12743,7 +12743,7 @@ détestait, le père Rouault ne pouvait rien; mais lui, Léon, il
 allait se mettre en course pour trouver cette indispensable
 somme...
 
--- Comment veux-tu...?
+-- UserComment veux-tu...?
 
 -- Quel lâche tu fais! s'écria-t-elle.
 
@@ -13266,7 +13266,7 @@ mère Rolet lui avait dit:
 
 -- Il n'y a personne chez vous!
 
--- Comment?
+-- UserComment?
 
 -- Oh! personne! Et monsieur pleure. Il vous appelle. On vous
 cherche.
@@ -13363,7 +13363,7 @@ les doigts entrelacés, -- comme le premier jour, aux Comices! Par
 un geste d'orgueil, il se débattait sous l'attendrissement. Mais,
 s'affaissant contre sa poitrine, elle lui dit:
 
--- Comment voulais-tu que je vécusse sans toi? On ne peut pas se
+-- UserComment voulais-tu que je vécusse sans toi? On ne peut pas se
 déshabituer du bonheur! J'étais désespérée! j'ai cru mourir! Je te
 conterai tout cela, tu verras. Et toi... tu m'as fuie!...
 
@@ -13538,7 +13538,7 @@ Il revint. Elle frappa contre la vitre. Il sortit.
 
 -- La clef! celle d'en haut, où sont les...
 
--- Comment?
+-- UserComment?
 
 Et il la regardait, tout étonné par la pâleur de son visage, qui
 tranchait en blanc sur le fond noir de la nuit. Elle lui apparut
@@ -13703,7 +13703,7 @@ Il bondit au secrétaire, brisa le cachet et lut tout haut: Qu'on
 n'accuse personne... Il s'arrêta, se passa la main sur les yeux,
 et relut encore.
 
--- Comment!... Au secours! à moi!
+-- UserComment!... Au secours! à moi!
 
 Et il ne pouvait que répéter ce mot: «Empoisonnée! empoisonnée!»
 Félicité courut chez Homais, qui l'exclama sur la place; madame
@@ -13942,7 +13942,7 @@ détails sur la catastrophe:
 -- Nous avons eu d'abord un sentiment de siccité au pharynx, puis
 des douleurs intolérables à l'épigastre, superpurgation, coma.
 
--- Comment s'est-elle donc empoisonnée?
+-- UserComment s'est-elle donc empoisonnée?
 
 -- Je l'ignore, docteur, et même je ne sais pas trop où elle a pu
 se procurer cet acide arsénieux.
@@ -14288,7 +14288,7 @@ fallait pas moins prier.
 -- Mais, objecta le pharmacien, puisque Dieu connaît tous nos
 besoins, à quoi peut servir la prière?
 
--- Comment! fit l'ecclésiastique, la prière! Vous n'êtes donc pas
+-- UserComment! fit l'ecclésiastique, la prière! Vous n'êtes donc pas
 chrétien?
 
 -- Pardonnez! dit Homais. J'admire le christianisme. Il a d'abord

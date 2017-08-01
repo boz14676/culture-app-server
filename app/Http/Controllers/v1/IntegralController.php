@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\v1\Integral;
+use App\Models\v1\UserIntegral;
 use App\Models\v1\IntegralTask;
 
 class IntegralController extends Controller
@@ -39,11 +39,11 @@ class IntegralController extends Controller
         $q = $this->request->input('q');                                        // 筛选
         $s = $this->request->input('s');                                        // 排序
 
-        if ($integrals = Integral::repositories($per_page, $q, $s)) {
+        if ($integrals = UserIntegral::repositories($per_page, $q, $s)) {
             return $this->formatPaged(['data' => $integrals]);
         }
 
-        return $this->error(self::BAD_REQUEST, Integral::errorMsg());
+        return $this->error(self::BAD_REQUEST, UserIntegral::errorMsg());
     }
 
 }

@@ -5,9 +5,9 @@ namespace App\Models\v1;
 use App\Models\BaseModel;
 use Auth;
 
-class Integral extends BaseModel
+class UserIntegral extends BaseModel
 {
-    protected $table = 'integrals';
+    protected $table = 'user_integrals';
 
     protected $guarded = [];
 
@@ -38,5 +38,9 @@ class Integral extends BaseModel
     {
         if ($this->attributes['created_at'])
             return $this->created_at->toDateString();
+    }
+
+    public function add()
+    {
     }
 }

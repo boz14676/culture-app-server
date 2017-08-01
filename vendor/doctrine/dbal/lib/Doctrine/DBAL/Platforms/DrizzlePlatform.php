@@ -272,7 +272,7 @@ class DrizzlePlatform extends AbstractPlatform
             $tableOptions[] = sprintf('AUTO_INCREMENT = %s', $options['auto_increment']);
         }
 
-        // Comment
+        // UserComment
         if (isset($options['comment'])) {
             $comment = trim($options['comment'], " '");
 

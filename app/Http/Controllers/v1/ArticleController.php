@@ -41,8 +41,6 @@ class ArticleController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            's' => 'array',
-            'q' => 'array',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;

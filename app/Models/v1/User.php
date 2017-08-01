@@ -186,7 +186,7 @@ class User extends BaseModel
      */
     public function comment()
     {
-        return $this->hasMany('App\Models\v1\Comment');
+        return $this->hasMany('App\Models\v1\UserComment');
     }
 
     //

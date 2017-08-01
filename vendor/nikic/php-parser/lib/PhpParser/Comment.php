@@ -11,7 +11,7 @@ class Comment implements \JsonSerializable
     /**
      * Constructs a comment node.
      *
-     * @param string $text         Comment text (including comment delimiters like /*)
+     * @param string $text         UserComment text (including comment delimiters like /*)
      * @param int    $startLine    Line number the comment started on
      * @param int    $startFilePos File offset the comment started on
      */
@@ -129,7 +129,7 @@ class Comment implements \JsonSerializable
 
     public function jsonSerialize() {
         // Technically not a node, but we make it look like one anyway
-        $type = $this instanceof Comment\Doc ? 'Comment_Doc' : 'Comment';
+        $type = $this instanceof Comment\Doc ? 'Comment_Doc' : 'UserComment';
         return [
             'nodeType' => $type,
             'text' => $this->text,

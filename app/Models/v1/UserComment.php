@@ -5,9 +5,9 @@ namespace App\Models\v1;
 use App\Models\BaseModel;
 use Auth;
 
-class Comment extends BaseModel
+class UserComment extends BaseModel
 {
-    protected $table = 'comments';
+    protected $table = 'user_comments';
 
     protected $guarded = [];
 
@@ -58,7 +58,7 @@ class Comment extends BaseModel
      */
     public function likes()
     {
-        return $this->morphMany('App\Models\v1\Likes', 'likesable');
+        return $this->morphMany('App\Models\v1\UserLikes', 'likesable');
     }
 
     // 获取[用户] 属性
@@ -102,6 +102,15 @@ class Comment extends BaseModel
         $comment->commentable_id = $commentable_id;         // 主题ID
         $comment->details = $details;                       // 内容
         $comment->save();
+
+        // 评论后的挂载操作
+        switch ($commentable_type) {
+            case 'article':
+                if ($article = Article::find($commentable_id))
+                    $article->commented();
+                break;
+        }
+
         return $comment;
     }
 

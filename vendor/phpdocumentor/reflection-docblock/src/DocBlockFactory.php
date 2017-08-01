@@ -130,7 +130,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
     /**
      * Splits the DocBlock into a template marker, summary, description and block of tags.
      *
-     * @param string $comment Comment to split into the sub-parts.
+     * @param string $comment UserComment to split into the sub-parts.
      *
      * @author Richard van Velzen (@_richardJ) Special thanks to Richard for the regex responsible for the split.
      * @author Mike van Riel <me@mikevanriel.com> for extending the regex with template marker support.

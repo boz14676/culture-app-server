@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\v1\Likes;
+use App\Models\v1\UserLikes;
 
 class LikesController extends Controller
 {
     /**
-     * GET /comments 获取评论(s)
+     * GET /likes 获取点赞(s)
      */
     public function _lists()
     {
@@ -26,7 +26,7 @@ class LikesController extends Controller
         $q = $this->request->input('q');                                        // 搜索
         $s = $this->request->input('s');                                        // 排序
 
-        if ($comment = Likes::repositories($per_page, $q, $s)) {
+        if ($comment = UserLikes::repositories($per_page, $q, $s)) {
             return $this->formatPaged(['data' => $comment]);
         }
 
