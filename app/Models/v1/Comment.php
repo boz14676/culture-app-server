@@ -112,4 +112,12 @@ class Comment extends BaseModel
     {
         return $this->increment('has_liked_number');
     }
+
+    /**
+     * 被取消点赞后的挂载操作
+     */
+    public function unliked()
+    {
+        return $this->decrement('has_liked_number');
+    }
 }

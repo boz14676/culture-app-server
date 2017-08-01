@@ -84,7 +84,7 @@ class Likes extends BaseModel
     /**
      * 取消点赞
      */
-    public static function add($likesable_type, $likseable_id)
+    public static function remove($likesable_type, $likseable_id)
     {
         // 当前登录用户
         if (!$user = Auth::user()) {
@@ -93,18 +93,26 @@ class Likes extends BaseModel
             return false;
         }
 
-        // 点赞的挂载操作
+        // 取消点赞的挂载操作
         switch ($likesable_type) {
             case 'comment':
                 if ($comment = Comment::find($likseable_id))
-                    $comment->liked();
+                    $comment->unliked();
                 break;
         }
 
-        $likes = new Likes;
-        $likes->user_id = $user->id;
-        $likes->likesable_type = $likesable_type;
-        $likes->likesable_id = $likseable_id;
-        return $likes->save();
+        if (
+            !$likes = self::where('user_id', $user->id)
+            ->where('likesable_type', $likesable_type)
+            ->where('likesable_id', $likseable_id)
+            ->first()
+        )
+        {
+            self::errorMsg(trans('message.user.operation_error'));
+
+            return false;
+        }
+
+        return $likes->delete();
     }
 }

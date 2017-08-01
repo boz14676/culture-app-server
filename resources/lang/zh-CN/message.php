@@ -17,7 +17,8 @@ return [
         'password_wrong' => '您输入的密码和手机号不匹配',
         'user_not_found' => '用户未找到',
         'original_password_wrong' => '您的输入的原始密码不正确',
-        'same_original_password' => '新密码不可与原始密码相同'
+        'same_original_password' => '新密码不可与原始密码相同',
+        'operation_error' => '操作失败'
     ],
     'photo' => [
     ],

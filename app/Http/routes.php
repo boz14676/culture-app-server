@@ -59,7 +59,7 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
     $app->post('user/comment', 'UserController@writeComment');                           // 写评论
     $app->post('user/like', 'UserController@likes');                                     // 点赞
-    $app->post('user/like', 'UserController@likes');                                     // 取消点赞
+    $app->delete('user/like', 'UserController@unlikes');                                     // 取消点赞
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单

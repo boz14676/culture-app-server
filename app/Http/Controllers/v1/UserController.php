@@ -289,6 +289,6 @@ class UserController extends Controller
             return $this->body();
         }
 
-        return $this->error(self::BAD_REQUEST, Comment::errorMsg());
+        return $this->error(self::BAD_REQUEST, Likes::errorMsg());
     }
 }
