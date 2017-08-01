@@ -15,8 +15,8 @@ class CommentController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'q' => 'array',
-            's' => 'array',
+            's.created_at' => 'string',
+            's.has_liked_number' => 'string',
             'q.commentable_type' => 'required|string',
             'q.commentable_id' => 'required|integer',
         ];
@@ -34,5 +34,4 @@ class CommentController extends Controller
 
         return $this->error(self::UNKNOWN_ERROR);
     }
-
 }

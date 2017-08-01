@@ -56,7 +56,8 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
 
     $app->get('user', 'UserController@get');                                             // 获取用户
     $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
-    $app->post('user/comment', 'UserController@writeComment');                           // 新增一个用户
+    $app->post('user/comment', 'UserController@writeComment');                           // 写评论
+    $app->post('user/like', 'UserController@likes');                                     // 写评论
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单
