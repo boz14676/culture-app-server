@@ -75,6 +75,7 @@ class Article extends BaseModel
             &&
             (
                 isset($q['is_hot'])
+                || isset($q['is_hot2'])
                 || isset($q['is_guess'])
             )
         )
@@ -82,6 +83,28 @@ class Article extends BaseModel
             $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
             $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
             $q['article_category_id'] = $subclasses_id->push($article_category->attributes['id']);  // 文章分类ids
+        }
+
+        // 实现附近推荐
+        if (
+            isset($q['article_category_id']) &&
+            isset($s['distance'])
+        )
+        {
+            $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
+            $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
+
+            $q['article_category_id'] = $subclasses_id->push($article_category->attributes['id']);  // 文章分类ids
+            $q['expression'] = [
+                ['whereNotNull', ['lat']],
+                ['whereNotNull', ['lng']]
+            ];                                                                                      // 过滤掉为空的经纬度
+
+            $user_lat = app('request')->input('user_lat');                                    // 用户坐标精度
+            $user_lng = app('request')->input('user_lng');                                    // 用户坐标纬度
+
+            $distance_field = DB::raw('ROUND( 6378.138 * 2 * ASIN( SQRT( POW( SIN(( lat * PI() / 180 - ' . $user_lat . ' * PI() / 180) / 2) , 2) + COS(lat * PI() / 180) * COS(' . $user_lat . ' * PI() / 180) * POW( SIN(( lng * PI() / 180 - ' . $user_lng . ' * PI() / 180) / 2) , 2))) * 1000)');
+            $s['distance'] = [$distance_field, 'asc'];
         }
 
         $s['id'] = 'desc'; // ID倒序排序

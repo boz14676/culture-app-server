@@ -116,7 +116,19 @@ class BaseModel extends Model
             // 关键字筛选
             if ($key === 'keywords') {
                 $query->where('name', 'like', '%' . $item . '%');
-            } else {
+            }
+            // 查询表达式
+            elseif ($key === 'expression') {
+                collect($item)->map(function ($item_deeper) use (&$query) {
+                    switch ($item_deeper[0]) {
+                        case 'whereNotNull':
+                            $query->whereNotNull($item_deeper[1][0]);
+                            break;
+                    }
+                });
+            }
+            else
+            {
                 if (is_array($item) || is_object($item))
                     $query->whereIn($key, $item);
                 else
@@ -136,7 +148,10 @@ class BaseModel extends Model
     public static function sorting($query, array $s=[])
     {
         collect($s)->map(function ($item, $key) use (&$query) {
-            $query->orderBy($key, $item);
+            if (is_array($item) || is_object($item))
+                $query->orderBy($item[0], $item[1]);
+            else
+                $query->orderBy($key, $item);
         });
 
         return $query;
