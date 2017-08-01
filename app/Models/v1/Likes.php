@@ -30,6 +30,13 @@ class Likes extends BaseModel
         return $this->morphTo();
     }
 
+    public static function repositories($per_page = 10, $q = [], $s = [])
+    {
+        $s['id'] = 'desc';
+
+        return parent::repositories($per_page, $q, $s);
+    }
+
     /**
      * 用户对象
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -49,6 +56,33 @@ class Likes extends BaseModel
 
     /**
      * 点赞
+     */
+    public static function add($likesable_type, $likseable_id)
+    {
+        // 当前登录用户
+        if (!$user = Auth::user()) {
+            self::errorMsg(trans('message.user.user_not_found'));
+
+            return false;
+        }
+
+        // 点赞的挂载操作
+        switch ($likesable_type) {
+            case 'comment':
+                if ($comment = Comment::find($likseable_id))
+                    $comment->liked();
+                break;
+        }
+
+        $likes = new Likes;
+        $likes->user_id = $user->id;
+        $likes->likesable_type = $likesable_type;
+        $likes->likesable_id = $likseable_id;
+        return $likes->save();
+    }
+
+    /**
+     * 取消点赞
      */
     public static function add($likesable_type, $likseable_id)
     {

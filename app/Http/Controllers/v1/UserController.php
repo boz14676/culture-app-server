@@ -268,4 +268,27 @@ class UserController extends Controller
 
         return $this->error(self::BAD_REQUEST, Comment::errorMsg());
     }
+
+    /**
+     * DELETE /user/comment 点赞
+     */
+    public function unlikes()
+    {
+        $rules = [
+            'likesable_type'  => 'required|string',
+            'likesable_id' => 'required|integer',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $likesable_type = $this->request->input('likesable_type');  // 主题类型
+        $likesable_id = $this->request->input('likesable_id');      // 主题ID
+
+        if (Likes::remove($likesable_type, $likesable_id)) {
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST, Comment::errorMsg());
+    }
 }

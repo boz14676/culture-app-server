@@ -44,6 +44,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 
     /**************************************************** 评论 **********************************************/
     $app->get('comments', 'CommentController@_lists'); // 评论列表
+    $app->get('likes', 'LikesController@_lists'); // 点赞列表
 });
 
 // Api - Authorization
@@ -57,7 +58,8 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->get('user', 'UserController@get');                                             // 获取用户
     $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
     $app->post('user/comment', 'UserController@writeComment');                           // 写评论
-    $app->post('user/like', 'UserController@likes');                                     // 写评论
+    $app->post('user/like', 'UserController@likes');                                     // 点赞
+    $app->post('user/like', 'UserController@likes');                                     // 取消点赞
 
     /**************************************************** 订单 **********************************************/
     $app->get('order/{id}', 'OrderController@get');     // 获取订单
