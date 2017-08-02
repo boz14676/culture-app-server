@@ -20,6 +20,8 @@ class UserCollect extends BaseModel
 
     protected $visible = [
         'id',
+        'collectable_type',
+        'collectable_id',
     ];
 
     protected $with = [];
