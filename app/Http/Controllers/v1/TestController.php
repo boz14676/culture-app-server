@@ -12,7 +12,7 @@ class TestController extends Controller
      */
     public function test()
     {
-        $this->insetArticle();
+        dd($_SERVER);
     }
 
     public function insetArticle()
