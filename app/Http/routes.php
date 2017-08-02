@@ -35,6 +35,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 
     /**************************************************** 场馆 **********************************************/
     $app->get('stadiums', 'StadiumController@_lists');
+    $app->get('stadium/{id}', 'StadiumController@get');
 
     /**************************************************** 活动 **********************************************/
     $app->get('activities', 'ActivityController@_lists'); // 活动列表

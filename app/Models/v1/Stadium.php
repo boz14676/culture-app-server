@@ -45,8 +45,9 @@ class Stadium extends BaseModel
 
     protected $casts = [
         'activity_numbers' => 'integer',
-        'comment_numbers' => 'integer',
-        'like_numbers' => 'integer',
+        'has_commented_numbers' => 'integer',
+        'has_liked_numbers' => 'integer',
+        'has_read_numbers' => 'integer',
     ];
 
     /**
