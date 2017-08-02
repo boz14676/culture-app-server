@@ -33,6 +33,9 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('user', 'UserController@get');
     $app->get('user/{attribute:agree|refuse}/update', 'UserController@update');
 
+    /**************************************************** 场馆 **********************************************/
+    $app->get('stadiums', 'StadiumController@_lists');
+
     /**************************************************** 活动 **********************************************/
     $app->get('activities', 'ActivityController@_lists'); // 活动列表
     $app->get('activity/{id}', 'ActivityController@get'); // 活动详情
