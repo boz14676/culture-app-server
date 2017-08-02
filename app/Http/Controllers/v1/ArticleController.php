@@ -14,18 +14,18 @@ class ArticleController extends Controller
     public function categories()
     {
         $rules = [
-            'topid'      => 'integer|min:0',
             'number'      => 'integer|min:1',
+            'q.topid'     => 'integer|min:0',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
 
-        $topid = $this->request->input('topid');              // 上一级ID
         $q = $this->request->input('q');                      // 筛选
-        $numbers = $this->request->input('numbers');          // 显示数量
+        $s = $this->request->input('s');                      // 排序
+        $numbers = $this->request->input('numbers', 0);       // 显示数量
 
-        if ($article_categories = ArticleCategory::repositories($topid, $q, $numbers)) {
+        if ($article_categories = ArticleCategory::repositories($numbers, $q, $s)) {
             return $this->body(['data' => $article_categories]);
         }
 

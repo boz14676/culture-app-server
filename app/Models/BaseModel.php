@@ -110,7 +110,7 @@ class BaseModel extends Model
     public static function filtering($query, array $q=[])
     {
         collect($q)->map(function ($item, $key) use (&$query) {
-            if (empty($item))
+            if (empty($item) && $item != 0)
                 return;
 
             // 关键字筛选

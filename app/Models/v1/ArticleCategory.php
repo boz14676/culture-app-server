@@ -3,6 +3,7 @@
 namespace App\Models\v1;
 
 use App\Models\BaseModel;
+use DB;
 
 class ArticleCategory extends BaseModel
 {
@@ -45,21 +46,11 @@ class ArticleCategory extends BaseModel
      * @param int $topid
      * @return mixed
      */
-    public static function repositories($topid=0, $q=[], $numbers=0)
+    public static function repositories($per_page=10, $q=[], $s=[])
     {
-        return self::when($topid, function ($query) use ($topid) {
-                return $query->where('topid', $topid);
-            })
-            // 筛选
-            ->when($q, function ($query) use ($q) {
-                return self::filtering($query, $q);
-            })
-            // 限制显示数量
-            ->when($numbers, function ($query) use ($numbers) {
-                return $query->take($numbers);
-            })
-            ->orderBy('sort', 'asc')
-            ->get();
+        $s['sort'] = 'asc';
+
+        return parent::repositories($per_page, $q, $s);
     }
 
     // 获取子类的id
