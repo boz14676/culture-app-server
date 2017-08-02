@@ -103,7 +103,7 @@ class Article extends BaseModel
             $user_lng = app('request')->input('user_lng');                                    // 用户坐标纬度
 
             $distance_field = DB::raw('ROUND( 6378.138 * 2 * ASIN( SQRT( POW( SIN(( lat * PI() / 180 - ' . $user_lat . ' * PI() / 180) / 2) , 2) + COS(lat * PI() / 180) * COS(' . $user_lat . ' * PI() / 180) * POW( SIN(( lng * PI() / 180 - ' . $user_lng . ' * PI() / 180) / 2) , 2))) * 1000)');
-            $s['distance'] = [$distance_field, 'asc'];
+            $s['distance'] = [$distance_field, $s['distance']];
         }
 
         $s['id'] = 'desc'; // ID倒序排序

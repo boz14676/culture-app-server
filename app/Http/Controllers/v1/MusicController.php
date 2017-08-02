@@ -15,8 +15,8 @@ class MusicController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-            'q.videoable_type' => 'required|string',
-            'q.videoable_id' => 'required|integer',
+            'q.musicable_type' => 'required|string',
+            'q.musicable_id' => 'required|integer',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
