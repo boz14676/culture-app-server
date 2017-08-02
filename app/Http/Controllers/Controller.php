@@ -138,6 +138,7 @@ class Controller extends BaseController
     {
         $page_val_data = [];
         list($page_key, $page_val) = each($page);
+
         if ($page_val) {
             $page_val_data = $page_val->toArray()['data'];
             $paged = [

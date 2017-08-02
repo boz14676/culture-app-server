@@ -33,7 +33,7 @@ class StadiumController extends Controller
     }
     
     /**
-     * GET /article 获取文章
+     * GET /article 获取场馆
      */
     public function get($id=0)
     {

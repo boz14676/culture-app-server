@@ -31,7 +31,10 @@ class Photo extends BaseModel
     // 获取[地址] 属性
     public function getUrlAttribute()
     {
-        $path_pre = 'file/photos/';
-        return format_photo($path_pre.$this->attributes['original'], $path_pre.$this->attributes['thumbnail']);
+        $path_pre = 'file/photos';
+        return format_photo([
+            $this->attributes['thumbnail'],
+            $this->attributes['original']
+        ], $path_pre);
     }
 }

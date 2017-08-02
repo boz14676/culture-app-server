@@ -98,11 +98,31 @@ if (! function_exists('format_photo')) {
 
         $cdn = config('app.cdn');
 
-        if ((strpos($img, 'http://') === false)) {
-            $img = $cdn . '/' . $extra_path . '/'. $img;
+        $extra_path = $extra_path ? '/' . $extra_path : '';
+
+        if (is_array($img)) {
+            $_img = [];
+            if ((strpos($img[0], 'http://') === false)) {
+                $_img['thumb'] = $cdn . $extra_path . '/'. $img[0];
+            } else {
+                $_img['thumb'] = $img[0];
+            }
+
+            if ((strpos($img[1], 'http://') === false)) {
+                $_img['large'] = $cdn . $extra_path . '/'. $img[0];
+            } else {
+                $_img['large'] = $img[1];
+            }
+        } else {
+            if ((strpos($img, 'http://') === false)) {
+                $_img = $cdn . $extra_path . '/'. $img;
+            } else {
+                $_img = $img;
+            }
+
         }
 
-        return $img;
+        return $_img;
     }
 }
 
