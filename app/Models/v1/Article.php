@@ -28,7 +28,7 @@ class Article extends BaseModel
         'name',                             // 名称（包含：姓名）
         'thumbnail',                        // 缩略图（包含：大师头像）
         'banner',                           // banner（包含：背景图）
-        'label',                            // 标签
+        'labels',                           // 标签
         'distance',                         // 距离（m）*可做排序使用属性
         'location',                         // 内容所在地
         'address',                          // 地址
@@ -40,9 +40,8 @@ class Article extends BaseModel
         'client_timed_at',                  // 时间
         'extra',                            // 扩展字段
 
-        'is_activity',                      // 是否有预约 [type: boolean(0, 1)]
-        'is_music',                         // 是否有音乐 [type: boolean(0, 1)]
-        'is_video',                         // 是否有视频 [type: boolean(0, 1)]
+        'has_photos',                       // 是否有图片 [type: boolean(0, 1)]
+        'has_videos',                       // 是否有视频 [type: boolean(0, 1)]
     ];
 
     protected $with = [];
