@@ -28,7 +28,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     /**************************************************** 用户 **********************************************/
     $app->post('user/code', 'UserController@sendCode');      // 发送验证码
     $app->post('user/register', 'UserController@register');  // 注册
-    $app->get('user/login', 'UserController@login');         // 登录
+    $app->post('user/login', 'UserController@login');         // 登录
 
     $app->get('user', 'UserController@get');
     $app->get('user/{attribute:agree|refuse}/update', 'UserController@update');

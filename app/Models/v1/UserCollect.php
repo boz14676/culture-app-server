@@ -32,7 +32,7 @@ class UserCollect extends BaseModel
         return $this->morphTo();
     }
 
-    public static function repositories($per_page = 10, $q = [], $s = [])
+    public static function  repositories($per_page = 10, $q = [], $s = [])
     {
         $s['id'] = 'desc';
 

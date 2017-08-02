@@ -33,7 +33,7 @@ class Article extends BaseModel
         'lng',                              // 坐标 纬度
         'address',                          // 地址
         'desc',                             // 用于：内容描述、专题简介、内容年代、主题、个人简介
-        'activity_numbers',                 // 活动数量
+        'has_activity_numbers',             // 活动数量
         'has_commented_numbers',            // 评论数量 *可用作做排序使用的属性
         'has_liked_numbers',                // 点赞数量 *可用作排序使用的属性
         'has_read_numbers',                 // 阅读量 *仅做排序使用的属性
@@ -50,9 +50,9 @@ class Article extends BaseModel
 
     protected $casts = [
         'is_hot' => 'integer',
-        'activity_numbers' => 'integer',
-        'comment_numbers' => 'integer',
-        'like_numbers' => 'integer',
+        'has_activity_numbers' => 'integer',
+        'has_commented_numbers' => 'integer',
+        'has_liked_numbers' => 'integer',
     ];
 
     /**
@@ -85,7 +85,7 @@ class Article extends BaseModel
         }
 
         // 实现附近推荐
-        if (
+        elseif (
             isset($q['article_category_id']) &&
             isset($s['distance'])
         )
