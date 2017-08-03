@@ -82,6 +82,8 @@ class UserComment extends BaseModel
                 ->where('user_id', $cur_user->id)
                 ->count();
         }
+
+        return 0;
     }
 
     /**
