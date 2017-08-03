@@ -111,6 +111,6 @@ class ArticleCategory extends BaseModel
     // 获取[图标] 属性
     public function getIconAttribute($value)
     {
-        return format_photo($value);
+        return format_assets($value);
     }
 }

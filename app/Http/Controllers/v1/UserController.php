@@ -302,8 +302,8 @@ class UserController extends Controller
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
 
-            'q.collectable_type'  => 'required|string',
-            'q.collectable_id' => 'required|integer',
+            'q.collectable_type'  => 'string',
+            'q.collectable_id' => 'integer',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;

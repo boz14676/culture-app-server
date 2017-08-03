@@ -168,13 +168,13 @@ class Article extends BaseModel
     // 获取[缩略图] 属性
     public function getThumbnailAttribute($value)
     {
-        return format_photo($value);
+        return format_assets($value);
     }
 
     // 获取[banner] 属性
     public function getBannerAttribute($value)
     {
-        return format_photo($value);
+        return format_assets($value);
     }
 
     // 获取[标签] 属性

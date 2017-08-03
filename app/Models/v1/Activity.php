@@ -87,14 +87,14 @@ class Activity extends BaseModel
     public function getThumbnailAttribute($value)
     {
         if ($value)
-            return format_photo('file/assets/'.$value);
+            return format_assets('file/assets/'.$value);
     }
 
     // 获取[banner] 属性
     public function getBannerAttribute($value)
     {
         if ($value)
-            return format_photo('file/assets/'.$value);
+            return format_assets('file/assets/'.$value);
     }
 
     // 获取[状态] 属性

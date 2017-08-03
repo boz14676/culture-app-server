@@ -90,7 +90,7 @@ if (! function_exists('format_photo')) {
      * @param  string $extra_path
      * @return array
      */
-    function format_photo($img, $extra_path='')
+    function format_assets($img, $extra_path='')
     {
         if (!$img) {
             return ;

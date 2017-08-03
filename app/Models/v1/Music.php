@@ -35,8 +35,8 @@ class Music extends BaseModel
     public function getUrlAttribute($value)
     {
         if ($value) {
-            $path_pre = 'file/videos/';
-            return format_photo($path_pre.$this->attributes['original'], $path_pre.$this->attributes['thumbnail']);
+            $path_pre = 'file/music';
+            return format_assets($this->attributes['url'], $path_pre);
         }
     }
 }

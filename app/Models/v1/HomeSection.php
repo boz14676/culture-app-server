@@ -52,6 +52,6 @@ class HomeSection extends BaseModel
     // 获取[缩略图]属性
     public function getThumbnailAttribute($value)
     {
-        return format_photo($value, 'file/assets');
+        return format_assets($value, 'file/assets');
     }
 }

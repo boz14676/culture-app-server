@@ -248,7 +248,7 @@ class User extends BaseModel
     // 获取[头像] 属性
     public function getAvatarAttribute()
     {
-        return format_photo('file/photos/user/' . $this->attributes['avatar']);
+        return format_assets('file/photos/user/' . $this->attributes['avatar']);
     }
 
     // 获取[token] 属性

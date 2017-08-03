@@ -32,7 +32,7 @@ class Photo extends BaseModel
     public function getUrlAttribute()
     {
         $path_pre = 'file/photos';
-        return format_photo([
+        return format_assets([
             $this->attributes['thumbnail'],
             $this->attributes['original']
         ], $path_pre);
