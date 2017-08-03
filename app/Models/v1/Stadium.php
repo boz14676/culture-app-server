@@ -7,7 +7,7 @@
 namespace App\Models\v1;
 
 use App\Models\BaseModel;
-use DB;
+use Auth;
 
 class Stadium extends BaseModel
 {
@@ -16,7 +16,9 @@ class Stadium extends BaseModel
     protected $guarded = [];
 
     protected $appends = [
-        'original_article_category'         // 文章分类对象
+        'original_article_category',        // 文章分类对象
+        'is_cur_user_liked',                // 是否被当前用户点赞
+        'is_cur_user_collected',            // 是否被当前用户收藏
     ];
 
     protected $visible = [
@@ -38,6 +40,8 @@ class Stadium extends BaseModel
         'has_commented_numbers',                // 评论数量 *可用作做排序使用的属性
         'has_liked_numbers',                    // 点赞数量 *可用作排序使用的属性
         'has_read_numbers',                     // 阅读数量 *仅做排序使用的属性
+        'is_cur_user_liked',                    // 是否被当前用户点赞
+        'is_cur_user_collected',                // 是否被当前用户收藏
         'details',                              // 内容
     ];
 
@@ -48,6 +52,8 @@ class Stadium extends BaseModel
         'has_commented_numbers' => 'integer',
         'has_liked_numbers' => 'integer',
         'has_read_numbers' => 'integer',
+        'is_cur_user_liked' => 'integer',
+        'is_cur_user_collected' => 'integer',
     ];
 
     /**
@@ -103,6 +109,24 @@ class Stadium extends BaseModel
         return $this->belongsTo('App\Models\v1\ArticleCategory', 'article_category_id');
     }
 
+    /**
+     * 点赞对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Models\v1\UserLikes', 'likesable');
+    }
+
+    /**
+     * 点赞对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function collects()
+    {
+        return $this->morphMany('App\Models\v1\UserCollect', 'collectable');
+    }
+
     // 获取[文章分类对象] 属性
     public function getOriginalArticleCategoryAttribute()
     {
@@ -155,6 +179,31 @@ class Stadium extends BaseModel
         return $value ? json_decode($value) : '';
     }
 
+    // 获取[是否被当前用户点赞] 属性
+    public function getIsCurUserLikedAttribute()
+    {
+        if ($cur_user = Auth::user()) {
+            return
+                $this->likes()
+                    ->where('user_id', $cur_user->id)
+                    ->count();
+        }
+
+        return 0;
+    }
+
+    // 获取[是否被当前用户收藏] 属性
+    public function getIsCurUserCollectedAttribute()
+    {
+        if ($cur_user = Auth::user()) {
+            return
+                $this->collects()
+                    ->where('user_id', $cur_user->id)
+                    ->count();
+        }
+
+        return 0;
+    }
 
     /**
      * 被点赞后的挂载操作

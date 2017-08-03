@@ -19,13 +19,17 @@ class UserComment extends BaseModel
     protected $visible = [
         'id',
         'original_user',            // 用户
-        'is_cur_user_liked',        // 是否被当前用户点过赞
+        'is_cur_user_liked',        // 是否被当前用户点赞
         'has_liked_number',         // 被赞数量
         'details',                  // 内容
         'created_at'                // 新增时间
     ];
 
     protected $with = [];
+
+    protected $casts = [
+        'is_cur_user_liked' => 'integer',
+    ];
 
     /**
      * 获取所有拥有的 imageable 模型
@@ -69,7 +73,7 @@ class UserComment extends BaseModel
         }
     }
 
-    // 获取[是否被当前用户点过赞] 属性
+    // 获取[是否被当前用户点赞] 属性
     public function getIsCurUserLikedAttribute()
     {
         if ($cur_user = Auth::user()) {
