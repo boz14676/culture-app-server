@@ -23,6 +23,7 @@ class Article extends BaseModel
 
     protected $visible = [
         'id',
+        'article_category_id',              // 文章分类ID
         'original_article_category',        // 文章分类
         'name',                             // 名称（包含：姓名）
         'thumbnail',                        // 缩略图（包含：大师头像）
@@ -33,7 +34,6 @@ class Article extends BaseModel
         'lng',                              // 坐标 纬度
         'address',                          // 地址
         'desc',                             // 用于：内容描述、专题简介、内容年代、主题、个人简介
-        'has_activity_numbers',             // 活动数量
         'has_commented_numbers',            // 评论数量 *可用作做排序使用的属性
         'has_liked_numbers',                // 点赞数量 *可用作排序使用的属性
         'has_read_numbers',                 // 阅读量 *仅做排序使用的属性

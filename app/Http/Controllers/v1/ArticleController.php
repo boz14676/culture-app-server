@@ -41,12 +41,15 @@ class ArticleController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
+            'numbers'  => 'integer|min:1',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
 
-        $per_page = $this->request->input('per_page');                          // 每页显示记录数
+
+        $numbers = $this->request->input('numbers');                            // 显示的数量
+        $per_page = $this->request->input('per_page', $numbers);                // 每页显示记录数
         $q = $this->request->input('q');                                        // 筛选
         $s = $this->request->input('s');                                        // 排序
 
