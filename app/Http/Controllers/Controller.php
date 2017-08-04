@@ -105,7 +105,7 @@ class Controller extends BaseController
                 'LOG_ID'         => $debug_id,
                 'IP_ADDRESS'     => $this->request->ip(),
                 'REQUEST_URL'    => $this->request->fullUrl(),
-                'AUTHORIZATION'  => $this->request->header('X-'.config('app.name').'-Authorization'),
+                'AUTHORIZATION'  => $this->request->header('Authorization'),
                 'REQUEST_METHOD' => $this->request->method(),
                 'PARAMETERS'     => $this->validated,
                 'RESPONSES'      => $body
