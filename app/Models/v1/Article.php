@@ -107,7 +107,7 @@ class Article extends BaseModel
         }
 
         $s['id'] = 'desc'; // ID倒序排序
-        return parent::repositories($per_page = 10, $q, $s);
+        return parent::repositories($per_page, $q, $s);
     }
 
     /**
