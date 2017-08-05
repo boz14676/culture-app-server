@@ -9,6 +9,8 @@ return array(
     'Xethron\\MigrationsGenerator' => array($vendorDir . '/xethron/migrations-generator/src'),
     'Way\\Generators' => array($vendorDir . '/xethron/laravel-4-generators/src'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
+    'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
+    'Maatwebsite\\Excel\\' => array($vendorDir . '/maatwebsite/excel/src'),
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
     'E421083458\\Wxxcx' => array($vendorDir . '/e421083458/wxxcx/src'),

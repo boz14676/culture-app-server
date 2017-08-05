@@ -28,7 +28,7 @@ class NodeAbstractTest extends \PHPUnit_Framework_TestCase
         $attributes = array(
             'startLine' => 10,
             'comments'  => array(
-                new Comment('// UserComment' . "\n"),
+                new Comment('// Comment' . "\n"),
                 new Comment\Doc('/** doc comment */'),
             ),
         );
@@ -248,7 +248,7 @@ PHP;
             "startLine": 4,
             "comments": [
                 {
-                    "nodeType": "UserComment",
+                    "nodeType": "Comment",
                     "text": "\/\/ comment\n",
                     "line": 2,
                     "filePos": 6

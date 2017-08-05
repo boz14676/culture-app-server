@@ -5,6 +5,7 @@ namespace App\Models\v1;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use Carbon\Carbon;
+use Auth;
 
 class Activity extends BaseModel
 {
@@ -13,23 +14,27 @@ class Activity extends BaseModel
     protected $guarded = [];
 
     protected $appends = [
-        'original_article_category',    // 文章分类对象
-        'registered_at',        // 预约有效时间区间
+        'original_article_category',        // 文章分类对象
+        'registered_at',                    // 预约有效时间区间
+        'is_cur_user_liked',                // 是否被当前用户点赞
+        'is_cur_user_collected',            // 是否被当前用户收藏
     ];
 
     protected $visible = [
         'id',
-        'original_article_category',    // 文章分类对象
-        'status',               // 状态
-        'is_free',              // 是否为免费(type: boolean[0, 1])
-        'name',                 // 名称
-        'labels',               // 标签(s)
-        'thumbnail',            // 缩略图
-        'banner',               // banner
-        'price',                // 价格
-        'address',              // 地址
-        'registered_at',        // 活动的开始和结束时间
-        'contact',              // 咨询电话
+        'original_article_category',        // 文章分类对象
+        'status',                           // 状态
+        'is_free',                          // 是否为免费(type: boolean[0, 1])
+        'name',                             // 名称
+        'labels',                           // 标签(s)
+        'thumbnail',                        // 缩略图
+        'banner',                           // banner
+        'price',                            // 价格
+        'address',                          // 地址
+        'registered_at',                    // 活动的开始和结束时间
+        'contact',                          // 咨询电话
+        'is_cur_user_liked',                // 是否被当前用户点赞
+        'is_cur_user_collected',            // 是否被当前用户收藏
     ];
 
     protected $with = [];
@@ -75,6 +80,24 @@ class Activity extends BaseModel
     public function articleCategory()
     {
         return $this->belongsTo('App\Models\v1\ArticleCategory', 'activitiable_id');
+    }
+
+    /**
+     * 点赞对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function likes()
+    {
+        return $this->morphMany('App\Models\v1\UserLikes', 'likesable');
+    }
+
+    /**
+     * 收藏对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function collects()
+    {
+        return $this->morphMany('App\Models\v1\UserCollect', 'collectable');
     }
 
     // 获取[活动开始和结束时间] 属性
@@ -143,5 +166,31 @@ class Activity extends BaseModel
         else {
             return self::STATUS_BOOKABLE;
         }
+    }
+
+    // 获取[是否被当前用户点赞] 属性
+    public function getIsCurUserLikedAttribute()
+    {
+        if ($cur_user = Auth::user()) {
+            return
+                $this->likes()
+                    ->where('user_id', $cur_user->id)
+                    ->count();
+        }
+
+        return 0;
+    }
+
+    // 获取[是否被当前用户收藏] 属性
+    public function getIsCurUserCollectedAttribute()
+    {
+        if ($cur_user = Auth::user()) {
+            return
+                $this->collects()
+                    ->where('user_id', $cur_user->id)
+                    ->count();
+        }
+
+        return 0;
     }
 }

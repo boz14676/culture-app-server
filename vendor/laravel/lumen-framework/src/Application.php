@@ -640,6 +640,8 @@ class Application extends Container
             
             class_alias('Intervention\Image\Facades\Image','Image');
             class_alias('Intervention\Image\Facades\Hash','Hash');
+
+            class_alias('Maatwebsite\Excel\Facades\Excel','Excel');
         }
     }
 

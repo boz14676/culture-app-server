@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use DB;
+use Excel;
 
 class TestController extends Controller
 {
@@ -12,6 +13,14 @@ class TestController extends Controller
      */
     public function test()
     {
+        // dd();
+
+        Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) {
+            // dd($reader->get());
+            $reader->get()->map(function ($item, $key) {
+                if ($key === 0) return ;
+            });
+        });
     }
 
     public function insetArticle()

@@ -106,6 +106,8 @@ $app->register(Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::c
 $app->register(Illuminate\Encryption\EncryptionServiceProvider::class);
 $app->register(Intervention\Image\ImageServiceProvider::class);
 
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
