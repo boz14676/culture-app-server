@@ -139,6 +139,12 @@ class Activity extends BaseModel
             return format_assets('file/assets/'.$value);
     }
 
+    // 获取[内容] 属性
+    public function getDetailsAttribute($value)
+    {
+        return html_entity_decode($value);
+    }
+
     // 获取[状态] 属性
     public function getStatusAttribute()
     {

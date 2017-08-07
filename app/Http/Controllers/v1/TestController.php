@@ -15,12 +15,20 @@ class TestController extends Controller
     {
         // dd();
 
-        Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) {
-            // dd($reader->get());
-            $reader->get()->map(function ($item, $key) {
-                if ($key === 0) return ;
+        /**
+         * stadium-repository
+         */
+        /*$article_categories = collect();
+        Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) use (&$article_categories) {
+            $reader->skipRows(1)->get()->each(function ($item, $key) use (&$article_categories) {
+                $item->details = htmlspecialchars($item->details);
+
+                $article_category = collect($item->all())->except(0)->put('details', $item->details);
+                $article_categories->push($article_category->all());
             });
         });
+        DB::table('stadiums')->insert($article_categories->all());*/
+
     }
 
     public function insetArticle()

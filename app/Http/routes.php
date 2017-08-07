@@ -78,8 +78,8 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
 
 
     /**************************************************** 订单 **********************************************/
-    $app->get('order/{id}', 'OrderController@get');     // 获取订单
-    $app->get('orders', 'OrderController@_lists');      // 获取订单(s)
+    $app->get('user/order/{id}', 'OrderController@get');     // 获取订单
+    $app->get('user/orders', 'OrderController@_lists');      // 获取订单(s)
 
     // **************************************** 购物 ***************************************
     $app->post('shopping/orders', 'ShoppingController@orders');  // 下单
