@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\v1\Activity;
+use App\Models\v1\Article;
+use App\Models\v1\Stadium;
+use App\Models\v1\Video;
 use DB;
 use Excel;
 
@@ -13,12 +17,35 @@ class TestController extends Controller
      */
     public function test()
     {
-        // dd();
+        $articles = Article::get();
+        $stadiums = Stadium::get();
+        $activities = Activity::get();
+        $videos = Video::get();
 
+        $labels = collect();
+        $labels_relationship = collect();
+
+        $articles->each(function ($article) use (&$labels, &$labels_relationship) {
+            $labels->push($article->labels);
+        });
+        $stadiums->each(function ($stadium) use (&$labels, &$labels_relationship) {
+            $labels->push($stadium->labels);
+        });
+        $activities->each(function ($activity) use (&$labels, &$labels_relationship) {
+            $labels->push($activity->labels);
+        });
+        $videos->each(function ($video) use (&$labels, &$labels_relationship) {
+            $labels->push($video->labels);
+        });
+        dd($labels->flatten()->unique()->filter());
+    }
+
+    public function exportRepository()
+    {
         /**
          * stadium-repository
          */
-        /*$article_categories = collect();
+        $article_categories = collect();
         Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) use (&$article_categories) {
             $reader->skipRows(1)->get()->each(function ($item, $key) use (&$article_categories) {
                 $item->details = htmlspecialchars($item->details);
@@ -27,8 +54,7 @@ class TestController extends Controller
                 $article_categories->push($article_category->all());
             });
         });
-        DB::table('stadiums')->insert($article_categories->all());*/
-
+        DB::table('stadiums')->insert($article_categories->all());
     }
 
     public function insetArticle()

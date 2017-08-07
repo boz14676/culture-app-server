@@ -21,6 +21,7 @@ class Video extends BaseModel
     protected $visible = [
         'id',
         'name',                     // 名称
+        'labels',                   // 标签
         'thumbnail',                // 缩略图
         'url',                      // 地址
         'wathcing_numbers',         // 观看次数
@@ -76,6 +77,12 @@ class Video extends BaseModel
             $path_pre = 'file/videos';
             return format_assets($this->attributes['url'], $path_pre);
         }
+    }
+
+    // 获取[标签(s)] 属性
+    public function getLabelsAttribute($value)
+    {
+        return explode(',', $value);
     }
 
     // 获取[是否被当前用户点赞] 属性

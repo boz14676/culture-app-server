@@ -81,7 +81,7 @@ class Shopping extends BaseModel
         $order->user_id = $user->id;                                     // 用户对象 ID
         $order->goods_id = $goods->id;                                   // 商品对象 ID
         $order->goods_numbers = $numbers;                                // 订单商品数量
-        $order->serial_number = snowflake_nextid();                      // 订单编号
+        $order->serial_number = rand(111111,999999);                     // 订单编号
         $order->status = Order::STATUS_WAIT_PAY;                         // 订单状态（下单默认为待付款状态）
         $order->amount = $goods->price * $numbers;                       // 订单总额
         $order->save();
