@@ -27,6 +27,8 @@ class Music extends BaseModel
         'lenstening_numbers',       // 观看次数
         'prev_id',                  // 上一个视频对象ID
         'next_id',                  // 下一个视频对象ID
+        'has_commented_numbers',    // 评论数量
+        'has_liked_numbers',        // 点赞数量
         'is_cur_user_liked',        // 是否被当前用户点赞
         'is_cur_user_collected',    // 是否被当前用户收藏
     ];
