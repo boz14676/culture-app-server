@@ -8,7 +8,7 @@ use App\Models\v1\Video;
 class VideoController extends Controller
 {
     /**
-     * GET /photos 获取视频(s)
+     * GET /photos 获取视频列表
      */
     public function _lists()
     {
@@ -31,5 +31,17 @@ class VideoController extends Controller
         }
 
         return $this->error(self::UNKNOWN_ERROR);
+    }
+
+    /**
+     * GET /video 获取视频详情
+     */
+    public function get($id)
+    {
+        if ($video = Video::repository($id)) {
+            return $this->body(['data' => $video]);
+        }
+
+        return $this->error(self::NOT_FOUND);
     }
 }

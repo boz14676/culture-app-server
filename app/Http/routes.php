@@ -22,9 +22,6 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('areas', 'OthersController@getAreas');                  // 获取区域(s)
 
 
-    /**************************************************** 图片资源库 **********************************************/
-    $app->get('photos', 'PhotoController@_lists'); // 获取图片(s)
-
     /**************************************************** 用户 **********************************************/
     $app->post('user/code', 'UserController@sendCode');      // 发送验证码
     $app->post('user/register', 'UserController@register');  // 注册
@@ -41,9 +38,12 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('activities', 'ActivityController@_lists'); // 活动列表
     $app->get('activity/{id}', 'ActivityController@get'); // 活动详情
 
-    /**************************************************** 视频&&音乐 **********************************************/
-    $app->get('videos', 'VideoController@_lists'); // 视频列表
+    /**************************************************** Media **********************************************/
+    $app->get('videos', 'VideoController@_lists'); // 获取视频列表
+    $app->get('video/{id}', 'VideoController@get'); // 获取视频详情
     $app->get('musics', 'MusicController@_lists'); // 音乐列表
+    $app->get('music/{id}', 'MusicController@get'); // 获取音乐详情
+    $app->get('photos', 'PhotoController@_lists'); // 获取图片列表
 
 
     /**************************************************** 评论 **********************************************/

@@ -8,7 +8,7 @@ use App\Models\v1\Music;
 class MusicController extends Controller
 {
     /**
-     * GET /photos 获取音乐(s)
+     * GET /photos 获取音乐列表
      */
     public function _lists()
     {
@@ -31,5 +31,17 @@ class MusicController extends Controller
         }
 
         return $this->error(self::UNKNOWN_ERROR);
+    }
+
+    /**
+     * GET /video 获取音乐详情
+     */
+    public function get($id)
+    {
+        if ($video = Music::repository($id)) {
+            return $this->body(['data' => $video]);
+        }
+
+        return $this->error(self::NOT_FOUND);
     }
 }
