@@ -18,13 +18,13 @@ class TestController extends Controller
      */
     public function test()
     {
-        phpinfo();
-        // dd(snowflake_nextid());
+        dd($_SERVER);
+        // $this->insertLabels();
     }
 
     public function insertLabels()
     {
-        $articles = Article::get();
+        $articles = Article::where('article_category_id', 49)->get();
         $stadiums = Stadium::get();
         $activities = Activity::get();
         $videos = Video::get();
@@ -33,7 +33,17 @@ class TestController extends Controller
         $labels_relationships = collect();
 
         $articles->each(function ($article) use (&$labels, &$labels_relationships) {
-            $labels->push($article->labels);
+
+            dd($article->articleCategory->top_level_id);
+
+            if ($original_labels = $article->labels) {
+                $labels = $original_labels->map(function ($original_label) use ($article) {
+                    [
+                        'article_cateogry_id' => $article,
+                        'name' => $original_label,
+                    ];
+                });
+            }
 
 
             if ($original_label_ids = Label::whereIn('name', $article->labels)->pluck('id')) {

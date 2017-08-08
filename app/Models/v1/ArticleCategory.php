@@ -13,6 +13,7 @@ class ArticleCategory extends BaseModel
 
     protected $appends = [
         'subclasses_id', // 所有子类的ID
+        'top_level_id',  // 一级分类ID
     ];
 
     protected $visible = [
@@ -39,6 +40,8 @@ class ArticleCategory extends BaseModel
         'showing_type_list' => 'integer',
         'showing_type_infor' => 'integer'
     ];
+
+    protected static $topmostCateogry;
 
     /**
      * repositories
@@ -75,9 +78,19 @@ class ArticleCategory extends BaseModel
     }
 
     // 获取当前文章分类对象的 上一级文章分类对象
-    public function topCategory()
+    public function topCategory($topid=0)
     {
-        return self::find($this->attributes['topid']);
+        $topid = $topid ? : $this->attributes['topid'];
+
+        if ($topid) {
+            return self::find($topid);
+        }
+    }
+
+    // 第一级别 文章分类对象
+    public function topmostCategory()
+    {
+
     }
 
     // 获取[文章列表展示类型] 属性
@@ -106,6 +119,12 @@ class ArticleCategory extends BaseModel
         }
 
         return ;
+    }
+
+    // 获取 [一级分类ID] 属性
+    public function getTopLevelIdAttribute()
+    {
+        dd($this->topmostCategory());
     }
 
     // 获取[图标] 属性
