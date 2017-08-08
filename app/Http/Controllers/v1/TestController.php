@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Models\v1\Activity;
 use App\Models\v1\Article;
+use App\Models\v1\Label;
 use App\Models\v1\Stadium;
 use App\Models\v1\Video;
 use DB;
@@ -17,28 +18,95 @@ class TestController extends Controller
      */
     public function test()
     {
-        dd(snowflake_nextid());
-        /*$articles = Article::get();
+        phpinfo();
+        // dd(snowflake_nextid());
+    }
+
+    public function insertLabels()
+    {
+        $articles = Article::get();
         $stadiums = Stadium::get();
         $activities = Activity::get();
         $videos = Video::get();
 
         $labels = collect();
-        $labels_relationship = collect();
+        $labels_relationships = collect();
 
-        $articles->each(function ($article) use (&$labels, &$labels_relationship) {
+        $articles->each(function ($article) use (&$labels, &$labels_relationships) {
             $labels->push($article->labels);
+
+
+            if ($original_label_ids = Label::whereIn('name', $article->labels)->pluck('id')) {
+                $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($article) {
+                    return
+                        [
+                            'label_id' => $original_label_id,
+                            'labeable_type' => 'article',
+                            'labeable_id' => $article->id,
+                        ];
+                });
+            }
+
+            $labels_relationships->push($labels_relationship);
         });
-        $stadiums->each(function ($stadium) use (&$labels, &$labels_relationship) {
-            $labels->push($stadium->labels);
+        $stadiums->each(function ($stadium) use (&$labels, &$labels_relationships) {
+            // $labels->push($stadium->labels);
+
+            if ($original_label_ids = Label::whereIn('name', $stadium->labels)->pluck('id')) {
+                $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($stadium) {
+                    return
+                        [
+                            'label_id' => $original_label_id,
+                            'labeable_type' => 'stadium',
+                            'labeable_id' => $stadium->id,
+                        ];
+                });
+            }
+
+            $labels_relationships->push($labels_relationship);
         });
-        $activities->each(function ($activity) use (&$labels, &$labels_relationship) {
+        $activities->each(function ($activity) use (&$labels, &$labels_relationships) {
             $labels->push($activity->labels);
+
+            if ($original_label_ids = Label::whereIn('name', $activity->labels)->pluck('id')) {
+                $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($activity) {
+                    return
+                        [
+                            'label_id' => $original_label_id,
+                            'labeable_type' => 'activity',
+                            'labeable_id' => $activity->id,
+                        ];
+                });
+            }
+
+            $labels_relationships->push($labels_relationship);
         });
-        $videos->each(function ($video) use (&$labels, &$labels_relationship) {
+        $videos->each(function ($video) use (&$labels, &$labels_relationships) {
             $labels->push($video->labels);
+
+            if ($original_label_ids = Label::whereIn('name', $video->labels)->pluck('id')) {
+                $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($video) {
+                    return
+                        [
+                            'label_id' => $original_label_id,
+                            'labeable_type' => 'video',
+                            'labeable_id' => $video->id,
+                        ];
+                });
+            }
+
+            $labels_relationships->push($labels_relationship);
         });
-        dd($labels->flatten()->unique()->filter());*/
+
+        // DB::table('labeables')->insert($labels_relationships->collapse()->all());
+
+        $original_labels = $labels->flatten()->unique()->filter()->map(function ($label) {
+            /*return [
+                'name' => $label,
+                'article_category_id' =>
+            ];*/
+        });
+        DB::table('labels')->insert($original_labels->all());
     }
 
     public function exportRepository()

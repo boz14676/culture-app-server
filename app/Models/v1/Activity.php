@@ -100,6 +100,15 @@ class Activity extends BaseModel
         return $this->morphMany('App\Models\v1\UserCollect', 'collectable');
     }
 
+    /**
+     * 标签对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Models\v1\Label', 'labeable');
+    }
+
     // 获取[活动开始和结束时间] 属性
     public function getRegisteredAtAttribute()
     {
@@ -119,10 +128,10 @@ class Activity extends BaseModel
         }
     }
 
-    // 获取[标签(s)] 属性
+    // 获取[标签](s) 属性
     public function getLabelsAttribute($value)
     {
-        return explode(',', $value);
+        return $this->tags()->pluck('name');
     }
 
     // 获取[缩略图] 属性

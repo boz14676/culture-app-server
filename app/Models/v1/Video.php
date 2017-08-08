@@ -70,6 +70,15 @@ class Video extends BaseModel
         return $this->morphMany('App\Models\v1\UserCollect', 'collectable');
     }
 
+    /**
+     * 标签对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Models\v1\Label', 'labeable');
+    }
+
     // 获取[地址] 属性
     public function getUrlAttribute($value)
     {
@@ -79,10 +88,10 @@ class Video extends BaseModel
         }
     }
 
-    // 获取[标签(s)] 属性
+    // 获取[标签](s) 属性
     public function getLabelsAttribute($value)
     {
-        return explode(',', $value);
+        return $this->tags()->pluck('name');
     }
 
     // 获取[是否被当前用户点赞] 属性

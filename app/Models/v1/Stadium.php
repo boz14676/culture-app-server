@@ -127,6 +127,15 @@ class Stadium extends BaseModel
         return $this->morphMany('App\Models\v1\UserCollect', 'collectable');
     }
 
+    /**
+     * 标签对象
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Models\v1\Label', 'labeable');
+    }
+
     // 获取[文章分类对象] 属性
     public function getOriginalArticleCategoryAttribute()
     {
@@ -154,10 +163,10 @@ class Stadium extends BaseModel
         return format_assets($value);
     }
 
-    // 获取[标签] 属性
+    // 获取[标签](s) 属性
     public function getLabelsAttribute($value)
     {
-        return explode(',', $value);
+        return $this->tags()->pluck('name');
     }
 
     // 获取[内容] 属性
