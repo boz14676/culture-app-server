@@ -17,7 +17,7 @@ class TestController extends Controller
      */
     public function test()
     {
-        dd('teststse'/);
+        dd(phpinfo());
         // dd(snowflake_nextid());
         /*$articles = Article::get();
         $stadiums = Stadium::get();
