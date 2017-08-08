@@ -17,7 +17,8 @@ class TestController extends Controller
      */
     public function test()
     {
-        $articles = Article::get();
+        dd(snowflake_nextid());
+        /*$articles = Article::get();
         $stadiums = Stadium::get();
         $activities = Activity::get();
         $videos = Video::get();
@@ -37,7 +38,7 @@ class TestController extends Controller
         $videos->each(function ($video) use (&$labels, &$labels_relationship) {
             $labels->push($video->labels);
         });
-        dd($labels->flatten()->unique()->filter());
+        dd($labels->flatten()->unique()->filter());*/
     }
 
     public function exportRepository()
