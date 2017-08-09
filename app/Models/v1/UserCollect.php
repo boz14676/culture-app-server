@@ -14,9 +14,7 @@ class UserCollect extends BaseModel
     protected $guarded = [];
 
     protected $appends = [
-        'original_article',         // 文章对象
-        'original_activity',        // 活动对象
-        'original_video',           // 视频对象
+        'original_collectable',         // 主题对象
     ];
 
     protected $visible = [
@@ -41,7 +39,7 @@ class UserCollect extends BaseModel
     }
 
     /**
-     * 获取所有拥有的 imageable 模型
+     * 获取所有拥有的 collectable 模型
      */
     public function collectable()
     {
@@ -133,48 +131,9 @@ class UserCollect extends BaseModel
         return $collect->delete();
     }
 
-    /**
-     * 文章对象
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function article()
+    // 获取[主题对象] 属性
+    public function getOriginalCollectableAttribute()
     {
-        return $this->belongsTo('App\Models\v1\Article', 'collectable_id');
-    }
-
-    /**
-     * 活动对象
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function activity()
-    {
-        return $this->belongsTo('App\Models\v1\Activity', 'collectable_id');
-    }
-
-    /**
-     * 视频对象
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function video()
-    {
-        return $this->belongsTo('App\Models\v1\Video', 'collectable_id');
-    }
-
-    // 获取[文章对象] 属性
-    public function getOriginalArticleAttribute()
-    {
-        return $this->article;
-    }
-
-    // 获取[活动对象] 属性
-    public function getOriginalActivityAttribute()
-    {
-        return $this->activity;
-    }
-
-    // 获取[视频对象] 属性
-    public function getOriginalVideoAttribute()
-    {
-        return $this->video;
+        return $this->collectable;
     }
 }

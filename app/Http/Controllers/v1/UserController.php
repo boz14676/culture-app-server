@@ -301,23 +301,25 @@ class UserController extends Controller
         $rules = [
             'page'      => 'required|integer|min:1',
             'per_page'  => 'required|integer|min:1',
-
-            'q.collectable_type'  => 'string',
-            'q.collectable_id' => 'integer',
         ];
         if ($error = $this->validateInput($rules)) {
             return $error;
         }
 
         $per_page = $this->request->input('per_page');                          // 每页显示记录数
-        $q = $this->request->input('q');                                        // 筛选
+        $q = $this->request->input('q');                                        // 搜索
         $s = $this->request->input('s');                                        // 排序
 
-        if ($user_collects = UserCollect::repositories($per_page, $q, $s)) {
+        // 获取用户
+        if (!$user = $this->request->user()) {
+            return $this->error(self::UNKNOWN_ERROR);
+        }
+
+        if ($user_collects = $user->collectRepositories($per_page, $q, $s)) {
             return $this->formatPaged(['data' => $user_collects]);
         }
 
-        return $this->error(self::BAD_REQUEST, UserLikes::errorMsg());
+        return $this->error(self::UNKNOWN_ERROR);
     }
 
     /**

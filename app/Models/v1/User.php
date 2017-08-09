@@ -186,16 +186,30 @@ class User extends BaseModel
      * 评论对象
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comment()
+    public function userComment()
     {
         return $this->hasMany('App\Models\v1\UserComment');
     }
 
-    //
+    /**
+     * 收藏对象
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userCollect()
+    {
+        return $this->hasMany('App\Models\v1\UserCollect');
+    }
+
+    /**
+     * 用户评论的数据仓库
+     * @param int $per_page
+     * @param array $q
+     * @param array $s
+     * @return mixed
+     */
     public function commentRepositories($per_page = 10, $q = [], $s = [])
     {
-        // TODO: 优化代码
-        self::$aliveSelf = $this->comment();
+        self::$aliveSelf = $this->userComment();
         $user_comments = self::repositories();
         $user_comments->map(function ($user_comment) {
             $user_comment->makeHidden(['original_user']);
@@ -203,6 +217,24 @@ class User extends BaseModel
         });
 
         return $user_comments;
+    }
+
+    /**
+     * 用户收藏的数据仓库
+     * @param int $per_page
+     * @param array $q
+     * @param array $s
+     * @return mixed
+     */
+    public function collectRepositories($per_page = 10, $q = [], $s = [])
+    {
+        self::$aliveSelf = $this->userCollect();
+        $user_collects = self::repositories();
+        $user_collects->map(function ($user_collect) {
+            $user_collect->makeVisible(['original_collectable']);
+        });
+
+        return $user_collects;
     }
 
     /**

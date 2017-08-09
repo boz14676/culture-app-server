@@ -70,10 +70,12 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->get('integral_tasks', 'IntegralController@getIntegralTasks');                  // 获取积分任务(s)
     $app->get('user/integrals', 'IntegralController@getIntegrals');                      // 获取用户积分记录(s)
 
+    /**** 收藏 ****/
     $app->get('user/collects', 'UserController@getUserCollects');                        // 获取用户的收藏(s)
     $app->post('user/collect', 'UserController@UserCollects');                           // 收藏
     $app->delete('user/collect', 'UserController@UserUncollects');                       // 取消收藏
 
+    /**** 其他 ****/
     $app->post('user/identification', 'UserController@identifies');                      // 提交实名认证
     $app->post('user/feedback', 'UserController@postFeedback');                          // 意见反馈
 
