@@ -19,7 +19,7 @@ class IntegralTask extends BaseModel
         "quantity",           // 积分量
     ];
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $with = [];
 
