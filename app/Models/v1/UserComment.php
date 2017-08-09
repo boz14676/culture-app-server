@@ -15,10 +15,13 @@ class UserComment extends BaseModel
     protected $appends = [
         'original_user',        // 用户对象
         'is_cur_user_liked',    // 是否被当前用户点过赞
+        'original_commentable', // 评论主题对象
     ];
 
     protected $visible = [
         'id',
+        'commentable_type',         // 评论主题类型
+        'commentable_id',           // 评论主题ID
         'original_user',            // 用户
         'is_cur_user_liked',        // 是否被当前用户点赞
         'has_liked_number',         // 被赞数量
@@ -46,20 +49,19 @@ class UserComment extends BaseModel
         ]);
     }
 
+    public static function repositories($per_page = 10, $q = [], $s = [])
+    {
+        $s['id'] = 'desc';
+
+        return parent::repositories($per_page, $q, $s);
+    }
+
     /**
      * 获取所有拥有的 imageable 模型
      */
     public function commentable()
     {
         return $this->morphTo();
-    }
-
-
-    public static function repositories($per_page = 10, $q = [], $s = [])
-    {
-        $s['id'] = 'desc';
-
-        return parent::repositories($per_page, $q, $s);
     }
 
     /**
@@ -86,6 +88,12 @@ class UserComment extends BaseModel
         if ($this->user) {
             return $this->user->setVisible(['nickname','avatar']);
         }
+    }
+
+    // 获取[评论主题对象] 属性
+    public function getOriginalCommentableAttribute()
+    {
+        return $this->commentable;
     }
 
     // 获取[是否被当前用户点赞] 属性

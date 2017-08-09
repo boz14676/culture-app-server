@@ -195,8 +195,14 @@ class User extends BaseModel
     public function commentRepositories($per_page = 10, $q = [], $s = [])
     {
         // TODO: 优化代码
-        return $this->comment()
-            ->simplePaginate($per_page);
+        self::$aliveSelf = $this->comment();
+        $user_comments = self::repositories();
+        $user_comments->map(function ($user_comment) {
+            $user_comment->makeHidden(['original_user']);
+            $user_comment->makeVisible(['original_commentable']);
+        });
+
+        return $user_comments;
     }
 
     /**

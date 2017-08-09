@@ -215,8 +215,8 @@ class UserController extends Controller
             return $this->error(self::UNKNOWN_ERROR);
         }
 
-        if ($comment = $user->commentRepositories($per_page, $q, $s)) {
-            return $this->formatPaged(['data' => $comment]);
+        if ($comments = $user->commentRepositories($per_page, $q, $s)) {
+            return $this->formatPaged(['data' => $comments]);
         }
 
         return $this->error(self::UNKNOWN_ERROR);
