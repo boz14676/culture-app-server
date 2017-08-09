@@ -78,7 +78,7 @@ class BaseModel extends Model
     public static function repositories($per_page=10, $q=[], $s=[])
     {
         if (!self::$aliveSelf) {
-            self::$aliveSelf = self::where();
+            self::$aliveSelf = self::select();
         }
 
         return self::$aliveSelf

@@ -14,6 +14,8 @@ class Order extends BaseModel
     protected $guarded = [];
 
     protected $appends = [
+        'goods_price',              // 商品金额
+        'goods_numbers',            // 商品数量
         'expire_time',              // 过期时间
         'original_activity',        // 预约对象
         'booking_person_name',      // 预约人姓名
@@ -31,7 +33,7 @@ class Order extends BaseModel
         'payment_serial_number',        // 支付单号
         'payment_type',                 // 支付类型
         'goods_price',                  // 商品金额
-        'goods_number',                 // 商品数量
+        'goods_numbers',                // 商品数量
         'paid_at',                      // 支付时间
         'created_at',                   // 订单创建时间
     ];
