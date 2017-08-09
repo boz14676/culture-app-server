@@ -349,7 +349,7 @@ class User extends BaseModel
      */
     public function postFeedback($details='')
     {
-        DB::table('feedback')->insert(['details' => $details, 'user_id' => $this->id, 'created_at' => Carbon::now()]);
+        DB::table('feedbacks')->insert(['details' => $details, 'user_id' => $this->id, 'created_at' => Carbon::now()]);
         return true;
     }
 }
