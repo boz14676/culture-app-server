@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Models\v1\Activity;
 use App\Models\v1\Article;
+use App\Models\v1\ArticleCategory;
 use App\Models\v1\Label;
 use App\Models\v1\Stadium;
 use App\Models\v1\Video;
@@ -18,13 +19,12 @@ class TestController extends Controller
      */
     public function test()
     {
-        dd($_SERVER);
-        // $this->insertLabels();
+        $this->insertLabels();
     }
 
     public function insertLabels()
     {
-        $articles = Article::where('article_category_id', 49)->get();
+        $articles = Article::get();
         $stadiums = Stadium::get();
         $activities = Activity::get();
         $videos = Video::get();
@@ -33,16 +33,15 @@ class TestController extends Controller
         $labels_relationships = collect();
 
         $articles->each(function ($article) use (&$labels, &$labels_relationships) {
-
-            dd($article->articleCategory->top_level_id);
-
-            if ($original_labels = $article->labels) {
-                $labels = $original_labels->map(function ($original_label) use ($article) {
-                    [
-                        'article_cateogry_id' => $article,
+            if ($article->labels) {
+                $original_labels = $article->labels->map(function ($original_label) use ($article) {
+                    return [
+                        'article_category_id' => $article->articleCategory->top_level_id,
                         'name' => $original_label,
                     ];
                 });
+
+                $labels->push($original_labels);
             }
 
 
@@ -60,7 +59,16 @@ class TestController extends Controller
             $labels_relationships->push($labels_relationship);
         });
         $stadiums->each(function ($stadium) use (&$labels, &$labels_relationships) {
-            // $labels->push($stadium->labels);
+            if ($stadium->labels) {
+                $original_labels = $stadium->labels->map(function ($original_label) use ($stadium) {
+                    return [
+                        'article_category_id' => $stadium->articleCategory->top_level_id,
+                        'name' => $original_label,
+                    ];
+                });
+
+                $labels->push($original_labels);
+            }
 
             if ($original_label_ids = Label::whereIn('name', $stadium->labels)->pluck('id')) {
                 $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($stadium) {
@@ -75,8 +83,18 @@ class TestController extends Controller
 
             $labels_relationships->push($labels_relationship);
         });
+
         $activities->each(function ($activity) use (&$labels, &$labels_relationships) {
-            $labels->push($activity->labels);
+            if ($activity->labels) {
+                $original_labels = $activity->labels->map(function ($original_label) use ($activity) {
+                    return [
+                        'article_category_id' => $activity->articleCategory->top_level_id,
+                        'name' => $original_label,
+                    ];
+                });
+
+                $labels->push($original_labels);
+            }
 
             if ($original_label_ids = Label::whereIn('name', $activity->labels)->pluck('id')) {
                 $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($activity) {
@@ -91,8 +109,26 @@ class TestController extends Controller
 
             $labels_relationships->push($labels_relationship);
         });
+
         $videos->each(function ($video) use (&$labels, &$labels_relationships) {
-            $labels->push($video->labels);
+
+            if ($video->labels) {
+                $original_labels = $video->labels->map(function ($original_label) use ($video) {
+
+                    if ($video->videoable instanceof ArticleCategory) {
+                        $article_category = $video->videoable;
+                    } else {
+                        $article_category = $video->videoable->articleCategory;
+                    }
+
+                    return [
+                        'article_category_id' => $article_category->top_level_id,
+                        'name' => $original_label,
+                    ];
+                });
+
+                $labels->push($original_labels);
+            }
 
             if ($original_label_ids = Label::whereIn('name', $video->labels)->pluck('id')) {
                 $labels_relationship = $original_label_ids->map(function ($original_label_id) use ($video) {
@@ -110,13 +146,8 @@ class TestController extends Controller
 
         // DB::table('labeables')->insert($labels_relationships->collapse()->all());
 
-        $original_labels = $labels->flatten()->unique()->filter()->map(function ($label) {
-            /*return [
-                'name' => $label,
-                'article_category_id' =>
-            ];*/
-        });
-        DB::table('labels')->insert($original_labels->all());
+        $out_original_labels = $labels->collapse()->unique()->filter();
+        DB::table('labels')->insert($out_original_labels->all());
     }
 
     public function exportRepository()

@@ -4,6 +4,7 @@ namespace App\Models\v1;
 
 use App\Models\BaseModel;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class UserLikes extends BaseModel
 {
@@ -21,6 +22,21 @@ class UserLikes extends BaseModel
     ];
 
     protected $with = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // 多态关联 类名映射
+        Relation::morphMap([
+            'article' => Article::class,
+            'activity' => Activity::class,
+            'stadium' => Stadium::class,
+            'video' => Video::class,
+            'music' => Music::class,
+            'user_comment' => UserComment::class
+        ]);
+    }
 
     /**
      * 获取所有拥有的 imageable 模型

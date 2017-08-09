@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use Carbon\Carbon;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Activity extends BaseModel
 {
@@ -42,6 +43,17 @@ class Activity extends BaseModel
     protected $dates = ['start_registered_at', 'end_registered_at'];
 
     protected $casts = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // 多态关联 类名映射
+        Relation::morphMap([
+            'article_category' => ArticleCategory::class,
+            'stadium' => Stadium::class,
+        ]);
+    }
 
     /**
      * 活动状态

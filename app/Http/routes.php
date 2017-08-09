@@ -20,6 +20,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('hotsearches', 'OthersController@getHotsearches');      // 获取热搜(s)
     $app->get('home_sections', 'OthersController@getHomeSections');   // 获取首页推荐栏目(s)
     $app->get('areas', 'OthersController@getAreas');                  // 获取区域(s)
+    $app->get('labels', 'OthersController@getLabels');                // 获取标签(s)
 
 
     /**************************************************** 用户 **********************************************/

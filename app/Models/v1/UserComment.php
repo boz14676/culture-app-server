@@ -4,6 +4,7 @@ namespace App\Models\v1;
 
 use App\Models\BaseModel;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class UserComment extends BaseModel
 {
@@ -30,6 +31,20 @@ class UserComment extends BaseModel
     protected $casts = [
         'is_cur_user_liked' => 'integer',
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // 多态关联 类名映射
+        Relation::morphMap([
+            'article' => Article::class,
+            'activity' => Activity::class,
+            'stadium' => Stadium::class,
+            'video' => Video::class,
+            'music' => Music::class,
+        ]);
+    }
 
     /**
      * 获取所有拥有的 imageable 模型

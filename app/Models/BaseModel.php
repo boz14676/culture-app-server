@@ -21,6 +21,8 @@ class BaseModel extends Model
     protected $casts = [
         'id' => 'string',
     ];
+
+    protected static $aliveSelf = null;
     
     protected static $error_msg = ''; // 错误信息
 
@@ -75,9 +77,13 @@ class BaseModel extends Model
      */
     public static function repositories($per_page=10, $q=[], $s=[])
     {
-        return self
+        if (!self::$aliveSelf) {
+            self::$aliveSelf = self::where();
+        }
+
+        return self::$aliveSelf
             // 排序
-            ::when($s, function ($query) use ($s) {
+            ->when($s, function ($query) use ($s) {
                 return self::sorting($query, $s);
             })
             // 筛选

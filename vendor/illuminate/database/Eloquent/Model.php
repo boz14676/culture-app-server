@@ -2045,8 +2045,8 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     {
         $morphMap = Relation::morphMap();
 
-        // $class = static::class; // 修改框架源码 -
-        $class = uncamelize(collect(explode('\\', static::class))->last()); // 修改框架源码 +
+        $class = static::class; // 修改框架源码 -
+        // $class = uncamelize(collect(explode('\\', static::class))->last()); // 修改框架源码 +
 
         if (! empty($morphMap) && in_array($class, $morphMap)) {
             return array_search($class, $morphMap, true);

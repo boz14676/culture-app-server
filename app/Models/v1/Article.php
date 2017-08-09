@@ -63,15 +63,15 @@ class Article extends BaseModel
      * repositories
      *
      * @param int $per_page # 每页显示记录数
-     * @param array $q # 筛选
-     * @param array $s # 排序
-     * @return mixed                    # 文章对象(s)或null
+     * @param array $q      # 筛选
+     * @param array $s      # 排序
+     * @return mixed        # 文章对象(s)或null
      */
     public static function repositories($per_page = 10, $q = [], $s = [])
     {
         /**
-         * 显示在一级文章分类下的 [ 附近推荐 ] 或 [ 近期热门 ]
-         * 逻辑实现：获取当前一级文章分类下的所有子分类，根据这些分类去查找符合条件的记录
+         * 显示在一级文章分类下的 [附近推荐] 或 [近期热门]
+         * 逻辑实现：获取当前一级文章分类和其下的所有子分类，根据这些分类去查找符合条件的记录
          */
         if (
             isset($q['article_category_id'])
@@ -108,6 +108,24 @@ class Article extends BaseModel
 
             $distance_field = DB::raw('ROUND( 6378.138 * 2 * ASIN( SQRT( POW( SIN(( lat * PI() / 180 - ' . $user_lat . ' * PI() / 180) / 2) , 2) + COS(lat * PI() / 180) * COS(' . $user_lat . ' * PI() / 180) * POW( SIN(( lng * PI() / 180 - ' . $user_lng . ' * PI() / 180) / 2) , 2))) * 1000)');
             $s['distance'] = [$distance_field, $s['distance']];
+        }
+
+        // 标签过滤
+        elseif (
+            isset($q['label_id'])
+        )
+        {
+            self::$aliveSelf = self::join('labeables', function ($join) use ($q) {
+                $join
+                    ->on('articles.id', '=', 'labeables.labeable_id')
+                    ->where('labeables.labeable_type', '=', 'article')
+                    ->where('labeables.label_id', '=', $q['label_id']);
+            });
+
+            $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
+            $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
+            $q['article_category_id'] = $subclasses_id->push($article_category->attributes['id']);  // 文章分类ids
+
         }
 
         $s['id'] = 'desc'; // ID倒序排序

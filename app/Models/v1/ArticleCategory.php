@@ -43,6 +43,11 @@ class ArticleCategory extends BaseModel
 
     protected static $topmostCateogry;
 
+    public function videos()
+    {
+        return $this->morphMany('App\Models\v1\Video', 'videoable');
+    }
+
     /**
      * repositories
      *
@@ -78,19 +83,28 @@ class ArticleCategory extends BaseModel
     }
 
     // 获取当前文章分类对象的 上一级文章分类对象
-    public function topCategory($topid=0)
+    public function topCategory()
     {
-        $topid = $topid ? : $this->attributes['topid'];
-
-        if ($topid) {
-            return self::find($topid);
-        }
+        return self::find($this->attributes['topid']);
     }
 
     // 第一级别 文章分类对象
     public function topmostCategory()
     {
+        static::$topmostCateogry = $this;
 
+        if (!static::$topmostCateogry->topid) {
+            return static::$topmostCateogry;
+        }
+
+        // 获取上一级别 文章分类
+        static::$topmostCateogry = static::$topmostCateogry->topCategory();
+
+        // 如果还有 上一级别 文章分类
+        if (static::$topmostCateogry->topid)
+            return static::$topmostCateogry->topmostCategory();
+        else
+            return static::$topmostCateogry;
     }
 
     // 获取[文章列表展示类型] 属性
@@ -124,7 +138,9 @@ class ArticleCategory extends BaseModel
     // 获取 [一级分类ID] 属性
     public function getTopLevelIdAttribute()
     {
-        dd($this->topmostCategory());
+        if ($this->topmostCategory()) {
+            return $this->topmostCategory()->id;
+        }
     }
 
     // 获取[图标] 属性

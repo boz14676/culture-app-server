@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\v1\Area;
 use App\Models\v1\HomeSection;
 use App\Models\v1\Hotsearch;
+use App\Models\v1\Label;
 
 class OthersController extends Controller
 {
@@ -69,6 +70,28 @@ class OthersController extends Controller
 
         if ($areas = Area::repositories(0, $q, $s)) {
             return $this->body(['data' => $areas]);
+        }
+
+        return $this->error(self::UNKNOWN_ERROR);
+    }
+
+    /**
+     * GET /labels 获取标签(s)
+     */
+    public function getLabels()
+    {
+        $rules = [
+            'q.article_category_id' => 'required|integer',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $q = $this->request->input('q');    // 筛选
+        $s = $this->request->input('s');    // 排序
+
+        if ($labels = Label::repositories(0, $q, $s)) {
+            return $this->body(['data' => $labels]);
         }
 
         return $this->error(self::UNKNOWN_ERROR);
