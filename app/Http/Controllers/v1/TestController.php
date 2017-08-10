@@ -22,7 +22,6 @@ class TestController extends Controller
      */
     public function test()
     {
-        $this->exportRepository();
     }
 
     public function insertLabels()
@@ -158,18 +157,32 @@ class TestController extends Controller
         /**
          * stadium-repository
          */
-        $stadiums = collect();
-        Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) use (&$stadiums) {
+        /*$stadiums = collect();
+        Excel::load(storage_path('data_repositories/stadium_repositories2.xlsx'), function($reader) use (&$stadiums) {
             $reader->skipRows(1)->get()->each(function ($item, $key) use (&$stadiums) {
                 $item->details = htmlspecialchars($item->details);
 
-                $article_category = collect($item->all())->except(0)->put('details', $item->details);
-
-
-                $stadiums->push($article_category->all());
+                $stadium = collect($item->all())->except(0)->put('details', $item->details);
+                $stadiums->push($stadium->all());
             });
         });
-        // DB::table('stadiums')->insert($stadiums->all());
+
+        DB::table('stadiums')->insert($stadiums->all());*/
+
+        /**
+         * article-repository
+         */
+        $articles = collect();
+        Excel::load(storage_path('data_repositories/article_repositories.xlsx'), function($reader) use (&$articles) {
+            $reader->skipRows(1)->get()->each(function ($item, $key) use (&$articles) {
+                $item->details = htmlspecialchars($item->details);
+
+                $article = collect($item->all())->except(0)->put('details', $item->details);
+                $articles->push($article->all());
+            });
+        });
+
+        DB::table('articles')->insert($articles->all());
     }
 
     public function _insetArticle()
