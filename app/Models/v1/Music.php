@@ -26,9 +26,9 @@ class Music extends BaseModel
         'thumbnail',                // 缩略图
         'url',                      // 地址
         'singer_name',              // 歌手名称
-        'lenstening_numbers',       // 观看次数
         'prev_id',                  // 上一个视频对象ID
         'next_id',                  // 下一个视频对象ID
+        'has_read_numbers',         // 试听数量
         'has_commented_numbers',    // 评论数量
         'has_liked_numbers',        // 点赞数量
         'is_cur_user_liked',        // 是否被当前用户点赞
@@ -138,5 +138,21 @@ class Music extends BaseModel
                 ->orderBy('id', 'asc')
                 ->value('id')
         );
+    }
+
+    /**
+     * 被点赞后的挂载操作
+     */
+    public function liked()
+    {
+        return $this->increment('has_liked_numbers');
+    }
+
+    /**
+     * 被取消点赞后的挂载操作
+     */
+    public function unliked()
+    {
+        return $this->decrement('has_liked_numbers');
     }
 }

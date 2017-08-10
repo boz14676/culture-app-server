@@ -96,23 +96,18 @@ class UserLikes extends BaseModel
             return false;
         }
 
-        // 点赞的挂载操作
-        switch ($likesable_type) {
-            case 'comment':
-                if ($comment = UserComment::find($likseable_id))
-                    $comment->liked();
-                break;
-            case 'article':
-                if ($article = Article::find($likseable_id))
-                    $article->liked();
-                break;
-        }
-
         $likes = new self;
         $likes->user_id = $user->id;
         $likes->likesable_type = $likesable_type;
         $likes->likesable_id = $likseable_id;
-        return $likes->save();
+        $likes->save();
+
+        // 点赞的挂载操作
+        if ($likes->likesable) {
+            $likes->likesable->increment('has_liked_numbers');
+        }
+
+        return true;
     }
 
     /**
@@ -141,18 +136,10 @@ class UserLikes extends BaseModel
             return false;
         }
 
-        // 取消点赞的挂载操作
-        switch ($likesable_type) {
-            case 'comment':
-                if ($comment = UserComment::find($likseable_id))
-                    $comment->unliked();
-                break;
-            case 'article':
-                if ($article = Article::find($likseable_id))
-                    $article->unliked();
-                break;
+        // 点赞的挂载操作
+        if ($likes->likesable) {
+            $likes->likesable->decrement('has_liked_numbers');
         }
-
 
         return $likes->delete();
     }

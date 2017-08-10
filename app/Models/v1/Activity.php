@@ -35,6 +35,9 @@ class Activity extends BaseModel
         'address',                          // 地址
         'registered_at',                    // 活动的开始和结束时间
         'contact',                          // 咨询电话
+        'has_commented_numbers',            // 评论数量
+        'has_liked_numbers',                // 点赞数量
+        'has_read_numbers',                 // 阅读数量
         'is_cur_user_liked',                // 是否被当前用户点赞
         'is_cur_user_collected',            // 是否被当前用户收藏
     ];
@@ -239,5 +242,21 @@ class Activity extends BaseModel
         }
 
         return 0;
+    }
+
+    /**
+     * 被点赞后的挂载操作
+     */
+    public function liked()
+    {
+        return $this->increment('has_liked_numbers');
+    }
+
+    /**
+     * 被取消点赞后的挂载操作
+     */
+    public function unliked()
+    {
+        return $this->decrement('has_liked_numbers');
     }
 }

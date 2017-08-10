@@ -25,9 +25,9 @@ class Video extends BaseModel
         'labels',                   // 标签
         'thumbnail',                // 缩略图
         'url',                      // 地址
-        'wathcing_numbers',         // 观看次数
         'particular_year',          // 年份
         'episode_numbers',          // 集数
+        'has_read_numbers',         // 观看数量
         'has_commented_numbers',    // 评论数量
         'has_liked_numbers',        // 点赞数量
         'is_cur_user_liked',        // 是否被当前用户点赞
@@ -153,5 +153,21 @@ class Video extends BaseModel
                 ->orderBy('id', 'asc')
                 ->value('id')
         );
+    }
+
+    /**
+     * 被点赞后的挂载操作
+     */
+    public function liked()
+    {
+        return $this->increment('has_liked_numbers');
+    }
+
+    /**
+     * 被取消点赞后的挂载操作
+     */
+    public function unliked()
+    {
+        return $this->decrement('has_liked_numbers');
     }
 }

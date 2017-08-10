@@ -58,7 +58,7 @@ class UserComment extends BaseModel
     }
 
     /**
-     * 获取所有拥有的 imageable 模型
+     * 获取所有拥有的 commentable 模型
      */
     public function commentable()
     {
@@ -133,12 +133,9 @@ class UserComment extends BaseModel
         $comment->details = $details;                       // 内容
         $comment->save();
 
-        // 评论后的挂载操作
-        switch ($commentable_type) {
-            case 'article':
-                if ($article = Article::find($commentable_id))
-                    $article->commented();
-                break;
+        // 评论的挂载操作
+        if ($comment->commentable) {
+            $comment->commentable->increment('has_commented_numbers');
         }
 
         return $comment;

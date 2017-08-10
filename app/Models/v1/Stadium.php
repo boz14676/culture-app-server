@@ -37,9 +37,9 @@ class Stadium extends BaseModel
         'distance',                             // 距离（m）*仅做排序使用属性
         'has_photos',                           // 是否有音乐 [type: boolean(0, 1)]
         'has_videos',                           // 是否有视频 [type: boolean(0, 1)]
-        'has_commented_numbers',                // 评论数量 *可用作做排序使用的属性
-        'has_liked_numbers',                    // 点赞数量 *可用作排序使用的属性
-        'has_read_numbers',                     // 阅读数量 *仅做排序使用的属性
+        'has_commented_numbers',                // 评论数量
+        'has_liked_numbers',                    // 点赞数量
+        'has_read_numbers',                     // 阅读数量
         'is_cur_user_liked',                    // 是否被当前用户点赞
         'is_cur_user_collected',                // 是否被当前用户收藏
         'details',                              // 内容

@@ -244,12 +244,20 @@ class User extends BaseModel
     }
 
     /**
-     * 实名认证 对象
+     * 实名认证对象
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function identification()
     {
         return $this->hasOne('App\Models\v1\UserIdentification');
+    }
+
+    /**
+     * 用户积分记录对象
+     */
+    public function userIntegral()
+    {
+        return $this->hasMany('App\Models\v1\UserIntegral');
     }
 
     /**
@@ -384,5 +392,63 @@ class User extends BaseModel
         }
 
         return $this->save();
+    }
+
+    // 增加积分
+    public function addIntegral($code)
+    {
+        $user_integral = new UserIntegral;
+
+        $integral_task = IntegralTask::where('code', $code)->first();
+        if ($integral_task) {
+            // 首次添加 类型
+            if ($integral_task->type === IntegralTask::TYPE_FIRSTTIME) {
+                $has_added =
+                    $this
+                    ->userIntegral()
+                    ->where('integral_task_id', $integral_task->id)
+                    ->count();
+                // 只限添加一次
+                if ($has_added) {
+                    return false;
+                }
+
+                // 写入积分记录
+                $user_integral->integral_task_id = $integral_task->id;
+                $user_integral->quantities = $integral_task->quantities;
+                $this->userIntegral()->save($user_integral);
+
+                // 写入积分
+                $this->integral_quantities = $integral_task->quantities;
+                $this->save();
+
+                return true;
+            }
+
+            // 每日添加 类型
+            elseif ($integral_task->type === IntegralTask::TYPE_EVERTYDAY) {
+                $has_added =
+                    $this
+                        ->userIntegral()
+                        ->where('integral_task_id', $integral_task->id)
+                        ->whereBetween('created_at', [])
+                        ->count();
+                // 只限添加一次
+                if ($has_added) {
+                    return false;
+                }
+
+                // 写入积分记录
+                $user_integral->integral_task_id = $integral_task->id;
+                $user_integral->quantities = $integral_task->quantities;
+                $this->userIntegral()->save($user_integral);
+
+                // 写入积分
+                $this->integral_quantities = $integral_task->quantities;
+                $this->save();
+
+                return true;
+            }
+        }
     }
 }

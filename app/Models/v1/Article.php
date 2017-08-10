@@ -37,9 +37,9 @@ class Article extends BaseModel
         'lng',                              // 坐标 纬度
         'address',                          // 地址
         'desc',                             // 用于：内容描述、专题简介、内容年代、主题、个人简介
-        'has_commented_numbers',            // 评论数量 *可用作做排序使用的属性
-        'has_liked_numbers',                // 点赞数量 *可用作排序使用的属性
-        'has_read_numbers',                 // 阅读量 *仅做排序使用的属性
+        'has_commented_numbers',            // 评论数量
+        'has_liked_numbers',                // 点赞数量
+        'has_read_numbers',                 // 阅读数量
         'client_timed_at',                  // 时间
         'extra',                            // 扩展字段
         'has_photos',                       // 是否有图片 [type: boolean(0, 1)]
