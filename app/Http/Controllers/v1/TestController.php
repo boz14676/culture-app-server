@@ -172,7 +172,7 @@ class TestController extends Controller
         DB::table('stadiums')->insert($article_categories->all());
     }
 
-    public function insetArticle()
+    public function _insetArticle()
     {
         /******************************************** 文章测试开发填充 ********************************************/
         // 文章测试填充
@@ -1378,7 +1378,7 @@ class TestController extends Controller
         DB::table('articles')->insert($total_articles);
     }
 
-    public function insertArticleCategory()
+    public function _insertArticleCategory()
     {
         /************************* 文章分类 *************************/
 

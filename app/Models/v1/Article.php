@@ -37,6 +37,7 @@ class Article extends BaseModel
         'lng',                              // 坐标 纬度
         'address',                          // 地址
         'desc',                             // 用于：内容描述、专题简介、内容年代、主题、个人简介
+        'has_activity_numbers',             // 活动数量
         'has_commented_numbers',            // 评论数量
         'has_liked_numbers',                // 点赞数量
         'has_read_numbers',                 // 阅读数量
@@ -131,7 +132,7 @@ class Article extends BaseModel
 
         // 文化服务下面的场馆、活动推荐
         elseif (
-            (isset($q['article_category_id']) && $q['article_category_id'] = 3)
+            (isset($q['article_category_id']) && $q['article_category_id'] == 3)
             && (isset($q['is_hot']) && $q['is_hot'] = 1)
         )
         {
