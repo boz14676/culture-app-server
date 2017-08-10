@@ -32,7 +32,6 @@ class Article extends BaseModel
         'thumbnail',                        // 缩略图（包含：大师头像）
         'banner',                           // banner（包含：背景图）
         'labels',                           // 标签
-        'distance',                         // 距离（m）*可做排序使用属性
         'lat',                              // 坐标 经纬
         'lng',                              // 坐标 纬度
         'address',                          // 地址

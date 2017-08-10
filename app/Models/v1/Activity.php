@@ -28,6 +28,8 @@ class Activity extends BaseModel
         'status',                           // 状态
         'is_free',                          // 是否为免费(type: boolean[0, 1])
         'name',                             // 名称
+        'lat',                              // 坐标 经纬
+        'lng',                              // 坐标 纬度
         'labels',                           // 标签(s)
         'thumbnail',                        // 缩略图
         'banner',                           // banner
