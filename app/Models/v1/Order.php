@@ -259,6 +259,15 @@ class Order extends BaseModel
         return true;
     }
 
+    // 取消订单
+    public function cancelOrder()
+    {
+        $this->status = self::STATUS_CANCELED;
+        $this->save();
+
+        return true;
+    }
+
     public function freshTimestamp()
     {
         return new Carbon;

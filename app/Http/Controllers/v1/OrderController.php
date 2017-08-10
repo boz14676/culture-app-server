@@ -7,21 +7,8 @@ use App\Models\v1\UserCoupon;
 
 class OrderController extends Controller
 {
-
     /**
-     * GET order/:id 获取订单
-     */
-    public function get($id)
-    {
-        if($order = Order::repository($id)) {
-            return self::body(['data' => $order]);
-        }
-
-        return self::error(self::NOT_FOUND);
-    }
-
-    /**
-     * api.order.get 订单列表
+     * GET /orders 获取订单列表
      */
     public function _lists()
     {
@@ -42,5 +29,30 @@ class OrderController extends Controller
         }
 
         return $this->error(self::UNKNOWN_ERROR);
+    }
+
+    /**
+     * GET /order/:id 获取订单
+     */
+    public function get($id)
+    {
+        if($order = Order::repository($id)) {
+            return self::body(['data' => $order]);
+        }
+
+        return self::error(self::NOT_FOUND);
+    }
+
+    /**
+     * DELETE user/order/:id 取消订单
+     */
+    public function cancelOrder($id)
+    {
+        if($order = Order::find($id)) {
+            $order->cancelOrder();
+            return self::body();
+        }
+
+        return self::error(self::NOT_FOUND);
     }
 }

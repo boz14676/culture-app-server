@@ -22,9 +22,7 @@ class TestController extends Controller
      */
     public function test()
     {
-        // dd(Carbon::today());
-        $user = User::find(1);
-        dd($user->addIntegral('collected'));
+        $this->exportRepository();
     }
 
     public function insertLabels()
@@ -160,16 +158,18 @@ class TestController extends Controller
         /**
          * stadium-repository
          */
-        $article_categories = collect();
-        Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) use (&$article_categories) {
-            $reader->skipRows(1)->get()->each(function ($item, $key) use (&$article_categories) {
+        $stadiums = collect();
+        Excel::load(storage_path('data_repositories/stadium_repositories.xlsx'), function($reader) use (&$stadiums) {
+            $reader->skipRows(1)->get()->each(function ($item, $key) use (&$stadiums) {
                 $item->details = htmlspecialchars($item->details);
 
                 $article_category = collect($item->all())->except(0)->put('details', $item->details);
-                $article_categories->push($article_category->all());
+
+
+                $stadiums->push($article_category->all());
             });
         });
-        DB::table('stadiums')->insert($article_categories->all());
+        // DB::table('stadiums')->insert($stadiums->all());
     }
 
     public function _insetArticle()

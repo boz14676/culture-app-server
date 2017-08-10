@@ -83,8 +83,9 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
 
 
     /**************************************************** 订单 **********************************************/
-    $app->get('user/order/{id}', 'OrderController@get');     // 获取订单
-    $app->get('user/orders', 'OrderController@_lists');      // 获取订单(s)
+    $app->get('user/orders', 'OrderController@_lists');             // 获取订单列表
+    $app->get('user/order/{id}', 'OrderController@get');            // 获取订单
+    $app->delete('user/order/{id}', 'OrderController@cancelOrder'); // 取消订单
 
     // **************************************** 购物 ***************************************
     $app->post('shopping/orders', 'ShoppingController@orders');  // 下单
