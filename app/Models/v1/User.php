@@ -74,6 +74,9 @@ class User extends BaseModel
         $user->is_bind = 1;                                            // 注册默认绑定
         $user->save();
 
+        // 绑定手机号后的用户积分挂载操作
+        $user->addIntegral('binded');
+
         return $user;
     }
 
@@ -394,13 +397,21 @@ class User extends BaseModel
         return $this->save();
     }
 
-    // 增加积分
+    /**
+     * 增加积分
+     * @param $code
+     * @return bool
+     */
     public function addIntegral($code)
     {
         $user_integral = new UserIntegral;
 
+        // 积分任务对象
         $integral_task = IntegralTask::where('code', $code)->first();
         if ($integral_task) {
+            $user_integral->integral_task_id = $integral_task->id;      // 积分任务ID
+            $user_integral->quantities = $integral_task->quantities;    // 积分量
+
             // 首次添加 类型
             if ($integral_task->type === IntegralTask::TYPE_FIRSTTIME) {
                 $has_added =
@@ -414,12 +425,10 @@ class User extends BaseModel
                 }
 
                 // 写入积分记录
-                $user_integral->integral_task_id = $integral_task->id;
-                $user_integral->quantities = $integral_task->quantities;
                 $this->userIntegral()->save($user_integral);
 
-                // 写入积分
-                $this->integral_quantities = $integral_task->quantities;
+                // 增加用户对象积分
+                $this->increment('integral_quantities', $integral_task->quantities);
                 $this->save();
 
                 return true;
@@ -427,24 +436,26 @@ class User extends BaseModel
 
             // 每日添加 类型
             elseif ($integral_task->type === IntegralTask::TYPE_EVERTYDAY) {
-                $has_added =
+                $has_added_today =
                     $this
                         ->userIntegral()
                         ->where('integral_task_id', $integral_task->id)
-                        ->whereBetween('created_at', [])
+                        ->whereBetween('created_at', [
+                            Carbon::today(),
+                            Carbon::createFromTimestamp(Carbon::tomorrow()->timestamp-1),
+                        ])
                         ->count();
-                // 只限添加一次
-                if ($has_added) {
+
+                // 只限每天添加一次
+                if ($has_added_today) {
                     return false;
                 }
 
                 // 写入积分记录
-                $user_integral->integral_task_id = $integral_task->id;
-                $user_integral->quantities = $integral_task->quantities;
                 $this->userIntegral()->save($user_integral);
 
-                // 写入积分
-                $this->integral_quantities = $integral_task->quantities;
+                // 增加用户对象积分
+                $this->increment('integral_quantities', $integral_task->quantities);
                 $this->save();
 
                 return true;

@@ -100,7 +100,12 @@ class UserCollect extends BaseModel
         $likes->user_id = $user->id;
         $likes->collectable_type = $collectable_type;
         $likes->collectable_id = $collectable_id;
-        return $likes->save();
+        $likes->save();
+
+        // 收藏的用户积分挂载操作
+        $user->addIntegral('collected');
+
+        return true;
     }
 
     /**

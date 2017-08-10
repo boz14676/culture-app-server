@@ -107,6 +107,9 @@ class UserLikes extends BaseModel
             $likes->likesable->increment('has_liked_numbers');
         }
 
+        // 点赞的用户积分挂载操作
+        $user->addIntegral('liked');
+
         return true;
     }
 

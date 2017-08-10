@@ -133,10 +133,13 @@ class UserComment extends BaseModel
         $comment->details = $details;                       // 内容
         $comment->save();
 
-        // 评论的挂载操作
+        // 评论的主题挂载操作
         if ($comment->commentable) {
             $comment->commentable->increment('has_commented_numbers');
         }
+
+        // 评论的用户积分挂载操作
+        $user->addIntegral('commented');
 
         return $comment;
     }

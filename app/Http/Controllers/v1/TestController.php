@@ -11,6 +11,7 @@ use App\Models\v1\Stadium;
 use App\Models\v1\User;
 use App\Models\v1\UserIntegral;
 use App\Models\v1\Video;
+use Carbon\Carbon;
 use DB;
 use Excel;
 
@@ -21,8 +22,9 @@ class TestController extends Controller
      */
     public function test()
     {
+        // dd(Carbon::today());
         $user = User::find(1);
-        dd($user->addIntegral('binded'));
+        dd($user->addIntegral('collected'));
     }
 
     public function insertLabels()
