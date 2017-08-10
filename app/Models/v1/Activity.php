@@ -77,6 +77,25 @@ class Activity extends BaseModel
         });
     }
 
+    public function relateds($per_page)
+    {
+        self::$aliveSelf = self
+            ::leftjoin('labeables', function ($join) {
+                $join
+                    ->on('activities.id', '=', 'labeables.labeable_id')
+                    ->where('labeables.labeable_type', '=', 'activity')
+                    ->whereIn('labeables.label_id', $this->tags()->pluck('id')->all());
+            })
+            ->where('activities.id', '<>', $this->attributes['id'])
+            ->where(function ($query) {
+                $query
+                    ->whereNotNull('labeables.label_id')
+                    ->orWhere('activities.area_id', '=', $this->attributes['area_id']);
+            });
+
+        return self::repositories($per_page);
+    }
+
     /**
      * 获取所有拥有的 activitiable 模型
      */

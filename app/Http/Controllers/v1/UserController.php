@@ -148,47 +148,36 @@ class UserController extends Controller
     }
 
     /**
-     * GET /api.user.:attribute.update
+     * Put /user/profile 修改用户资料
      */
-    public function update($attribute)
+    public function putProfile()
     {
         if (!$user = $this->request->user()) {
             return $this->error(self::NOT_FOUND);
         }
 
-        // 更改头像
-        if ($attribute === 'avatar') {
-            $rules = [
-                'photo' => 'required|image',
-            ];
-            if ($error = $this->validateInput($rules)) {
-                return $error;
-            }
-
-            $photo = $this->request->file('photo');
-
-            if ($user->updates('avatar', $photo)) {
-                return $this->body(['avatar' => $user->avatar]);
-            }
+        $rules = [
+            'nickname' => 'required|string',
+            'gender' => 'required|in:1,2',
+            'avatar' => 'image',
+            'signature' => 'required|string',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
         }
 
-        // 更改昵称
-        elseif ($attribute === 'profiles') {
-            $rules = [
-                'nickname' => 'required|string',
-            ];
-            if ($error = $this->validateInput($rules)) {
-                return $error;
-            }
 
-            $nickname = $this->request->input('nickname');
-            $user->nickname = $nickname;
-            $user->save();
+        $user->nickname = $this->request->input('nickname');
+        $user->gender = $this->request->input('gender');
+        $user->photo = $this->request->file('avatar');
+        $user->signature = $this->request->input('signature');
 
+        if ($user->putProfile()) {
             return $this->body();
         }
 
-        return $this->error(self::NOT_FOUND);
+
+        return $this->error(self::BAD_REQUEST, User::errorMsg());
     }
 
     /**

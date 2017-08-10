@@ -10,6 +10,8 @@ use Laravel\Lumen\Auth\Authorizable;
 use Hash;
 use Auth;
 use DB;
+use App\Services\Photo;
+
 
 class User extends BaseModel
 {
@@ -148,28 +150,6 @@ class User extends BaseModel
         // 更新用户密码
         $user->password = Hash::make($password);
         return $user->save();
-    }
-
-    /**
-     * 更新用户
-     * @param string $attribute
-     * @param null $ext
-     * @return $this|bool
-     */
-    public function updates($attribute='', $ext=null)
-    {
-        // 更改头像
-        if ($attribute === 'avatar') {
-            if (!$filename = Photo::uploads($ext)) {
-                self::errorMsg(Photo::errorMsg());
-
-                return false;
-            }
-            $this->avatar = $filename;
-            $this->save();
-
-            return $this;
-        }
     }
 
     /**
@@ -383,5 +363,26 @@ class User extends BaseModel
     {
         DB::table('feedbacks')->insert(['details' => $details, 'user_id' => $this->id, 'created_at' => Carbon::now()]);
         return true;
+    }
+
+    /**
+     * 更改用户资料
+     */
+    public function putProfile()
+    {
+        if (isset($this->attributes['photo'])) {
+            // 更改头像
+            if (!$filename = Photo::uploads($this->photo)) {
+                unset($this->attributes['photo']);
+
+                self::errorMsg(Photo::errorMsg());
+                return false;
+            }
+
+            $this->avatar = $filename;
+            unset($this->attributes['photo']);
+        }
+
+        return $this->save();
     }
 }

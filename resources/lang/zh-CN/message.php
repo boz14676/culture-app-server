@@ -21,8 +21,6 @@ return [
         'operation_error' => '操作失败',
         'opt_repetition' => '重复操作'
     ],
-    'photo' => [
-    ],
     'shopping' => [
         'goods_not_found' => '商品没有找到',
         'stockout' => '商品已售光',

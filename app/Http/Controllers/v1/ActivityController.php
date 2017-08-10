@@ -8,7 +8,7 @@ use App\Models\v1\Activity;
 class ActivityController extends Controller
 {
     /**
-     * GET /activities 获取活动(s)
+     * GET /activities 获取活动列表
      */
     public function _lists()
     {
@@ -34,12 +34,35 @@ class ActivityController extends Controller
     }
 
     /**
-     * GET /activity 获取活动
+     * GET /activity 获取活动详情
      */
     public function get($id=0)
     {
         if ($activity = Activity::find($id)) {
             return $this->body(['data' => $activity->makeVisible(['details'])]);
+        }
+
+        return $this->error(self::UNKNOWN_ERROR);
+    }
+
+    /**
+     * GET /activity/:id/relateds 获取相关活动列表
+     */
+    public function getRelateds($id=0)
+    {
+        $rules = [
+            'page'      => 'required|integer|min:1',
+            'per_page'  => 'required|integer|min:1',
+        ];
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $per_page = $this->request->input('per_page');                          // 每页显示记录数
+
+        if ($activity = Activity::find($id)) {
+            $activity_relateds = $activity->relateds($per_page);
+            return $this->formatPaged(['data' => $activity_relateds]);
         }
 
         return $this->error(self::UNKNOWN_ERROR);

@@ -2,9 +2,10 @@
 
 namespace App\Models\v1;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use Auth;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class UserComment extends BaseModel
 {
