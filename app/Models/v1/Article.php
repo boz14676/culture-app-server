@@ -74,7 +74,7 @@ class Article extends BaseModel
          * 逻辑实现：获取当前一级文章分类和其下的所有子分类，根据这些分类去查找符合条件的记录
          */
         if (
-            isset($q['article_category_id'])
+            (isset($q['article_category_id']) && $q['article_category_id'] != 3)
             &&
             (
                 isset($q['is_hot'])
@@ -121,6 +121,7 @@ class Article extends BaseModel
                     ->where('labeables.labeable_type', '=', 'article')
                     ->where('labeables.label_id', '=', $q['label_id']);
             });
+            unset($q['label_id']);
 
             $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
             $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
@@ -128,8 +129,41 @@ class Article extends BaseModel
 
         }
 
+        // 文化服务下面的场馆、活动推荐
+        elseif (
+            (isset($q['article_category_id']) && $q['article_category_id'] = 3)
+            && (isset($q['is_hot']) && $q['is_hot'] = 1)
+        )
+        {
+            $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
+            $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
+            $full_id = $subclasses_id->push($article_category->attributes['id']);                   // 文章分类ids
+
+            $activities_build = Activity
+                ::select('id', 'activitiable_id', 'name', 'thumbnail', 'banner')
+                ->whereIn('activitiable_id', $full_id)
+                ->where('activitiable_type', 'article_category')
+                ->where('is_hot', 1);
+
+            $stadiums_build = Stadium
+                ::select('id', 'article_category_id', 'name', 'thumbnail', 'banner')
+                ->whereIn('article_category_id', $full_id)
+                ->where('is_hot', 1);
+
+            $articles_build = Article
+                ::select('id', 'article_category_id', 'name', 'thumbnail', 'banner')
+                ->whereIn('article_category_id', $full_id)
+                ->where('is_hot', 1)
+                ->union($stadiums_build)
+                ->union($activities_build);
+
+            self::$aliveSelf = $articles_build;
+
+            unset($q, $s);
+        }
+
         $s['id'] = 'desc'; // ID倒序排序
-        return parent::repositories($per_page, $q, $s);
+        return parent::repositories($per_page, isset($q) ? $q : [], isset($s) ? $s : []);
     }
 
     /**

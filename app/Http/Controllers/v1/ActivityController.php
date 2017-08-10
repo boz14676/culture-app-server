@@ -61,7 +61,7 @@ class ActivityController extends Controller
         $per_page = $this->request->input('per_page');                          // 每页显示记录数
 
         if ($activity = Activity::find($id)) {
-            $activity_relateds = $activity->relateds($per_page);
+            $activity_relateds = $activity->relatedsRepository($per_page);
             return $this->formatPaged(['data' => $activity_relateds]);
         }
 

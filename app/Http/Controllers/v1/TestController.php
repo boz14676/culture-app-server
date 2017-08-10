@@ -19,7 +19,33 @@ class TestController extends Controller
      */
     public function test()
     {
-        $this->insertLabels();
+        // $this->insertLabels();
+        $article_category = ArticleCategory::find(3);                                           // 获取文章分类对象
+        $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
+        $full_id = $subclasses_id->push(3);                                               // 文章分类ids
+
+        $activities_build = Activity
+            ::select(['id', 'name'])
+            ->whereIn('activitiable_id', $full_id)
+            ->where('activitiable_type', 'article_category')
+            ->where('is_hot', 1);
+
+        $stadiums_build = Stadium
+            ::select('id', 'name')
+            ->whereIn('article_category_id', $full_id)
+            ->where('is_hot', 1);
+
+        $articles = Article
+            ::select('id', 'name')
+            ->whereIn('article_category_id', $full_id)
+            ->where('is_hot', 1)
+            ->union($stadiums_build)
+            ->union($activities_build)
+            ->get()
+            ->toArray();
+
+
+        dd($articles);
     }
 
     public function insertLabels()

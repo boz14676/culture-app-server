@@ -2,11 +2,12 @@
 
 namespace App\Models\v1;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use Carbon\Carbon;
 use Auth;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use DB;
 
 class Activity extends BaseModel
 {
@@ -77,7 +78,12 @@ class Activity extends BaseModel
         });
     }
 
-    public function relateds($per_page)
+    /**
+     * 获取相关活动列表
+     * @param $per_page
+     * @return mixed
+     */
+    public function relatedsRepository($per_page)
     {
         self::$aliveSelf = self
             ::leftjoin('labeables', function ($join) {
@@ -102,15 +108,6 @@ class Activity extends BaseModel
     public function activitiable()
     {
         return $this->morphTo();
-    }
-
-    /**
-     * 文章对象
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function articleCategory()
-    {
-        return $this->belongsTo('App\Models\v1\ArticleCategory', 'activitiable_id');
     }
 
     /**
@@ -154,8 +151,12 @@ class Activity extends BaseModel
     // 获取[文章分类对象] 属性
     public function getOriginalArticleCategoryAttribute()
     {
-        if ($this->activitiable_type === 'article_category') {
-            return $this->articleCategory;
+        if ($this->activitiable) {
+            if ($this->activitiable instanceof ArticleCategory) {
+                return $this->activitiable;
+            } else {
+                return $this->activitiable->articleCategory;
+            }
         }
     }
 
