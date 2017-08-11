@@ -40,6 +40,8 @@ class User extends BaseModel
         'is_bind',                  // 是否绑定
         'identification_status',    // 是否认证
         'numbers_count',            // 数据统计
+        'signature',                // 个性签名
+        'integral_quantities',      // 积分
     ];
 
     protected $with = [];
