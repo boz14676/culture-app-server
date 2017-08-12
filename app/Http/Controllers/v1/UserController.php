@@ -15,7 +15,7 @@ class UserController extends Controller
     const VENDOR_TAOBAO = 4;
 
     /**
-     * POST user/code 发送验证码
+     * POST /user/code 发送验证码
      */
     public function sendCode()
     {
@@ -40,7 +40,7 @@ class UserController extends Controller
     }
 
     /**
-     * POST user/register 注册
+     * POST /user/register 注册
      */
     public function register()
     {
@@ -66,7 +66,7 @@ class UserController extends Controller
     }
 
     /**
-     * GET user/login 登录
+     * POST /user/login 登录
      */
     public function login()
     {
@@ -88,7 +88,6 @@ class UserController extends Controller
 
         return $this->error(self::BAD_REQUEST, User::errorMsg());
     }
-
 
     /**
      * GET user/verify_original_password 验证原始密码

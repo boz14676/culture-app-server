@@ -47,10 +47,9 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
     $app->get('music/{id}', 'MusicController@get'); // 获取音乐详情
     $app->get('photos', 'PhotoController@_lists');  // 获取图片列表
 
-
     /**************************************************** 评论 **********************************************/
-    $app->get('comments', 'CommentController@_lists'); // 评论列表
-    $app->get('likes', 'LikesController@_lists'); // 点赞列表
+    $app->get('comments', 'CommentController@_lists');  // 评论列表
+    $app->get('likes', 'LikesController@_lists');       // 点赞列表
 });
 
 // Api - Authorization
@@ -61,11 +60,16 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->get('user/check_original_password', 'UserController@chekcOriginalPassword');   // 验证原始密码
     $app->put('user/password', 'UserController@updatePassword');                  // 修改密码
 
+    /**** 评论 ****/
     $app->get('user', 'UserController@get');                                             // 获取用户
     $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
     $app->post('user/comment', 'UserController@writeComment');                           // 写评论
+
+    /**** 点赞 ****/
     $app->post('user/like', 'UserController@likes');                                     // 点赞
     $app->delete('user/like', 'UserController@unlikes');                                 // 取消点赞
+
+    /**** 个人资料修改 ****/
     $app->put('user/profile', 'UserController@putProfile');                              // 修改用户资料
 
     /**** 积分 ****/
