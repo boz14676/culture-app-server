@@ -236,6 +236,20 @@ class UserController extends Controller
     }
 
     /**
+     * DELETE /user/comment/:id 删除评论
+     */
+    public function deleteComment($id)
+    {
+        if ($user_comment = UserComment::find($id)) {
+            $user_comment->delete();
+
+            return $this->body();
+        }
+
+        return $this->error(self::BAD_REQUEST, UserComment::errorMsg());
+    }
+
+    /**
      * POST /user/comment 点赞
      */
     public function likes()
