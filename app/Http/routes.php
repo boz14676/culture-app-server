@@ -1,6 +1,6 @@
 <?php
 
-$app->get('test', ['namespace' => 'App\Http\Controllers\v1', 'uses' => 'v1\TestController@test']); // 测试使用
+$app->get('123123test', ['namespace' => 'App\Http\Controllers\v1', 'uses' => 'v1\TestController@test']); // 测试使用
 
 $app->get('/', function () use ($app) {
     return $app->version();
