@@ -15,7 +15,7 @@ class UserCollect extends BaseModel
 
     protected $appends = [
         'original_collectable',         // 主题对象
-        'collected_at',                 // 收藏时间
+        'collected_at',                 // 收藏 时间
     ];
 
     protected $visible = [
