@@ -93,7 +93,7 @@ class Article extends BaseModel
         }
 
         // 区域筛选
-        if (
+        elseif (
             (
                 isset($q['article_category_id'])
                 && ArticleCategory::isTop($q['article_category_id'])
