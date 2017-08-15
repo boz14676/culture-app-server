@@ -93,4 +93,4 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->post('shopping/pays', 'ShoppingController@pays');      // 付款
 });
 
-$app->get('123123test', ['namespace' => 'App\Http\Controllers\v1', 'uses' => 'v1\TestController@test']); // 测试使用
+$app->get('00000test', ['namespace' => 'App\Http\Controllers\v1', 'uses' => 'v1\TestController@test']); // 测试使用
