@@ -23,7 +23,6 @@ class TestController extends Controller
     public function test()
     {
         // phpinfo();
-        dd(snowflake_nextid());
     }
 
     public function insertLabels()
