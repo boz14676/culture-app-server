@@ -111,7 +111,7 @@ class Article extends BaseModel
         elseif (
             (
                 isset($q['article_category_id'])
-                && ArticleCategory::isTop($q['article_category_id'])
+                 && ArticleCategory::isTop($q['article_category_id'])
             )
             &&
             isset($s['distance'])
