@@ -58,13 +58,13 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     /**************************************************** 用户 **********************************************/
     /**** 修改密码 ****/
     $app->get('user/check_original_password', 'UserController@chekcOriginalPassword');   // 验证原始密码
-    $app->put('user/password', 'UserController@updatePassword');                  // 修改密码
+    $app->put('user/password', 'UserController@updatePassword');                         // 修改密码
 
     /**** 评论 ****/
     $app->get('user', 'UserController@get');                                             // 获取用户
     $app->get('user/comments', 'UserController@commentLists');                           // 用户的评论列表
     $app->post('user/comment', 'UserController@writeComment');                           // 写评论
-    $app->delete('user/comment/{id}', 'UserController@deleteComment');                           // 写评论
+    $app->delete('user/comment/{id}', 'UserController@deleteComment');                   // 写评论
 
     /**** 点赞 ****/
     $app->post('user/like', 'UserController@likes');                                     // 点赞

@@ -72,7 +72,8 @@ class UserController extends Controller
     {
         $rules = [
             'mobile' => 'required|regex:/^[0-9]{11}$/',
-            'password' => 'required|regex:/^[a-zA-Z0-9]{6,10}$/',
+            'password' => 'required_without_all:code|regex:/^[a-zA-Z0-9]{6,10}$/',
+            'code' => 'required_without_all:password|regex:/^[a-zA-Z0-9]{6,10}$/',
         ];
 
         if ($error = $this->validateInput($rules)) {
@@ -81,8 +82,9 @@ class UserController extends Controller
 
         $mobile = $this->request->input('mobile');      // 手机号
         $password = $this->request->input('password');  // 密码
+        $code = $this->request->input('code');          // 验证码
 
-        if ($user = User::login($mobile, $password)) {
+        if ($user = User::login($mobile, $password, $code)) {
             return self::body(['data' => $user->makeVisible(['token'])]);
         }
 

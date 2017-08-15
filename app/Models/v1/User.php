@@ -86,9 +86,10 @@ class User extends BaseModel
      * 登录
      * @param int $mobile       # 手机号
      * @param string $password  # 密码
+     * @param string $code      # 验证码
      * @return mixed
      */
-    public static function login($mobile, $password)
+    public static function login($mobile, $password, $code)
     {
         // 查找用户
         if (!$user = self::where('mobile', $mobile)->first()) {
@@ -98,11 +99,24 @@ class User extends BaseModel
         }
 
         // 验证密码
-        if (!Hash::check($password, $user->password)) {
-            self::errorMsg(trans('message.user.password_wrong'));
+        if ($password) {
+            if (!Hash::check($password, $user->password)) {
+                self::errorMsg(trans('message.user.password_wrong'));
 
-            return false;
+                return false;
+            }
         }
+
+        // 验证验证码
+        elseif ($code) {
+            // 验证验证码
+            if (!Sms::verifySmsCode($mobile, $code)) {
+                self::errorMsg(trans('message.user.verify_code_error'));
+
+                return false;
+            }
+        }
+
 
         return $user;
     }
