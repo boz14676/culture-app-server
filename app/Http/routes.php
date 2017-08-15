@@ -1,8 +1,12 @@
 <?php
 
+$app->get('test', ['namespace' => 'App\Http\Controllers\v1', 'uses' => 'v1\TestController@test']); // 测试使用
+
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+
 
 // Api - Guest
 $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middleware' => ['xss']], function($app)
@@ -92,5 +96,3 @@ $app->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\v1', 'middle
     $app->post('shopping/orders', 'ShoppingController@orders');  // 下单
     $app->post('shopping/pays', 'ShoppingController@pays');      // 付款
 });
-
-$app->get('00000test', ['namespace' => 'App\Http\Controllers\v1', 'uses' => 'v1\TestController@test']); // 测试使用
