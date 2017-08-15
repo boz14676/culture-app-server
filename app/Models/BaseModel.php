@@ -95,7 +95,7 @@ class BaseModel extends Model
             ->when(true, function ($query) use ($per_page) {
                 // 分页
                 if (app('request')->input('page')) {
-                    return $query->simplePaginate($per_page);
+                    return $query->paginate($per_page);
                 }
                 // 非分页
                 else

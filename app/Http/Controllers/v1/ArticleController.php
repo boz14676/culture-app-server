@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Models\v1\Article;
 use App\Models\v1\ArticleCategory;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
 class ArticleController extends Controller
@@ -55,7 +56,7 @@ class ArticleController extends Controller
         $s = $this->request->input('s');                                        // 排序
 
         if ($articles = Article::repositories($per_page, $q, $s)) {
-            if  ($articles instanceof Paginator) {
+            if  ($articles instanceof LengthAwarePaginator) {
                 return $this->formatPaged(['data' => $articles]);
             } else {
                 return $this->body(['data' => $articles]);

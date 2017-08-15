@@ -144,13 +144,15 @@ class Controller extends BaseController
             $paged = [
                 'size' => $page_val->perPage(),
                 'page' => $page_val->currentPage(),
-                'more' => intval($page_val->hasMorePages())
+                'more' => intval($page_val->hasMorePages()),
+                'total' => $page_val->total()
             ];
         } else {
             $paged = [
                 'size' => 10,
                 'page' => 1,
-                'more' => 0
+                'more' => 0,
+                'total' => 0
             ];
         }
 
