@@ -15,12 +15,14 @@ class UserCollect extends BaseModel
 
     protected $appends = [
         'original_collectable',         // 主题对象
+        'collected_at',                 // 收藏时间
     ];
 
     protected $visible = [
         'id',
         'collectable_type',
         'collectable_id',
+        'collected_at'
     ];
 
     protected $with = [];
@@ -140,5 +142,11 @@ class UserCollect extends BaseModel
     public function getOriginalCollectableAttribute()
     {
         return $this->collectable;
+    }
+
+    // 获取[收藏时间] 属性
+    public function getCollectedAtAttribute()
+    {
+        return $this->created_at->toDateString();
     }
 }
