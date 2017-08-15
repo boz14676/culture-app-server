@@ -74,7 +74,11 @@ class Article extends BaseModel
          * 逻辑实现：获取当前一级文章分类和其下的所有子分类，根据这些分类去查找符合条件的记录
          */
         if (
-            (isset($q['article_category_id']) && $q['article_category_id'] != 3)
+            (
+                isset($q['article_category_id'])
+                && ArticleCategory::isTop($q['article_category_id'])
+                && $q['article_category_id'] != 3
+            )
             &&
             (
                 isset($q['is_hot'])
@@ -88,9 +92,28 @@ class Article extends BaseModel
             $q['article_category_id'] = $subclasses_id->push($article_category->attributes['id']);  // 文章分类ids
         }
 
+        // 区域筛选
+        if (
+            (
+                isset($q['article_category_id'])
+                && ArticleCategory::isTop($q['article_category_id'])
+            )
+            &&
+            isset($q['area_id'])
+        )
+        {
+            $article_category = ArticleCategory::find($q['article_category_id']);                   // 获取文章分类对象
+            $subclasses_id = collect($article_category->subclasses_id);                             // 文章分类对象 所有子类的ID
+            $q['article_category_id'] = $subclasses_id->push($article_category->attributes['id']);  // 文章分类ids
+        }
+
         // 实现附近推荐
         elseif (
-            isset($q['article_category_id']) &&
+            (
+                isset($q['article_category_id'])
+                && ArticleCategory::isTop($q['article_category_id'])
+            )
+            &&
             isset($s['distance'])
         )
         {

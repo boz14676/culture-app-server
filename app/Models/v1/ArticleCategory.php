@@ -148,4 +148,15 @@ class ArticleCategory extends BaseModel
     {
         return format_assets($value);
     }
+
+    // 检查是否为一级分类
+    public static function isTop($id)
+    {
+        if ($article_category = self::find($id)) {
+            if (!$article_category->topid)
+                return true;
+            else
+                return false;
+        }
+    }
 }
