@@ -407,8 +407,8 @@ class User extends BaseModel
             }
 
             $this->avatar = $filename;
-            unset($this->attributes['photo']);
         }
+        unset($this->attributes['photo']);
 
         return $this->save();
     }
