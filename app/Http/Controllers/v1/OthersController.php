@@ -7,6 +7,7 @@ use App\Models\v1\Area;
 use App\Models\v1\HomeSection;
 use App\Models\v1\Hotsearch;
 use App\Models\v1\Label;
+use DB;
 
 class OthersController extends Controller
 {
@@ -16,7 +17,7 @@ class OthersController extends Controller
     public function getHotsearches()
     {
         $rules = [
-            'q.article_category_id' => 'required|integer|min:1',
+            'q.article_category_id' => 'required|integer|min:0',
             'numbers' => 'integer|min:1'
         ];
         if ($error = $this->validateInput($rules)) {
@@ -24,8 +25,11 @@ class OthersController extends Controller
         }
 
         $numbers = $this->request->input('numbers', 6);                        // 显示数量
+        $q = $this->request->input('q');                                        // 搜索
+        $s = $this->request->input('s');                                        // 排序
 
-        if ($hotsearch = Hotsearch::repositories($numbers)) {
+        if ($hotsearch = Hotsearch::repositories($numbers, $q, $s))
+        {
             return $this->body(['data' => $hotsearch]);
         }
 
