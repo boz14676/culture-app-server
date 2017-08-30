@@ -25,7 +25,7 @@ class Social extends BaseModel
             case self::VENDOR_WEIXIN:
                 $code = $attributes['code'];
                 $wechat = new Wechat();
-                $userinfo = $wechat->getUserInfo($code);
+                $userinfo = $wechat->getUser($code);
                 break;
 
             case self::VENDOR_WEIBO:
