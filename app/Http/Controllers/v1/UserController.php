@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\v1\Social;
 use App\Models\v1\UserCollect;
 use App\Models\v1\UserComment;
 use App\Models\v1\UserLikes;
@@ -424,6 +425,27 @@ class UserController extends Controller
         }
 
         return $this->error(self::BAD_REQUEST);
+    }
+
+    /**
+     * GET /user/social/auth
+     */
+    public function auth()
+    {
+        $rules = [
+            'vendor' => 'required|integer|in:1,2,3,4,5',
+
+            /****************************** 微信授权登录 ******************************/
+            'code' => 'string',
+            'openid' => 'string',
+        ];
+
+        if ($error = $this->validateInput($rules)) {
+            return $error;
+        }
+
+        $data = Social::auth($this->validated);
+        return $this->json($data);
     }
 
 }

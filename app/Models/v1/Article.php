@@ -69,6 +69,7 @@ class Article extends BaseModel
      */
     public static function repositories($per_page = 10, $q = [], $s = [])
     {
+
         /**
          * 显示在一级文章分类下的 [附近推荐] 或 [近期热门]
          * 逻辑实现：获取当前一级文章分类和其下的所有子分类，根据这些分类去查找符合条件的记录
@@ -255,6 +256,18 @@ class Article extends BaseModel
         return $this->morphToMany('App\Models\v1\Label', 'labeable');
     }
 
+    // 获取[精度]属性
+    public function getLatAttribute()
+    {
+        return $this->attributes['lng'];
+    }
+
+    // 获取[纬度]属性
+    public function getLngAttribute()
+    {
+        return $this->attributes['lat'];
+    }
+
     // 获取[文章分类对象] 属性
     public function getOriginalArticleCategoryAttribute()
     {
@@ -291,7 +304,7 @@ class Article extends BaseModel
     // 获取[内容] 属性
     public function getDetailsAttribute($value)
     {
-        return html_entity_decode($value);
+        return htmlspecialchars_decode(html_entity_decode($value));
     }
 
     // 获取[时间] 属性

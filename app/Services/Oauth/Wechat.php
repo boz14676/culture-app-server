@@ -110,8 +110,8 @@ class Wechat {
      * @return OAuth
      */
     public function __construct($appid = null, $secret = null, $access_token = null) {
-        $this->appid = $appid ? : env('wechat_app_id');
-        $this->secret = $secret ? : env('wechat_app_secret');
+        $this->appid = $appid ? : env('WECHAT_APP_ID');
+        $this->secret = $secret ? : env('WECHAT_APP_SECRET');
         $this->access_token = $access_token;
         return $this;
     }
@@ -141,6 +141,9 @@ class Wechat {
         $params['state'] = $state;
         return "https://open.weixin.qq.com/connect/qrconnect?" . http_build_query($params);
     }
+
+
+
     /**
      * 用户授权，用于微信端登陆
      * get authorize url, with callback url and scope
@@ -170,7 +173,32 @@ class Wechat {
         $this->access_token = $access_token;
         return $this;
     }
-    
+
+    /**
+     * 获取用户的信息
+     * @param $code
+     * @param $openid
+     * @return array|bool
+     */
+    public function getUserInfo($code, $openid)
+    {
+        $this->getAccessToken('code', $code);
+        $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$this->access_token}&openid={$openid}";
+        $res = curl_request($api);
+        if (isset($res['errcode'])) {
+            Log::error('weixin_oauth_log: '.json_encode($res));
+            return false;
+        }
+        dd($res);
+
+        return [
+            'nickname' => $res['nickname'],
+            'gender' => $res['sex'],
+            'prefix' => 'wx',
+            'avatar' => $res['headimgurl']
+        ];
+    }
+
     /**
      * get access_token
      *
