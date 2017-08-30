@@ -29,6 +29,12 @@ class Social extends BaseModel
         return $wechat->getUser($code);
     }
 
+    /**
+     * QQ授权
+     * @param $access_token
+     * @param $openid
+     * @return array|bool
+     */
     public static function qqAuth($access_token, $openid)
     {
         $appid = env('QQ_APP_ID');

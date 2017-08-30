@@ -115,9 +115,9 @@ class User extends BaseModel
                 break;
         }
 
-        if (!$user = User::create(array_merge(
+        if (!$user = self::create(array_merge(
             $user_attributes,
-            ['vendor' => Social::VENDOR_WEIXIN]
+            ['vendor' => $vendor]
         ))) {
             return false;
         }
