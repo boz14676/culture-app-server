@@ -242,7 +242,7 @@ class Wechat {
     
     public function getUser($code)
     {
-        dd($this->getAccessToken('code', $code));
+        $this->getAccessToken('code', $code);
 
         $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$this->access_token}&openid={$this->openid}";
         $res = json_decode(curl_request($api), true);
