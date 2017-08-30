@@ -116,7 +116,7 @@ class User extends BaseModel
                 break;
         }
 
-        if (!$user = self::create(array_merge(
+        if (!$user = self::firstOrCreate(array_merge(
             $user_attributes,
             ['vendor' => $vendor]
         ))) {
