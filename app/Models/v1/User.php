@@ -25,6 +25,7 @@ class User extends BaseModel
         'vendor',
         'wechat_openid',
         'wechat_unionid',
+        'qq_openid',
         'nickname',
         'gender',
         'avatar',
