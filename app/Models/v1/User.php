@@ -105,16 +105,25 @@ class User extends BaseModel
                     return false;
                 }
 
-                if (!$user = User::create(array_merge(
-                    $user_attributes,
-                    ['vendor' => Social::VENDOR_WEIXIN]
-                ))) {
+                break;
+            case Social::VENDOR_QQ:
+                $access_token = $attributes['access_token'];
+                $openid = $attributes['openid'];
+                if (!$user_attributes = Social::qqAuth($access_token, $openid)) {
                     return false;
                 }
-
-                return $user->makeVisible(['token']);
                 break;
         }
+
+        if (!$user = User::create(array_merge(
+            $user_attributes,
+            ['vendor' => Social::VENDOR_WEIXIN]
+        ))) {
+            return false;
+        }
+
+        return $user->makeVisible(['token']);
+
     }
 
     /**

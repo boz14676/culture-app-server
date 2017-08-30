@@ -29,6 +29,30 @@ class Social extends BaseModel
         return $wechat->getUser($code);
     }
 
+    public static function qqAuth($access_token, $openid)
+    {
+        $appid = env('QQ_APP_ID');
+        if (isset($config['app_id'])) {
+            $api = "https://graph.qq.com/user/get_user_info?oauth_consumer_key={$appid}&access_token={$access_token}&openid={$openid}&format=json";
+            $res = curl_request($api);
+
+            if (isset($res['ret']) && $res['ret'] != 0) {
+                dd($res);
+                Log::error('qq_oauth_log: '.json_encode($res));
+                return false;
+            }
+
+            dd($res);
+
+            return [
+                'nickname' => $res['nickname'],
+                'gender' => ($res['gender'] == '男' ? 1 : ($res['gender'] == '女' ? 2 : 0)),
+                'prefix' => 'qq',
+                'avatar' => $res['figureurl_qq_2']
+            ];
+        }
+    }
+
     public static function auth(array $attributes)
     {
         $userinfo = null;
