@@ -98,6 +98,7 @@ class User extends BaseModel
     public static function socialLogin(array $attributes)
     {
         $vendor = $attributes['vendor'];
+        dd($vendor);
         switch ($vendor) {
             case Social::VENDOR_WEIXIN:
                 $code = $attributes['code'];
