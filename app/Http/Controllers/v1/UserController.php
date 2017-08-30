@@ -439,7 +439,7 @@ class UserController extends Controller
             'code' => 'string|required_if=vendor,1',
 
             /****************************** QQ授权登录 ******************************/
-            'access_token' => 'required_if:vendor|string',
+            'access_token' => 'required_if:vendor,3|string',
             'openid' => 'required_if:vendor,3|string'
         ];
 
