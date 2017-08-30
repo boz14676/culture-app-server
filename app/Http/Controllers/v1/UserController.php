@@ -437,7 +437,6 @@ class UserController extends Controller
 
             /****************************** 微信授权登录 ******************************/
             'code' => 'string',
-            'openid' => 'string',
         ];
 
         if ($error = $this->validateInput($rules)) {

@@ -23,11 +23,9 @@ class Social extends BaseModel
         $userinfo = null;
         switch ($attributes['vendor']) {
             case self::VENDOR_WEIXIN:
+                $code = $attributes['code'];
                 $wechat = new Wechat();
-                $userinfo = $wechat->getUserInfo(
-                    $attributes['code'],
-                    $attributes['openid']
-                );
+                $userinfo = $wechat->getUserInfo($code);
                 break;
 
             case self::VENDOR_WEIBO:
