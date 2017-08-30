@@ -439,8 +439,8 @@ class UserController extends Controller
             'code' => 'string|required_if=vendor,1',
 
             /****************************** QQ授权登录 ******************************/
-            'access_token' => 'string|required_if=vendor,3',
-            'openid' => 'string|required_if=vendor,3'
+            'access_token' => 'required_if:vendor|string',
+            'openid' => 'required_if:vendor,3|string'
         ];
 
         if ($error = $this->validateInput($rules)) {
