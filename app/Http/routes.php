@@ -24,7 +24,7 @@ $app->group(['namespace' => 'App\Http\Controllers\v1','prefix' => 'v1', 'middlew
 
 
     /**************************************************** 用户 **********************************************/
-    $app->get('user/social/auth', 'UserController@auth');   // 第三方登录
+    $app->get('user/login/social', 'UserController@auth');   // 第三方授权登录
 
     $app->post('user/code', 'UserController@sendCode');      // 发送验证码
     $app->post('user/register', 'UserController@register');  // 注册

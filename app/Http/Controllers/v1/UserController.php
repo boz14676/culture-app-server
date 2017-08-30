@@ -443,8 +443,11 @@ class UserController extends Controller
             return $error;
         }
 
-        $data = Social::auth($this->validated);
-        return $this->json($data);
+        if (!$user = User::socialLogin($this->validated)) {
+            return $this->error(self::BAD_REQUEST, User::errorMsg());
+        }
+
+        return self::body(['data' => $user]);
     }
 
 }

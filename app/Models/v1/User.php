@@ -21,6 +21,15 @@ class User extends BaseModel
 
     protected $guarded = ['password'];
 
+    protected $fillable = [
+        'vendor',
+        'wechat_openid',
+        'wechat_unionid',
+        'nickname',
+        'gender',
+        'avatar',
+    ];
+
     protected $appends = [
         'token',                    // TOKEN
 
@@ -80,6 +89,32 @@ class User extends BaseModel
         $user->addIntegral('binded');
 
         return $user;
+    }
+
+    /**
+     * 授权登录
+     * @param array $attributes
+     */
+    public static function socialLogin(array $attributes)
+    {
+        $vendor = $attributes['vendor'];
+        switch ($vendor) {
+            case Social::VENDOR_WEIXIN:
+                $code = $attributes['code'];
+                if (!$user_attributes = Social::wechatAuth($code)) {
+                    return false;
+                }
+
+                if (!$user = User::create(array_merge(
+                    $user_attributes,
+                    ['vendor' => Social::VENDOR_WEIXIN]
+                ))) {
+                    return false;
+                }
+
+                return $user->makeVisible(['token']);
+                break;
+        }
     }
 
     /**

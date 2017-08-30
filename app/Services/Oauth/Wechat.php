@@ -246,7 +246,6 @@ class Wechat {
 
         $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$this->access_token}&openid={$this->openid}";
         $res = json_decode(curl_request($api), true);
-        dd($res);
 
         if (isset($res['errcode'])) {
             Log::error('weixin_oauth_log: '.json_encode($res));
@@ -254,8 +253,8 @@ class Wechat {
         }
         
         return [
-            'wechat_openid' => $this->openid,
-            'unionid' => $res['unionid'],
+            'wechat_openid' => $res['openid'],
+            'wechat_unionid' => $res['unionid'],
             'nickname' => $res['nickname'],
             'avatar' => $res['headimgurl'],
             'gender' => $res['sex'],

@@ -18,6 +18,17 @@ class Social extends BaseModel
     const GENDER_MALE   = 1;
     const GENDER_FEMALE = 2;
 
+    /**
+     * 微信授权
+     * @param $code
+     * @return array|bool
+     */
+    public static function wechatAuth($code)
+    {
+        $wechat = new Wechat();
+        return $wechat->getUser($code);
+    }
+
     public static function auth(array $attributes)
     {
         $userinfo = null;
