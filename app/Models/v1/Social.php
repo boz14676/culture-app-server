@@ -2,6 +2,7 @@
 
 namespace App\Models\v1;
 
+use Log;
 use App\Models\BaseModel;
 use App\Services\Oauth\Wechat;
 
