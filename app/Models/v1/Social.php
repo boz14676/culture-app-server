@@ -39,10 +39,9 @@ class Social extends BaseModel
     {
         $appid = env('QQ_APP_ID');
         $api = "https://graph.qq.com/user/get_user_info?oauth_consumer_key={$appid}&access_token={$access_token}&openid={$openid}&format=json";
-        $res = curl_request($api);
+        $res = json_decode(curl_request($api), true);
 
         if (isset($res['ret']) && $res['ret'] != 0) {
-            dd($res);
             Log::error('qq_oauth_log: '.json_encode($res));
             return false;
         }
