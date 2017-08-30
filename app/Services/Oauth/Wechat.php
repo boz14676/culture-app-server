@@ -180,24 +180,24 @@ class Wechat {
      * @param $openid
      * @return array|bool
      */
-    public function getUserInfo($code, $openid)
-    {
-        $this->getAccessToken('code', $code);
-        $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$this->access_token}&openid={$openid}";
-        $res = curl_request($api);
-        if (isset($res['errcode'])) {
-            Log::error('weixin_oauth_log: '.json_encode($res));
-            return false;
-        }
-        dd($res);
-
-        return [
-            'nickname' => $res['nickname'],
-            'gender' => $res['sex'],
-            'prefix' => 'wx',
-            'avatar' => $res['headimgurl']
-        ];
-    }
+    // public function getUserInfo($code, $openid)
+    // {
+    //     $this->getAccessToken('code', $code);
+    //     $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$this->access_token}&openid={$openid}";
+    //     $res = curl_request($api);
+    //     if (isset($res['errcode'])) {
+    //         Log::error('weixin_oauth_log: '.json_encode($res));
+    //         return false;
+    //     }
+    //     dd($res);
+    //
+    //     return [
+    //         'nickname' => $res['nickname'],
+    //         'gender' => $res['sex'],
+    //         'prefix' => 'wx',
+    //         'avatar' => $res['headimgurl']
+    //     ];
+    // }
 
     /**
      * get access_token
@@ -240,21 +240,21 @@ class Wechat {
         return $this->access_token;
     }
     
-    public function getUser($access_token = null, $openid = null)
+    public function getUser($code)
     {
-        $access_token = $access_token ? : $this->access_token;
-        $openid = $openid ? : $this->openid;
-        
-        $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$access_token}&openid={$openid}";
+        dd($this->getAccessToken('code', $code));
+
+        $api = "https://api.weixin.qq.com/sns/userinfo?access_token={$this->access_token}&openid={$this->openid}";
         $res = json_decode(curl_request($api), true);
-        
+        dd($res);
+
         if (isset($res['errcode'])) {
             Log::error('weixin_oauth_log: '.json_encode($res));
             return false;
         }
         
         return [
-            'wechat_openid' => $openid,
+            'wechat_openid' => $this->openid,
             'unionid' => $res['unionid'],
             'nickname' => $res['nickname'],
             'avatar' => $res['headimgurl'],
