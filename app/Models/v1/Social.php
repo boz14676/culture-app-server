@@ -47,13 +47,11 @@ class Social extends BaseModel
             return false;
         }
 
-        dd($res);
-
         return [
             'nickname' => $res['nickname'],
             'gender' => ($res['gender'] == '男' ? 1 : ($res['gender'] == '女' ? 2 : 0)),
-            'prefix' => 'qq',
-            'avatar' => $res['figureurl_qq_2']
+            'avatar' => $res['figureurl_qq_2'],
+            'qq_openid' => $openid,
         ];
     }
 
