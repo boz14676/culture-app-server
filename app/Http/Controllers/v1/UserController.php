@@ -436,7 +436,7 @@ class UserController extends Controller
             'vendor' => 'required|integer|in:1,2,3,4,5',
 
             /****************************** 微信授权登录 ******************************/
-            'code' => 'string|required_if=vendor,1',
+            'code' => 'required_if:vendor,1|string',
 
             /****************************** QQ授权登录 ******************************/
             'access_token' => 'required_if:vendor,3|string',
