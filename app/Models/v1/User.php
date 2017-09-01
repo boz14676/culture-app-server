@@ -47,6 +47,7 @@ class User extends BaseModel
     protected $visible = [
         'nickname',                 // 昵称
         'avatar',                   // 头像
+        'gender',                   // 性别
         'is_bind',                  // 是否绑定
         'identification_status',    // 是否认证
         'numbers_count',            // 数据统计
